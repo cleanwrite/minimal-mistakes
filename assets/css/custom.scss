@@ -1,59 +1,71 @@
 ---
 ---
 
-/* 1. 锁死全屏背景 */
+/* ── 1. 全局背景锁定 ── */
 html, body {
-  background: url("/assets/images/wall.jpg") no-repeat center center fixed !important;
+  background: url("/assets/images/wall.webp") no-repeat center center fixed !important;
   background-size: cover !important;
   margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
 }
 
-/* 2. 铲除那些“超大覆盖背景”的根源容器 */
-/* 直接把这些大容器的背景设为透明，它们就不会覆盖你的背景图了 */
+/* ── 2. 移除所有覆盖式白框 ── */
 .page, 
 .masthead, 
 .initial-content, 
 .page__footer, 
 .sidebar, 
-.archive {
+.archive,
+.page__header {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
 
-/* 3. 仅对“核心内容”区域施加轻盈的磨砂卡片效果 */
-/* 把这些容器背景设为更透的白色，只包裹文字和核心信息 */
+/* ── 3. 核心内容区：白色磨砂质感 (提高不透明度，确保文字清晰) ── */
 .page__inner-wrap, 
-.entries-list .list__item, 
 .page__content {
-  background: rgba(255, 255, 255, 0.45) !important; /* 透明度 0.45，非常透气 */
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.7) !important; /* 透明度0.7，文字更易读 */
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   border-radius: 20px !important;
-  padding: 25px !important;
-  margin-bottom: 20px !important;
+  padding: 30px !important;
+  margin-bottom: 25px !important;
 }
 
-/* 4. 彻底移除 QuickStart 按钮 */
-/* 如果右上角还有那个按钮，用这个逻辑移除 */
-.btn--primary, .page__nav {
+/* ── 4. 帖子列表：专项优化，保证文字阅读体验 ── */
+.entries-list .list__item {
+  background: rgba(255, 255, 255, 0.8) !important; /* 列表背景更实，防干扰 */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 15px !important;
+  padding: 20px !important;
+  margin-bottom: 15px !important;
+  color: #000 !important;
+}
+
+/* ── 5. 隐藏右上角按钮 ── */
+.btn--primary, 
+.page__nav,
+.page__share {
   display: none !important;
 }
 
-/* 5. 文字对比度修正：在更透的背景下保持清晰 */
-body, p, li, h1, h2, h3, .site-title {
-  color: #222 !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+/* ── 6. 字体与阅读体验 ── */
+body, p, li, h1, h2, h3, .site-title, .archive__item-title {
+  color: #1a1a1a !important; /* 使用深色文字 */
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important;
 }
 
 a {
-  color: #c0392b !important;
-  border-bottom: 1px dashed rgba(192, 57, 43, 0.5) !important;
+  color: #b33939 !important; /* 醒目链接色 */
+  border-bottom: 1px dashed rgba(179, 57, 57, 0.4) !important;
+  text-decoration: none !important;
 }
 
-/* 6. 特别优化：列表项 (列表看起来不透明或字看不清，这里修正) */
-.entries-list .list__item {
-  background: rgba(255, 255, 255, 0.5) !important; /* 列表背景稍深一点，保证字清晰 */
+a:hover {
   color: #000 !important;
+  border-bottom: 1px solid #000 !important;
 }
