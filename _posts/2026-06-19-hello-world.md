@@ -10,47 +10,28 @@ hidden_resource: |
   ### 🎉 验证成功！欢迎进入内部核心资源区
   
   以下内容已成功解密，请勿将敏感链接与逻辑外传：
-  
-  #### 1. 自动化部署核心配置
-  在 workstation 节点部署时，请务必核对以下底层标识：
-  * **Workstation ID**: `fw`
-  * **Username**: `ss202`
-  * **环境根路径**: `H:\keyan\`
-  
-  #### 2. 核心自动化工具源码 (Python)
-  这是一个基于 `tkinter` 的自动化静默配置工具完整示例，用于一键初始化开发环境：
-  
-  ```python
-  import tkinter as tk
-  from tkinter import messagebox
-  import os
+  注意⚠️！！！
+由于网警大力打击，大部分cf节点已停用，我仅将可用节点放出，但是实际上体验不是很好，请自行进行ip优选后获得最佳体验，ip优选请咨询或自行学习
 
-  class AutoConfigApp:
-      def __init__(self, root):
-          self.root = root
-          self.root.title("FloatWaunch Elite v4.0 - 环境初始化")
-          self.root.geometry("400x200")
-          
-          self.label = tk.Label(root, text="点击下方按钮一键配置科研工作流环境", pady=20)
-          self.label.pack()
-          
-          self.btn = tk.Button(root, text="开始初始化", command=self.run_config, bg="#24292e", fg="white", padx=10, pady=5)
-          self.btn.pack()
+已将代理脚本更新为Cloudflare-workers/pages-vless代理脚本 v2.1.20260617014121
+推荐使用v2ray进行使用，使用时可在设置中开启分片功能防止截断
 
-      def run_config(self):
-          target_dir = r"H:\keyan"
-          if not os.path.exists(target_dir):
-              try:
-                  os.makedirs(target_dir)
-                  messagebox.showinfo("成功", f"工作流目录 {target_dir} 创建成功！")
-              except Exception as e:
-                  messagebox.showerror("错误", f"目录创建失败: {str(e)}")
-          else:
-              messagebox.showinfo("提示", "工作流目录已存在，无需重复创建。")
+PC下载网址：https://github.com/2dust/v2rayNG/releases
+手机端：https://github.com/fxazkwxm/v2rayNG/releases
 
-  if __name__ == "__main__":
-      root = tk.Tk()
-      app = AutoConfigApp(root)
-      root.mainloop()
+如果你还在使用fw的节点，请在下次使用时访问https://myfk.cc.cd/获取最新节点 （目前处于可用状态）
+
+
+
+第二代理脚本如下（可用）
+单节点：vless://f40e65e8-a0a6-4af0-829c-a5735e866254@blogfw.cc.cd:443?security=tls&type=ws&ech=https%3A%2F%2Fdoh.cmliussss.net%2FCMLiussss&host=blogfw.cc.cd&fp=chrome&sni=blogfw.cc.cd&path=%2F&encryption=none#fw
+
+自适应订阅链接：https://blogfw.cc.cd/sub?token=e0e89f124677726e9cc796d987796033
+
+
+
+第三代理脚本如下（暂时不可使用）
+订阅链接v2ray：https://fvvblog.us.ci/fw/sub
+  
 ---
-正文
+你好，欢迎来到fw的bolg的第一篇文章，全新blog，抄的github仓库的，然后想看别的什么去要密码去，想看的都在下面
