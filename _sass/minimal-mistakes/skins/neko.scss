@@ -1,18 +1,18 @@
 /* ==========================================================================
-   Minimal Mistakes 极度圆滑&完美对称皮肤：neko (二次元温润猫娘控制台)
-   Jekyll 编译安全修正版
+   Minimal Mistakes 极度清晰&人性化护眼皮肤：neko (二次元温润猫娘控制台)
+   终极文字亮度增强版
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. 人性化全视效护眼色盘（标准 Sass 变量声明，禁止在此处追加 !important）
    -------------------------------------------------------------------------- */
-$background-color:       #0a0615 !default; /* 极其深邃的静谧夜紫（降低屏幕全局低频蓝光） */
-$text-color:             #ded9e2 !default; /* 核心正文：改用低饱和度、偏暖调的香草猫毛白（极度温润，消除高对比纯白刺眼感） */
-$muted-text-color:       #6c6285 !default; /* 辅助文字：暮光暗紫（既清晰分明，又不喧宾夺主） */
+$background-color:       #0a0615 !default; /* 极其深邃的静谧夜紫 */
+$text-color:             #e2daeb !default; /* 核心正文：暖调香草猫毛白 */
+$muted-text-color:       #968cb3 !default; /* 辅助文字：全面提亮，确保时间戳和二级文本清晰可见 */
 $primary-color:          #ff65be !default; /* 标志性猫娘粉 */
 $border-color:           rgba(255, 101, 190, 0.18) !default;
-$link-color:             #ffa3dc !default; /* 链接：降低饱和度，改为柔和的浅糖粉 */
-$link-color--hover:      #3bf285 !default; /* 悬浮：高明度薄荷绿（提供清晰的无障碍视觉反馈） */
+$link-color:             #ffb3e6 !default; /* 链接：提亮为高明度浅糖粉，一眼就能看清 */
+$link-color--hover:      #3bf285 !default; /* 悬浮：高明度薄荷绿 */
 $code-background-color:  #110922 !default; /* 代码块底色 */
 
 /* --------------------------------------------------------------------------
@@ -43,20 +43,20 @@ html {
   box-sizing: inherit !important;
 }
 
-/* 强特异性联合声明，彻底隔离层级，防止文字潜入卡片下方 */
+/* 强特异性联合声明，彻底隔离层级 */
 html body {
   .sidebar, .page, .archive, .archive__item {
     position: relative !important;
     z-index: 1 !important; 
-    background: rgba(20, 13, 33, 0.82) !important; 
+    background: rgba(20, 13, 33, 0.85) !important; 
     border: 1.5px solid rgba(255, 101, 190, 0.4) !important;
     border-radius: 26px !important; 
     
-    /* 开启高级高斯模糊滤镜（毛玻璃效果） */
+    /* 开启高级高斯模糊滤镜 */
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     
-    /* 消灭生硬发光，改用极度虚化的漫反射阴影 */
+    /* 漫反射阴影 */
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 101, 190, 0.05) !important;
     
     padding: 30px !important;
@@ -92,9 +92,9 @@ html body {
   .masthead {
     position: sticky !important; 
     top: 0 !important;
-    z-index: 9999 !important; /* 确保导航栏绝对封顶 */
+    z-index: 9999 !important; 
     
-    background: linear-gradient(90deg, rgba(255, 101, 190, 0.92) 0%, rgba(147, 51, 234, 0.92) 100%) !important;
+    background: linear-gradient(90deg, rgba(255, 101, 190, 0.95) 0%, rgba(147, 51, 234, 0.95) 100%) !important;
     backdrop-filter: blur(10px) !important; 
     -webkit-backdrop-filter: blur(10px) !important;
     border-bottom: 2px solid $primary-color !important;
@@ -119,7 +119,7 @@ html body {
         content: " ฅ(＾・ω・＾)ฅ" !important;
         font-size: 11px;
         font-weight: normal;
-        color: rgba(255,255,255,0.8) !important;
+        color: #ffffff !important;
       }
     }
 
@@ -141,52 +141,55 @@ html body {
 }
 
 /* --------------------------------------------------------------------------
-   5. 深度正文多级标题与文本排版
+   5. 终极强效文本亮化（全面捕获并干掉看不清的暗色字）
    -------------------------------------------------------------------------- */
 html body {
-  .page__content {
-    p {
-      color: $text-color !important;
-      line-height: 1.85 !important;
-      letter-spacing: 0.3px !important;
-      margin-bottom: 1.5em !important;
-    }
+  /* 地毯式覆盖：强制把卡片内所有的段落、归档摘要、列表项、小字全部强制亮化 */
+  p, .page__content p, .archive__item-excerpt, li, .fluid-jar, .page__meta, .page__sidebar {
+    color: $text-color !important;
+    line-height: 1.85 !important;
+    letter-spacing: 0.3px !important;
+  }
 
-    a {
-      color: $link-color !important;
-      border-bottom: 1px dashed rgba(255, 101, 190, 0.4) !important;
-      transition: all 0.2s ease !important;
-      
-      &:hover {
-        color: $link-color--hover !important;
-        border-bottom-style: solid !important;
-        text-shadow: 0 0 6px rgba(59, 242, 133, 0.3) !important;
-      }
-    }
+  /* 强力拯救那些发灰变暗的辅助说明字（如发布日期、阅读时间等） */
+  .page__meta, .small, .author__bio, .post__meta, time {
+    color: $muted-text-color !important;
+  }
 
-    h1, h2, h3, h4, h5, h6 {
-      color: #ffffff !important;
-      font-weight: 800 !important;
-      margin-top: 1.6em !important;
-      margin-bottom: 0.6em !important;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.5) !important;
-    }
-
-    h2, h3 {
-      border-left: 5px solid #a855f7 !important;
-      padding-left: 14px !important;
-      background: linear-gradient(90deg, rgba(168, 85, 247, 0.12), transparent) !important;
-      border-radius: 6px !important;
+  /* 全局重写超链接：杜绝原本主题自带的暗蓝色/暗灰色链接 */
+  a, .page__content a, .archive__item-title a, .sidebar a {
+    color: $link-color !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    
+    &:hover {
+      color: $link-color--hover !important;
+      text-shadow: 0 0 6px rgba(59, 242, 133, 0.4) !important;
     }
   }
 
+  /* 多级标题对比度绝对增强 */
+  h1, h2, h3, h4, h5, h6, .page__title, .archive__item-title {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6) !important;
+  }
+
+  /* 正文内部二级、三级标题 */
+  .page__content {
+    h2, h3 {
+      border-left: 5px solid #a855f7 !important;
+      padding-left: 14px !important;
+      background: linear-gradient(90deg, rgba(168, 85, 247, 0.15), transparent) !important;
+      border-radius: 6px !important;
+      margin-top: 1.6em !important;
+      margin-bottom: 0.6em !important;
+    }
+  }
+
+  /* 主页列表文章标题前缀猫爪 */
   .archive__item-title {
     font-weight: 800 !important;
-    
-    a { 
-      border-bottom: none !important; 
-    }
-    
     &::before {
       content: "🐾 " !important;
       display: inline-block;
@@ -222,14 +225,15 @@ html body {
     code {
       font-family: Consolas, Monaco, "Courier New", monospace !important;
       background: transparent !important;
-      color: #e2daeb !important; 
+      color: #e2daeb !important; /* 代码默认文本提亮 */
     }
   }
 
+  /* 行内小代码块 */
   p code, li code {
     background-color: #211438 !important;
     color: #6bf2ff !important; 
-    border: 1px solid rgba(107, 242, 255, 0.15) !important;
+    border: 1px solid rgba(107, 242, 255, 0.2) !important;
     padding: 2px 6px !important;
     border-radius: 8px !important;
     font-size: 0.88em !important;
@@ -259,6 +263,14 @@ html body {
     padding: 30px 20px !important;
     position: relative !important;
     z-index: 10 !important;
+    
+    /* 强力拯救页脚里原本看不清的链接字 */
+    a {
+      color: $muted-text-color !important;
+      &:hover {
+        color: $primary-color !important;
+      }
+    }
   }
 }
 
