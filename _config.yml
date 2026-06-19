@@ -1,30 +1,30 @@
-# theme                     : "minimal-mistakes-jekyll"
+# theme                 : "minimal-mistakes-jekyll"
 remote_theme           : "mmistakes/minimal-mistakes@4.28.0"
-minimal_mistakes_skin    : "neko" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "catppuccin_latte", "catppuccin_mocha"
+minimal_mistakes_skin    : "neko"
 
 # Site Settings
-locale                   : "zh-CN"
-direction                : # "ltr" (default), "rtl" # set the direction of the page
-title                    : "fw's Blog"
-title_separator          : "-"
-subtitle                 : "我草，还是github上的项目好用" # site tagline that appears below site title in masthead
-name                     : "fw"
-description              : "欢迎来到我的个人博客！"
-url                      : # the base hostname & protocol for your site e.g. "https://fw.github.io"
-baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : "cleanwrite/minimal-mistakes" # 自动关联到你的GitHub仓库
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-breadcrumbs              : true
-words_per_minute         : 200
+locale                 : "zh-CN"
+direction              : 
+title                  : "fw's Blog"
+title_separator        : "-"
+subtitle               : "我草，还是github上的项目好用"
+name                   : "fw"
+description            : "欢迎来到我的个人博客！"
+url                    : 
+baseurl                : 
+repository             : "cleanwrite/minimal-mistakes"
+teaser                 : 
+logo                   : 
+masthead_title         : 
+breadcrumbs            : true
+words_per_minute       : 200
 enable_copy_code_button  : true
-copyright                : # "copyright" name, defaults to site.title
-copyright_url            : # "copyright" URL, defaults to site.url
+copyright              : 
+copyright_url          : 
 
-# 评论核心系统配置（已优化格式对齐）
+# Comments
 comments:
-  provider               : "giscus" # 切换评论系统为 giscus 权限讨论区
+  provider               : "giscus"
   disqus:
     shortname            : 
   discourse:
@@ -37,39 +37,41 @@ comments:
     theme                : 
     issue_term           : 
   giscus:
-    repo_id              : "R_kgDOS-jfew"      # 你的专属仓库 ID
-    category_name        : "Announcements"     # 对应的讨论区分类名称
-    category_id          : "DIC_kwDOS-jfew"    # 对应的分类 ID
-    discussion_term      : "pathname"          # 保持默认，用页面路径关联讨论
-    reactions_enabled    : "1"                 # 开启点赞回应 (1为开启)
-    theme                : "light"             # 评论区皮肤，可选 light, dark 
-    strict               : 0                   # 关闭严格匹配
-    input_position       : "bottom"            # 输入框在评论列表底部
-    emit_metadata        : 0                   # 不向父页面发送元数据
-    lang                 : "zh-CN"             # 评论框界面强制显示为简体中文
-    lazy                 : true                # 懒加载
+    repo_id              : "R_kgDOS-jfew"
+    category_name        : "Announcements"
+    category_id          : "DIC_kwDOS-jfew"
+    discussion_term      : "pathname"
+    reactions_enabled    : "1"
+    theme                : "light"
+    strict               : 0
+    input_position       : "bottom"
+    emit_metadata        : 0
+    lang                 : "zh-CN"
+    lazy                 : true
   staticman:
     branch               : 
     endpoint             : 
+
 reCaptcha:
   siteKey                :
-  secret                 :
+  secret                 : 
 atom_feed:
-  path                   : # blank (default) uses feed.xml
-  hide                   : # true, false (default)
+  path                   : 
+  hide                   : 
 search                   : true
 search_full_content      : true
 search_provider          : lunr
 lunr:
   search_within_pages    : true
 algolia:
-  application_id         : # YOUR_APPLICATION_ID
-  index_name             : # YOUR_INDEX_NAME
-  search_only_api_key    : # YOUR_SEARCH_ONLY_API_KEY
-  powered_by             : # true (default), false
+  application_id         : 
+  index_name             : 
+  search_only_api_key    : 
+  powered_by             : 
 google:
-  search_engine_id       : # YOUR_SEARCH_ENGINE_ID
-  instant_search         : # false (default), true
+  search_engine_id       : 
+  instant_search         : 
+
 # SEO Related
 google_site_verification :
 bing_site_verification   :
@@ -84,25 +86,24 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : # Open Graph/Twitter default site image
-og_image_alt             : # Alt text for Open Graph/Twitter default site image
+og_image                 : 
+og_image_alt             : 
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
-  links: # An array of links to social media profiles
+  type                   : 
+  name                   : 
+  links: 
 
 # Analytics
 analytics:
-  provider               : # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : 
   google:
     tracking_id          :
-    anonymize_ip         : # true, false (default)
-
+    anonymize_ip         : 
 
 # Site Author
 author:
   name               : "fw"
-  avatar             : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar             : 
   bio                : "欢迎来到我的空间。"
   location           : "China"
   email              : "your.email@email.com"
@@ -140,7 +141,6 @@ footer:
       icon: "fab fa-fw fa-instagram"
   since: "2026"
 
-
 # Reading Files
 include:
   - .htaccess
@@ -171,14 +171,13 @@ exclude:
   - Rakefile
   - README
   - tmp
-  - /docs # ignore Minimal Mistakes /docs
-  - /test # ignore Minimal Mistakes /test
+  - /docs
+  - /test
 keep_files:
   - .git
   - .svn
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-
 
 # Conversion
 markdown: kramdown
@@ -186,7 +185,6 @@ highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
-
 
 # Markdown Processing
 kramdown:
@@ -199,7 +197,6 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
-
 # Sass/SCSS
 sass:
   sass_dir: _sass
@@ -207,14 +204,12 @@ sass:
   quiet_deps: true
   silence_deprecations: ['import']
 
-
 # Outputting
 permalink: /:categories/:title/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: 
 
-
-# Pagination with jekyll-paginate
-paginate: 5 # amount of posts to show
+# Pagination
+paginate: 5
 paginate_path: /page:num/
 
 pagination:
@@ -233,7 +228,6 @@ pagination:
     before: 2
     after: 2
 
-
 # Plugins 
 plugins:
   - jekyll-paginate
@@ -242,14 +236,12 @@ plugins:
   - jekyll-feed
   - jekyll-include-cache
 
-# mimic GitHub Pages with --safe
 whitelist:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
-
 
 # Archives
 category_archive:
@@ -259,15 +251,13 @@ tag_archive:
   type: liquid
   path: /tags/
 
-
 # HTML Compression
 compress_html:
   clippings: all
   ignore:
     envs: development
 
-
-# Defaults
+# Defaults & Navigation
 defaults:
   - scope:
       path: ""
@@ -276,6 +266,14 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: true # 全局默认开启文章评论
+      comments: true
       share: true
       related: true
+
+# 强制重置导航菜单，移除 Quick-Start Guide
+navigation:
+  main:
+    - title: "首页"
+      url: /
+    - title: "文章归档"
+      url: /posts/
