@@ -1,56 +1,40 @@
 /* ==========================================================================
-   Minimal Mistakes 极度暴力透明版 - 彻底清除所有遮挡
+   优化方案：向日葵田专享 - 清透琥珀磨砂版
    ========================================================================== */
 
-/* 1. 全局：抹除所有背景、阴影、边框 (彻底让 wall.jpg 接管一切) */
-body, #main, .masthead, .masthead__inner-wrap, 
-.page, .page__header, .page__inner-wrap, 
-.sidebar, .archive__item, .archive, .content {
+/* 1. 彻底抹除所有不和谐色块 */
+.masthead, .masthead__inner-wrap, .page__header, .page__inner-wrap, body, #main {
   background: transparent !important;
-  background-color: transparent !important;
   background-image: none !important;
   border: none !important;
   box-shadow: none !important;
-  border-radius: 0 !important;
 }
 
-/* 2. 导航栏：强制扁平化，删除所有多余高度和色块 */
-.masthead {
-  position: sticky !important;
-  top: 0 !important;
-  padding: 10px 0 !important;
-  width: 100% !important;
-  background: transparent !important;
-}
-
-/* 3. 卡片效果：只留磨砂玻璃，去掉那种丑陋的“方块边框” */
-.sidebar, .page, .archive__item {
-  background: rgba(255, 255, 255, 0.1) !important; /* 非常淡的磨砂层 */
+/* 2. 重新定义卡片：改用“浅色磨砂”适配向日葵的亮色背景 */
+.sidebar, .page, .archive, .archive__item {
+  /* 这里的色值改为高透明度的琥珀色/米色，而不是紫色 */
+  background: rgba(255, 255, 255, 0.25) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 20px !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  margin-bottom: 20px !important;
-  padding: 20px !important;
-  border-radius: 15px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* 4. 文本：为了在透明背景下清晰，必须强制加粗和阴影 */
+/* 3. 导航栏文字：深色化，否则在亮背景下看不清 */
+.site-title, .nav__links a {
+  color: #4a3728 !important; /* 深棕色，比纯黑更有质感 */
+  text-shadow: none !important;
+}
+
+/* 4. 正文文字：适配亮色背景 */
 body {
-  color: #fff !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8) !important;
+  color: #3d2b1f !important; /* 深棕灰，更柔和 */
+  text-shadow: 0 1px 1px rgba(255,255,255,0.5) !important;
 }
 
+/* 5. 链接颜色：改用柔和的玫瑰棕，呼应向日葵色系 */
 a {
-  color: #ff99cc !important;
-  font-weight: bold !important;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.5) !important;
-}
-
-h1, h2, h3 {
-  color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.9) !important;
-}
-
-/* 5. 暴力拦截：如果还有东西是白色的，把它透明化 */
-div, section, article, header, nav {
-  background-color: transparent !important;
+  color: #b35c00 !important; 
+  font-weight: 600 !important;
 }
