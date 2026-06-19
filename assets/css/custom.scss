@@ -1,43 +1,40 @@
----
----
+/* ==========================================================================
+   custom.scss - 极致清新透视方案
+   ========================================================================== */
 
-/* 背景图 */
+/* 背景图固定，确保不产生偏移 */
 body {
   background-image: url("/assets/images/wall.jpg") !important;
   background-size: cover !important;
   background-attachment: fixed !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  background-color: #0a0615 !important;
 }
 
-/* 所有组件渐变半透明 */
+/* 核心优化：彻底移除沉重的线性渐变，改为柔和的白磨砂 */
 html body .sidebar,
 html body .page,
 html body .archive,
 html body .archive__item,
-html body .masthead,
 html body .page__footer {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 13, 33, 0.55) 0%,
-    rgba(107, 33, 168, 0.25) 50%,
-    rgba(20, 13, 33, 0.55) 100%
-  ) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  /* 使用浅色磨砂，这比紫色渐变更能融入向日葵的亮色背景 */
+  background: rgba(255, 255, 255, 0.25) !important; 
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* masthead 导航栏也半透明 */
+/* 导航栏：完全通透，只保留模糊，不再是夺目的紫色块 */
 html body .masthead {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 101, 190, 0.7) 0%,
-    rgba(147, 51, 234, 0.7) 100%
-  ) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
 }
 
-/* footer 半透明 */
-html body .page__footer {
-  background: rgba(10, 6, 21, 0.6) !important;
+/* 针对页面主体文字颜色（深棕色，适配亮背景） */
+body {
+  color: #3d2b1f !important;
 }
