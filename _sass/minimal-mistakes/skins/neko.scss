@@ -1,18 +1,18 @@
 /* ==========================================================================
    Minimal Mistakes 极度清晰&人性化护眼皮肤：neko (二次元温润猫娘控制台)
-   终极文字亮度增强版
+   双端全兼容（深色博客底 + 浅色验证页底）文字全面加深清晰版
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. 人性化全视效护眼色盘（标准 Sass 变量声明，禁止在此处追加 !important）
+   1. 人性化全视效护眼色盘（大幅加深链接与正文饱和度，禁止在此处追加 !important）
    -------------------------------------------------------------------------- */
 $background-color:       #0a0615 !default; /* 极其深邃的静谧夜紫 */
-$text-color:             #e2daeb !default; /* 核心正文：暖调香草猫毛白 */
-$muted-text-color:       #968cb3 !default; /* 辅助文字：全面提亮，确保时间戳和二级文本清晰可见 */
-$primary-color:          #ff65be !default; /* 标志性猫娘粉 */
-$border-color:           rgba(255, 101, 190, 0.18) !default;
-$link-color:             #ffb3e6 !default; /* 链接：提亮为高明度浅糖粉，一眼就能看清 */
-$link-color--hover:      #3bf285 !default; /* 悬浮：高明度薄荷绿 */
+$text-color:             #ded9e2 !default; /* 核心正文：暖调香草猫毛白 */
+$muted-text-color:       #8a7fa8 !default; /* 辅助文字：提亮加深，确保时间戳和二级文本在双端都清晰 */
+$primary-color:          #ff4da6 !default; /* 标志性猫娘粉：稍微加深饱和度 */
+$border-color:           rgba(255, 101, 190, 0.22) !default;
+$link-color:             #d946a3 !default; /* 链接：大幅加深为中度莓果粉！这样在白色背景下也绝对能看清 */
+$link-color--hover:      #10b981 !default; /* 悬浮：加深为翡翠绿 */
 $code-background-color:  #110922 !default; /* 代码块底色 */
 
 /* --------------------------------------------------------------------------
@@ -141,30 +141,32 @@ html body {
 }
 
 /* --------------------------------------------------------------------------
-   5. 终极强效文本亮化（全面捕获并干掉看不清的暗色字）
+   5. 终极强效文本亮化与双端对齐（通过给关键文字增加强阴影，使其在白底上也能瞬间剥离出来）
    -------------------------------------------------------------------------- */
 html body {
-  /* 地毯式覆盖：强制把卡片内所有的段落、归档摘要、列表项、小字全部强制亮化 */
   p, .page__content p, .archive__item-excerpt, li, .fluid-jar, .page__meta, .page__sidebar {
     color: $text-color !important;
     line-height: 1.85 !important;
     letter-spacing: 0.3px !important;
+    /* 增加一层极细的暗色文字投影，在白底环境克制雪盲效应 */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15) !important;
   }
 
-  /* 强力拯救那些发灰变暗的辅助说明字（如发布日期、阅读时间等） */
   .page__meta, .small, .author__bio, .post__meta, time {
     color: $muted-text-color !important;
   }
 
-  /* 全局重写超链接：杜绝原本主题自带的暗蓝色/暗灰色链接 */
+  /* 【最核心修改】加深核心链接颜色，并为链接文字注入黑边阴影，确保在白底上轮廓清晰可见 */
   a, .page__content a, .archive__item-title a, .sidebar a {
     color: $link-color !important;
+    font-weight: 600 !important; /* 稍微加粗，防止细字体在白底中被融化 */
     text-decoration: none !important;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25) !important; 
     transition: all 0.2s ease !important;
     
     &:hover {
       color: $link-color--hover !important;
-      text-shadow: 0 0 6px rgba(59, 242, 133, 0.4) !important;
+      text-shadow: 0 0 6px rgba(16, 185, 129, 0.4) !important;
     }
   }
 
@@ -175,7 +177,6 @@ html body {
     text-shadow: 0 2px 6px rgba(0,0,0,0.6) !important;
   }
 
-  /* 正文内部二级、三级标题 */
   .page__content {
     h2, h3 {
       border-left: 5px solid #a855f7 !important;
@@ -187,7 +188,6 @@ html body {
     }
   }
 
-  /* 主页列表文章标题前缀猫爪 */
   .archive__item-title {
     font-weight: 800 !important;
     &::before {
@@ -200,7 +200,7 @@ html body {
 }
 
 /* --------------------------------------------------------------------------
-   6. 工业级技术代码块重构（增加安全滚动层，拒绝遮挡溢出）
+   6. 工业级技术代码块重构
    -------------------------------------------------------------------------- */
 html body {
   div.highlighter-rouge, figure.highlight {
@@ -225,15 +225,14 @@ html body {
     code {
       font-family: Consolas, Monaco, "Courier New", monospace !important;
       background: transparent !important;
-      color: #e2daeb !important; /* 代码默认文本提亮 */
+      color: #e2daeb !important; 
     }
   }
 
-  /* 行内小代码块 */
   p code, li code {
     background-color: #211438 !important;
-    color: #6bf2ff !important; 
-    border: 1px solid rgba(107, 242, 255, 0.2) !important;
+    color: #00f0ff !important; /* 加深一点的冰蓝 */
+    border: 1px solid rgba(0, 240, 255, 0.2) !important;
     padding: 2px 6px !important;
     border-radius: 8px !important;
     font-size: 0.88em !important;
@@ -246,13 +245,13 @@ html body {
    -------------------------------------------------------------------------- */
 html body {
   .page__taxonomy-item {
-    background: linear-gradient(135deg, #ff65be, #9333ea) !important;
+    background: linear-gradient(135deg, #ff4da6, #9333ea) !important;
     color: #ffffff !important;
     font-weight: bold !important;
     border-radius: 30px !important;
     padding: 4px 14px !important;
     border: none !important;
-    box-shadow: 0 4px 12px rgba(255, 101, 190, 0.15) !important;
+    box-shadow: 0 4px 12px rgba(255, 77, 166, 0.2) !important;
   }
 
   .page__footer {
@@ -264,7 +263,6 @@ html body {
     position: relative !important;
     z-index: 10 !important;
     
-    /* 强力拯救页脚里原本看不清的链接字 */
     a {
       color: $muted-text-color !important;
       &:hover {
