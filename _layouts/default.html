@@ -9,7 +9,10 @@
     {% include head.html locale=locale %}
     {% include head/custom.html %}
   </head>
-
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
     {% include_cached skip-links.html locale=locale %}
     {% include_cached masthead.html locale=locale %}
