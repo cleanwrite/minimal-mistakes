@@ -32,6 +32,8 @@ PC下载网址：https://github.com/2dust/v2rayNG/releases
 
 第三代理脚本如下（暂时不可使用）
 订阅链接v2ray：https://fvvblog.us.ci/fw/sub
-  
+
+
+任何问题咨询 QQ： 1285698642
 ---
 你好，欢迎来到fw的bolg的第一篇文章，全新blog，抄的github仓库的，然后想看别的什么去要密码去，想看的都在下面
