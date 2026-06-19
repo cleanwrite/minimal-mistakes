@@ -1,14 +1,11 @@
 ---
-layout:single
-title:"技术文档与自动化工"
-date:2026-06-19
-categories:[技术, 自动化]
-tags:[Python, 资源]
+layout: single
+title: "测试密码锁文章"
+date: 2026-06-19
 comments: true
-invite_code_hash:"c4d038b4bed09fdb1471ef51ec3a32cd"
-hidden_resource:|
+invite_code_hash: "c4d038b4bed09fdb1471ef51ec3a32cd"
+hidden_resource: |
   ### 🎉 验证成功！欢迎进入内部核心资源区
-  
   以下内容已成功解密，请勿将敏感链接与逻辑外传：
   注意⚠️！！！
 由于网警大力打击，大部分cf节点已停用，我仅将可用节点放出，但是实际上体验不是很好，请自行进行ip优选后获得最佳体验，ip优选请咨询或自行学习
