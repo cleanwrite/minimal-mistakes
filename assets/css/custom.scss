@@ -1,119 +1,102 @@
 ---
 ---
 /* ==========================================================================
-   终极修复版 v2：彻底去白框 + 背景强制锁定 + 全局文字增强
+   Custom：背景锁定 + 去白框 + 导航修复
    ========================================================================== */
 
-/* 1. 强制背景层：确保永远不被遮挡 */
+/* ── 1. 全屏背景 ── */
 html, body {
   background: url("/assets/images/wall.jpg") no-repeat center center fixed !important;
   background-size: cover !important;
-  min-height: 100vh !important;
   margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
 }
 
-/* 移动端背景兼容（iOS Safari fixed bug）*/
 @media (max-width: 768px) {
   html, body {
     background-attachment: scroll !important;
   }
 }
 
-/* 2. 彻底清洗所有容器背景：移除主题默认白底干扰 */
-.masthead,
+/* ── 2. 全局重置：铲掉所有主题默认白底 ── */
+*,
+*::before,
+*::after {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* ── 3. 磨砂玻璃卡片层 ── */
 .masthead__inner-wrap,
-.page__header,
 .page__inner-wrap,
-.sidebar,
+.page__header,
 .page,
+.sidebar,
 .archive,
-.archive__item,
 .page__footer,
-.page__content,
-.page__content .notice,
-.page__content .notice--info,
-.entries-list .list__item,
-.taxonomy__section,
-.search-content,
-.initial-content,
-.results-container,
 .page__related,
 .author__urls-wrapper,
 .nav__list .nav__items,
 .toc.sticky,
-.page__taxonomy-item {
-  background: rgba(0, 0, 0, 0.45) !important;
-  background-image: none !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: none !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-radius: 20px !important;
+.page__taxonomy-item,
+.entries-list .list__item,
+.taxonomy__section,
+.search-content,
+.initial-content,
+.results-container {
+  background: rgba(255, 255, 255, 0.28) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06) !important;
   margin-bottom: 20px !important;
 }
 
-/* 3. 导航栏专项处理：完全悬浮通透，无圆角 */
-.masthead {
-  background: rgba(0, 0, 0, 0.2) !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding: 10px 0 !important;
-}
-
-/* 4. 头像白框修复 */
-.sidebar .author__avatar img {
+/* ── 4. 内部穿透层：不需要卡片感的子元素 ── */
+.page__content,
+.archive__item {
   background: transparent !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 0 !important;
+}
+
+/* ── 5. 导航栏：扁平通透，无圆角 ── */
+.masthead,
+.masthead__inner-wrap,
+.greedy-nav {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: none !important;
+  padding: 8px 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.greedy-nav .site-title,
+.greedy-nav .visible-links a,
+.greedy-nav .hidden-links a {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+/* ── 6. 头像 ── */
+.author__avatar img {
   border-radius: 50% !important;
+  border: 2px solid rgba(255, 255, 255, 0.6) !important;
+  background: transparent !important;
 }
 
-/* 5. 文字对比度：分级设置，保留视觉层级 */
-body, p, li, .nav__links a, .site-title {
-  color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
-  font-weight: 400 !important;
-}
-
-h1 {
-  color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
-  font-weight: 700 !important;
-  font-size: 2em !important;
-}
-
-h2 {
-  color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
-  font-weight: 600 !important;
-}
-
-h3, h4 {
-  color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
-  font-weight: 500 !important;
-}
-
-.page__title {
-  color: #ffffff !important;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95) !important;
-  font-weight: 700 !important;
-}
-
-/* 6. 链接与交互优化 */
-a {
-  color: #ffcc99 !important;
-  border-bottom: 1px dashed rgba(255, 204, 153, 0.8) !important;
-}
-
-a:hover {
-  color: #ffffff !important;
-  border-bottom: 1px solid #ffffff !important;
-}
-
-/* 7. 严禁溢出：强制最大宽度防止布局崩坏 */
+/* ── 7. 主内容区宽度 ── */
 #main {
-  max-width: 1000px !important;
+  max-width: 1020px !important;
   margin: 0 auto !important;
-  padding: 20px !important;
+  padding: 24px 16px !important;
 }
