@@ -1,15 +1,15 @@
 /* ==========================================================================
-   Minimal Mistakes 生产级定制皮肤：neko (二次元赛博猫娘电竞控制台)
+   Minimal Mistakes 极度圆滑&完美对称皮肤：neko (二次元赛博猫娘电竞控制台)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. 核心原色系统（精细调色盘）
+   1. 核心原色系统（极柔和低对比色盘）
    -------------------------------------------------------------------------- */
 $background-color:       #0d0816 !default; /* 深邃魅紫基底 */
-$text-color:             #f3eef4 !default; /* 暖调猫毛白（护眼低对比） */
+$text-color:             #f3eef4 !default; /* 暖调猫毛白（护眼舒适） */
 $muted-text-color:       #79709c !default; /* 钛暗紫（辅助说明、时间戳） */
 $primary-color:          #ff75ca !default; /* 猛男电竞粉（主色、核心标签） */
-$border-color:           rgba(255, 117, 202, 0.25) !default;
+$border-color:           rgba(255, 117, 202, 0.2) !default;
 $link-color:             #ff75ca !default;
 $link-color--hover:      #4bf48d !default; /* 元气傲娇绿（悬浮交互） */
 $code-background-color:  #11091f !default; /* 控制台暗紫底色 */
@@ -32,55 +32,70 @@ body, #main {
 }
 
 /* --------------------------------------------------------------------------
-   3. 双端流式自适应弹性卡片（重构防溢出核心）
+   3. 双端全对称流式弹性卡片（极致圆滑重构）
    -------------------------------------------------------------------------- */
+/* 全局强行统一盒子模型，确保绝对对称 */
+*, *::before, *::after {
+  box-sizing: border-box !important;
+}
+
 .sidebar, .page, .archive, .archive__item {
   background: rgba(21, 14, 34, 0.88) !important;
   border: 2px solid $primary-color !important;
-  border-radius: 18px !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 0 18px rgba(255, 117, 202, 0.12), inset 0 0 12px rgba(255, 117, 202, 0.05) !important;
-  padding: 24px !important;
-  margin-bottom: 20px !important;
-  box-sizing: border-box !important;
-  word-wrap: break-word !important; /* 强制长字符换行，防止手机端撑开容器 */
+  
+  /* 极致圆滑改进：全面升级为 28px 极度圆润肉垫圆角 */
+  border-radius: 28px !important; 
+  
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  
+  /* 柔化边框阴影：去掉死板的线型边框感，改用柔和微光的毛茸茸外发光 */
+  box-shadow: 0 8px 30px rgba(255, 117, 202, 0.1), inset 0 0 15px rgba(255, 117, 202, 0.05) !important;
+  
+  /* 完美对称调整：上下左右内边距绝对等宽 */
+  padding: 30px !important; 
+  margin-bottom: 25px !important;
+  
+  word-wrap: break-word !important;
   overflow-wrap: break-word !important;
-  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* 升级为弹性软萌物理动效 */
 }
 
 /* 电脑端独立文章卡片及侧边栏 Q 弹动力学悬浮 */
 @media (min-width: 60em) {
   .archive__item:hover, .sidebar:hover {
-    transform: translateY(-4px) scale(1.005) !important;
+    transform: translateY(-6px) scale(1.008) !important;
     border-color: #7df2ff !important; /* 悬浮时转为傲娇初音蓝 */
-    box-shadow: 0 0 25px rgba(125, 242, 255, 0.35), inset 0 0 15px rgba(125, 242, 255, 0.1) !important;
+    box-shadow: 0 15px 35px rgba(125, 242, 255, 0.25), inset 0 0 20px rgba(125, 242, 255, 0.1) !important;
   }
 }
 
-/* 针对手机移动端的专属精细触控优化 */
+/* 针对手机移动端的全对称压缩优化 */
 @media (max-width: 60em) {
   .sidebar, .page, .archive, .archive__item {
-    padding: 16px !important; /* 手机缩窄内边距，留出更多阅读空间 */
-    border-radius: 14px !important; /* 微调圆角防止在小屏上显得臃肿 */
+    padding: 20px !important; /* 移动端同样保持等边绝对对称 */
+    border-radius: 22px !important; /* 移动端等比例缩放超圆润转角 */
     border-width: 1.5px !important; 
-    box-shadow: 0 0 10px rgba(255, 117, 202, 0.08) !important;
+    margin-bottom: 18px !important;
   }
 }
 
 /* --------------------------------------------------------------------------
-   4. 顶部导航通栏（Neko 限定电竞幻彩灯带）
+   4. 顶部导航通栏（两端对齐与平滑边缘）
    -------------------------------------------------------------------------- */
 .masthead {
   background: linear-gradient(90deg, #ff75ca 0%, #a855f7 50%, #6366f1 100%) !important;
   border-bottom: 3px solid $primary-color !important;
   box-shadow: 0 4px 20px rgba(255, 117, 202, 0.2) !important;
-  border-radius: 0 0 16px 16px !important;
-  padding: 0.5em 0 !important;
+  border-radius: 0 0 24px 24px !important; /* 底部转角同步柔化 */
+  padding: 0.6em 0 !important;
   
   .inner {
     max-width: 100% !important;
-    padding: 0 20px !important;
+    padding: 0 30px !important; /* 导航内容两端留白，与下方的卡片完美对齐 */
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
 
   .site-title {
@@ -97,20 +112,20 @@ body, #main {
     }
   }
 
-  /* 导航菜单链接细节调整 */
+  /* 导航菜单链接极致圆滑（胶囊泡泡状） */
   .nav__links a {
     color: #ffffff !important;
     font-weight: bold !important;
-    border: 1px solid rgba(255,255,255,0.25) !important;
-    padding: 4px 12px !important;
-    border-radius: 20px !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    padding: 6px 16px !important;
+    border-radius: 50px !important; /* 绝对圆角（两头半圆胶囊状） */
     background: rgba(0,0,0,0.15) !important;
     transition: all 0.2s ease;
     
     &:hover {
       background: #ffffff !important;
       color: #ff75ca !important;
-      box-shadow: 0 0 12px #ffffff !important;
+      box-shadow: 0 0 15px #ffffff !important;
     }
   }
 }
@@ -141,37 +156,38 @@ h1, h2, h3, h4, h5, h6, .page__title, .archive__item-title {
   content: "🐾 " !important;
   display: inline-block;
   transform: rotate(-10deg);
-  margin-right: 4px;
+  margin-right: 6px;
 }
 
-/* 正文内部小标题：猫咪雷达信号导向线 */
+/* 正文内部小标题：极致圆滑的猫咪雷达信号导向槽 */
 .page__content {
   p {
-    color: #e5def3 !important; /* 调高正文文字亮度，提升阅读舒适度 */
-    line-height: 1.75 !important;
+    color: #e5def3 !important;
+    line-height: 1.8 !important;
   }
 
   h2, h3 {
-    border-left: 5px solid #a855f7 !important;
-    padding-left: 12px !important;
+    border-left: 6px solid #a855f7 !important;
+    padding-left: 14px !important;
     background: linear-gradient(90deg, rgba(168, 85, 247, 0.08), transparent) !important;
-    border-radius: 4px;
+    border-radius: 6px !important; /* 告别尖锐边角，标题槽也做圆滑处理 */
   }
 }
 
 /* --------------------------------------------------------------------------
-   6. 技术代码块变身（二次元萌娘专用特供电竞控制台）
+   6. 技术代码块极致圆滑处理（电竞控制台）
    -------------------------------------------------------------------------- */
 div.highlighter-rouge, figure.highlight {
   border: 2px solid #a855f7 !important;
   background-color: $code-background-color !important;
-  border-radius: 12px !important;
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.6), 0 4px 12px rgba(168, 85, 247, 0.05) !important;
-  overflow-x: auto !important; /* 强制开启横向滚动条，防止溢出屏幕 */
+  border-radius: 20px !important; /* 代码块大圆角处理，与整体完美呼应 */
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 5px 15px rgba(168, 85, 247, 0.05) !important;
+  overflow-x: auto !important; 
+  margin: 20px 0 !important;
   
   pre {
     background-color: transparent !important;
-    padding: 14px !important;
+    padding: 18px !important; /* 增加代码块内边距，提升视觉居中对称性 */
     font-size: 0.9em !important;
   }
   
@@ -181,39 +197,39 @@ div.highlighter-rouge, figure.highlight {
   }
 }
 
-/* 行内微型代码段微调 */
+/* 行内微型代码段（小胶囊状） */
 p code, li code {
   background-color: #221538 !important;
   color: #7df2ff !important;
   border: 1px solid rgba(125, 242, 255, 0.2) !important;
-  padding: 2px 6px !important;
-  border-radius: 6px !important;
+  padding: 3px 8px !important;
+  border-radius: 8px !important; /* 小圆角确保圆润度 */
   font-size: 0.9em !important;
 }
 
 /* --------------------------------------------------------------------------
-   7. 分类气泡标签与全自适应页脚
+   7. 胶囊气泡标签与全自适应页脚
    -------------------------------------------------------------------------- */
 .page__taxonomy-item {
   background: linear-gradient(135deg, #ff75ca, #a855f7) !important;
   color: #ffffff !important;
   font-weight: bold !important;
-  border-radius: 20px !important;
-  padding: 3px 12px !important;
+  border-radius: 30px !important; /* 标签完全改用胶囊圆角 */
+  padding: 4px 14px !important;
   border: none !important;
-  box-shadow: 0 3px 8px rgba(255, 117, 202, 0.2) !important;
+  box-shadow: 0 4px 10px rgba(255, 117, 202, 0.2) !important;
   
   &:hover {
-    box-shadow: 0 3px 12px rgba(255, 117, 202, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(255, 117, 202, 0.4) !important;
   }
 }
 
 .page__footer {
   background: transparent !important;
   color: $muted-text-color !important;
-  border-top: 2px dashed $primary-color !important;
+  border-top: 3px dashed $primary-color !important; /* 加粗虚线，显得更萌 */
   margin-top: 60px !important;
-  padding-top: 20px !important;
+  padding: 30px 20px !important;
 }
 
 /* 完美修剪可能导致移动端左右晃动的溢出根源 */
