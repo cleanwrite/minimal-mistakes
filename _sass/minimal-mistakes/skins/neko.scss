@@ -1,74 +1,48 @@
 /* ==========================================================================
-   Minimal Mistakes 极度透明&净化皮肤：neko (二次元温润猫娘控制台)
-   终极版本：去边框、去补丁、全穿透磨砂玻璃
+   Minimal Mistakes 极度透明&净化皮肤：neko (完全穿透版)
+   去除了顶部所有背景色块，实现真正的一体化透明视觉
    ========================================================================== */
 
-/* 1. 基础变量区 */
-$text-color:             #ded9e2 !default; 
-$muted-text-color:       #8a7fa8 !default; 
-$primary-color:          #ff4da6 !default; 
-$link-color:             #d946a3 !default; 
-$link-color--hover:      #10b981 !default; 
-$code-background-color:  rgba(17, 9, 34, 0.6) !default; 
-
-/* 2. 全局重置：彻底移交背景控制权 */
-body, #main, .site-header, .masthead {
+/* 1. 全局穿透：强制抹除所有容器背景 */
+body, #main, .masthead, .masthead__inner-wrap, .page__header, .page__inner-wrap {
+  background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-  color: $text-color !important;
-  font-family: Consolas, Menlo, Monaco, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* 3. 彻底消除导航栏的任何白色背景和边框 */
+/* 2. 组件磨砂：只保留卡片主体的一点点磨砂，导航栏完全透明 */
+html body {
+  .sidebar, .page, .archive, .archive__item {
+    background: rgba(20, 13, 33, 0.3) !important; /* 透明度调得更低，更通透 */
+    border: 1px solid rgba(255, 101, 190, 0.2) !important;
+    border-radius: 20px !important; 
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+  }
+}
+
+/* 3. 导航栏处理：彻底去背景，去阴影，去边框，仅保留文字 */
 html body .masthead {
   position: sticky !important; 
   top: 0 !important; 
   z-index: 9999 !important;
-  background: rgba(10, 6, 21, 0.4) !important; /* 导航栏改为更通透的磨砂 */
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border: none !important; /* 强制干掉导航栏边框 */
-  box-shadow: none !important; /* 干掉导航栏阴影白边 */
-  border-radius: 0 0 20px 20px !important;
+  padding: 10px 0 !important;
 }
 
-/* 4. 组件容器：磨砂玻璃效果，去除默认白色补丁 */
+/* 4. 文本与链接：保持对比度，确保在透明背景下清晰可见 */
 html body {
-  .sidebar, .page, .archive, .archive__item, .page__content {
-    background: rgba(20, 13, 33, 0.4) !important; /* 组件透明度设为0.4，进一步强化穿透感 */
-    border: 1px solid rgba(255, 101, 190, 0.2) !important; /* 弱化边框线 */
-    border-radius: 20px !important; 
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
-  }
+  p, li, .page__meta { color: #ffffff !important; text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important; }
+  a { color: #ffb3e6 !important; text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important; }
+  h1, h2, h3, h4, h5, h6 { color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important; }
 }
 
-/* 5. 文本与链接：保持对比度 */
-html body {
-  p, li, .page__meta { color: $text-color !important; text-shadow: 1px 1px 1px rgba(0,0,0,0.2) !important; }
-  a { color: $link-color !important; text-decoration: none !important; text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important; }
-  a:hover { color: $link-color--hover !important; }
-  h1, h2, h3, h4, h5, h6 { color: #ffffff !important; }
-}
-
-/* 6. 代码块与标签 */
-html body div.highlighter-rouge, html body figure.highlight {
-  background-color: $code-background-color !important;
-  border: 1px solid rgba(168, 85, 247, 0.2) !important;
-  border-radius: 12px !important;
-}
-
-html body .page__taxonomy-item {
-  background: rgba(255, 77, 166, 0.2) !important;
-  border: 1px solid rgba(255, 77, 166, 0.3) !important;
-}
-
-/* 7. 终极补丁：如果还有漏网之鱼，直接强制抹除 */
-html body .page__header, 
-html body .page__inner-wrap,
-html body .masthead__inner-wrap {
-  background-color: transparent !important;
+/* 5. 终极强力清除：如果还有任何残留，直接强制清空 */
+html body .masthead__inner-wrap, 
+html body .page__title,
+html body .site-title {
+  background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
