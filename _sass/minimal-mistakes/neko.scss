@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Minimal Mistakes 专属爆改：neko_cyber_pink (二次元猫娘元气电竞皮肤)
+   ========================================================================== */
+
+/* 1. 赛博猫娘专属：粉紫渐变星空底色与动态光晕 */
+body, #main {
+  background-color: #0b0713 !important; /* 深夜魅紫底色 */
+  background-image: 
+    radial-gradient(circle at 80% 20%, rgba(255, 111, 190, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 10% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+    linear-gradient(rgba(255, 111, 190, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 111, 190, 0.02) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px !important;
+  color: #f1ebd9 !important; /* 带有肉垫温度的奶白文字 */
+  font-family: "PingFang SC", -apple-system, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 2. 霓虹肉垫霓虹卡片（双端拉满，自带猫耳发光边缘） */
+.sidebar, .page, .archive, .archive__item {
+  background: rgba(19, 13, 31, 0.85) !important; /* 半透明猫咖夜色 */
+  border: 2px solid #ff79c6 !important; /* 猛男萌娘粉霓虹边框 */
+  border-radius: 20px !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 15px rgba(255, 111, 190, 0.2), inset 0 0 10px rgba(255, 111, 190, 0.1) !important;
+  padding: 25px !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  position: relative;
+}
+
+/* 悬浮时：像猫咪踩奶一样富有Q弹律动，且霓虹灯效加倍！ */
+.archive__item:hover, .sidebar:hover {
+  transform: translateY(-5px) scale(1.01) !important;
+  border-color: #8be9fd !important; /* 悬浮时变成傲娇的电光蓝 */
+  box-shadow: 0 0 25px rgba(139, 233, 253, 0.4), inset 0 0 15px rgba(139, 233, 253, 0.2) !important;
+}
+
+/* 3. 顶部导航栏（猫娘限定电竞灯带） */
+.masthead {
+  background: linear-gradient(90deg, #ff79c6 0%, #bd93f9 100%) !important; /* 粉紫幻彩渐变 */
+  border-bottom: 3px solid #ff79c6 !important;
+  box-shadow: 0 4px 20px rgba(255, 111, 190, 0.3) !important;
+  border-radius: 0 0 16px 16px !important;
+  
+  .site-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.6), 2px 2px 0px #bd93f9 !important;
+  }
+  
+  /* 自动在博客标题后面加上傲娇猫娘尾巴 */
+  .site-title::after {
+    content: " ฅ(＾・ω・＾)ฅ" !important;
+    font-size: 14px;
+    font-weight: normal;
+    color: #fff;
+    text-shadow: none !important;
+  }
+
+  .nav__links a {
+    color: #ffffff !important;
+    font-weight: bold !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    padding: 5px 12px !important;
+    border-radius: 20px !important;
+    background: rgba(0,0,0,0.1) !important;
+    
+    &:hover {
+      background: #ffffff !important;
+      color: #ff79c6 !important;
+      box-shadow: 0 0 10px #ffffff;
+    }
+  }
+}
+
+/* 4. 超链接与核心按钮（猫咪薄荷糖） */
+a {
+  color: #ff79c6 !important; /* 核心链接全部转为萌娘粉 */
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #50fa7b !important; /* 悬浮时变成充满活力的元气绿 */
+  text-shadow: 0 0 8px rgba(80, 250, 123, 0.6);
+}
+
+/* 5. 页面大标题：猫爪印章点缀 */
+h1, h2, h3, h4, h5, h6, .page__title, .archive__item-title {
+  color: #ffffff !important;
+  text-shadow: 0 0 5px rgba(255, 111, 190, 0.3) !important;
+}
+
+/* 让每一篇文章的标题前都自动出现小猫爪 */
+.archive__item-title a::before, .page__title::before {
+  content: "🐾 " !important;
+  display: inline-block;
+  transform: rotate(-15deg);
+}
+
+/* 文章内部小标题的左侧猫咪雷达感应线 */
+.page__content h2, .page__content h3 {
+  border-left: 5px solid #bd93f9 !important;
+  padding-left: 12px !important;
+  background: linear-gradient(90deg, rgba(189, 147, 249, 0.1), transparent) !important;
+  border-radius: 4px;
+}
+
+/* 6. 技术代码块变身（二次元萌娘特供电竞控制台） */
+div.highlighter-rouge, figure.highlight {
+  border: 2px solid #bd93f9 !important; /* 极客魅紫边框 */
+  background-color: #0f0a1c !important; /* 极深紫色背景 */
+  border-radius: 14px !important;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 5px 15px rgba(189, 147, 249, 0.1) !important;
+}
+
+/* 7. 文章标签与分类小气泡 */
+.page__taxonomy-item {
+  background: linear-gradient(135deg, #ff79c6, #bd93f9) !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  padding: 3px 12px !important;
+  border: none !important;
+  box-shadow: 0 3px 8px rgba(255, 111, 190, 0.3) !important;
+}
+
+/* 8. 底部虚线分隔符 */
+.page__footer {
+  background: transparent !important;
+  color: #6272a4 !important;
+  border-top: 2px dashed #ff79c6 !important;
+  margin-top: 60px !important;
+}
