@@ -1,40 +1,60 @@
 /* ==========================================================================
-   custom.scss - 极致清新透视方案
+   终极整合版：修复背景图 + 全局清新磨砂 + 丝滑动效
    ========================================================================== */
 
-/* 背景图固定，确保不产生偏移 */
+/* 1. 强制固定背景图，确保绝对不会消失 */
 body {
   background-image: url("/assets/images/wall.jpg") !important;
   background-size: cover !important;
   background-attachment: fixed !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+  /* 确保页面基色，避免加载时闪白 */
+  background-color: #fceabb !important; 
+  color: #3d2b1f !important;
+  transition: background-size 20s ease-in-out;
 }
 
-/* 核心优化：彻底移除沉重的线性渐变，改为柔和的白磨砂 */
-html body .sidebar,
-html body .page,
-html body .archive,
-html body .archive__item,
-html body .page__footer {
-  /* 使用浅色磨砂，这比紫色渐变更能融入向日葵的亮色背景 */
-  background: rgba(255, 255, 255, 0.25) !important; 
-  backdrop-filter: blur(18px) !important;
-  -webkit-backdrop-filter: blur(18px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+/* 2. 动效：背景图缓慢呼吸 */
+body:hover {
+  background-size: 105% 105% !important;
 }
 
-/* 导航栏：完全通透，只保留模糊，不再是夺目的紫色块 */
-html body .masthead {
-  background: rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(15px) !important;
-  -webkit-backdrop-filter: blur(15px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+/* 3. 核心布局：彻底清除所有顽固的紫色渐变色块 */
+.masthead, .masthead__inner-wrap, .page__header, .page__inner-wrap, .page__footer, 
+.sidebar, .page, .archive, .archive__item {
+  background: rgba(255, 255, 255, 0.2) !important; /* 清透白色磨砂 */
+  background-image: none !important; /* 强制移除之前的 linear-gradient */
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 25px !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 4. 消除导航栏默认阴影和边框 */
+.masthead {
+  border-bottom: none !important;
   box-shadow: none !important;
 }
 
-/* 针对页面主体文字颜色（深棕色，适配亮背景） */
-body {
-  color: #3d2b1f !important;
+/* 5. 动效：鼠标悬停卡片时的浮动反馈 */
+.sidebar:hover, .page:hover, .archive__item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 6. 文字优化：确保在亮色背景下清晰可见 */
+.site-title, .nav__links a, h1, h2, h3, p, li {
+  color: #2c1e15 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 7. 链接效果 */
+a {
+  color: #a65100 !important;
+  text-decoration: none !important;
+  border-bottom: 1px dashed rgba(166, 81, 0, 0.2) !important;
 }
