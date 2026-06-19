@@ -1,240 +1,66 @@
 ---
 ---
-/* ==========================================================================
-   向日葵终极版：去重叠蒙版 + 精准卡片 + 动效
-   ========================================================================== */
 
-/* ── 1. 全屏背景 ── */
+/* ── 1. 全局：背景图锁定 ── */
 html, body {
   background: url("/assets/images/wall.jpg") no-repeat center center fixed !important;
   background-size: cover !important;
   margin: 0 !important;
-  padding: 0 !important;
-  min-height: 100vh !important;
 }
 
-@media (max-width: 768px) {
-  html, body {
-    background-attachment: scroll !important;
-  }
-}
-
-/* ── 2. 全局重置：铲掉所有主题默认白底 ── */
-*,
-*::before,
-*::after {
-  background-color: transparent;
-  box-shadow: none;
-}
-
-/* ── 3. 入场动画 ── */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── 4. 真正需要卡片感的元素：精准磨砂玻璃 ── */
+/* ── 2. 核心：高通透白色毛玻璃卡片 (解决看不清字的问题) ── */
+/* 我们使用纯白+较高的透明度，配合字体的黑色阴影来保证清晰度 */
 .sidebar,
 .archive,
 .page__inner-wrap,
-.author__urls-wrapper,
-.nav__list .nav__items,
-.toc.sticky,
 .entries-list .list__item,
-.taxonomy__section,
-.results-container {
-  background: rgba(255, 255, 255, 0.18) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  border-radius: 20px !important;
-  box-shadow: 0 4px 20px rgba(180, 120, 60, 0.08) !important;
-  margin-bottom: 24px !important;
-  padding: 28px 32px !important;
-  animation: fadeInUp 0.45s ease both !important;
-  transition: box-shadow 0.25s ease, transform 0.25s ease !important;
-}
-
-/* 文章卡片悬停微浮 */
-.entries-list .list__item:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 12px 36px rgba(180, 120, 60, 0.14) !important;
-}
-
-/* ── 5. 完全透明：不需要蒙版的容器 ── */
-.initial-content,
+.masthead,
 .page__header,
 .page__footer,
-.page,
-.archive,
 .page__related,
 .search-content,
-.page__taxonomy-item {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  animation: none !important;
-}
-
-/* ── 6. 内部穿透：卡片内子元素不叠加蒙版 ── */
-.page__content,
-.archive__item {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  animation: none !important;
-}
-
-/* ── 7. 导航栏：极度通透 ── */
-.masthead,
-.masthead__inner-wrap,
-.greedy-nav {
-  background: rgba(255, 248, 235, 0.22) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border-radius: 0 !important;
-  border: none !important;
-  border-bottom: 1px solid rgba(224, 123, 57, 0.15) !important;
-  box-shadow: none !important;
-  padding: 6px 0 !important;
-  margin-bottom: 0 !important;
-  animation: none !important;
-}
-
-.greedy-nav .site-title,
-.greedy-nav .visible-links a,
-.greedy-nav .hidden-links a {
-  background: transparent !important;
-  border-bottom: none !important;
-  transition: color 0.2s ease !important;
-}
-
-.greedy-nav .visible-links a:hover {
-  color: #a65100 !important;
-}
-
-/* ── 8. 链接 ── */
-a {
-  color: #7a3a00 !important;
-  text-decoration: none !important;
-  border-bottom: 1px dashed rgba(166, 81, 0, 0.35) !important;
-  transition: color 0.2s ease, border-color 0.2s ease !important;
-}
-
-a:hover {
-  color: #3d1a00 !important;
-  border-bottom: 1px solid #3d1a00 !important;
-}
-
-/* ── 9. 文字分级（白色光晕保证透明背景可读） ── */
-body, p, li, span, td, th {
-  color: #2a1a0e !important;
-  line-height: 1.9 !important;
-  font-weight: 400 !important;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.55) !important;
-}
-
-h1 {
-  color: #1a0e06 !important;
-  font-weight: 700 !important;
-  font-size: 1.9em !important;
-  line-height: 1.3 !important;
-  margin-bottom: 0.6em !important;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.65) !important;
-}
-
-h2 {
-  color: #1a0e06 !important;
-  font-weight: 600 !important;
-  margin-top: 1.4em !important;
-  margin-bottom: 0.5em !important;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.65) !important;
-}
-
-h3, h4 {
-  color: #2a1a0e !important;
-  font-weight: 500 !important;
-  margin-top: 1.2em !important;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.55) !important;
-}
-
-.page__title {
-  color: #1a0e06 !important;
-  font-weight: 700 !important;
-  margin-bottom: 0.4em !important;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.65) !important;
-}
-
-.site-title {
-  color: #2a1a0e !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.02em !important;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5) !important;
-}
-
-/* ── 10. 头像 ── */
-.author__avatar img {
-  border-radius: 50% !important;
-  border: 3px solid rgba(224, 123, 57, 0.45) !important;
-  background: transparent !important;
-  transition: transform 0.3s ease, border-color 0.3s ease !important;
-}
-
-.author__avatar img:hover {
-  transform: scale(1.06) !important;
-  border-color: rgba(224, 123, 57, 0.80) !important;
-}
-
-/* ── 11. 标签气泡 ── */
-.page__taxonomy-item a {
-  background: rgba(255, 255, 255, 0.22) !important;
-  border: 1px solid rgba(224, 123, 57, 0.30) !important;
+.taxonomy__section,
+.results-container,
+.initial-content {
+  background: rgba(255, 255, 255, 0.65) !important; /* 增加到0.65透明度，让底下的白清晰可见 */
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   border-radius: 20px !important;
-  padding: 2px 12px !important;
-  font-size: 0.82em !important;
-  transition: background 0.2s ease !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+  padding: 30px !important;
+  margin-bottom: 25px !important;
 }
 
-.page__taxonomy-item a:hover {
-  background: rgba(224, 123, 57, 0.20) !important;
-  border-bottom: 1px solid rgba(224, 123, 57, 0.30) !important;
+/* ── 3. 移除右上角按钮 (更精准) ── */
+.btn--primary,
+.btn--info,
+.masthead__menu-item--link {
+  /* 如果还有其他按钮，可以根据类名继续追加到这里 */
+}
+/* 尝试隐藏特定按钮，如果无效请右键“检查”它看类名 */
+.btn--primary {
+  display: none !important;
 }
 
-/* ── 12. 主内容区宽度 ── */
-#main {
-  max-width: 1020px !important;
-  margin: 0 auto !important;
-  padding: 28px 20px !important;
+/* ── 4. 导航栏处理：保持和卡片一致的通透白 ── */
+.masthead {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
-/* ── 13. 滚动条 ── */
-::-webkit-scrollbar {
-  width: 6px;
+/* ── 5. 文字与链接：使用深色，确保在白色背景上清晰可见 ── */
+body, p, li, h1, h2, h3, .site-title, .nav__links a {
+  color: #333333 !important; /* 文字改为深灰，阅读感更好 */
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+a {
+  color: #d35400 !important; /* 链接用稍微亮一点的橙色 */
+  border-bottom: 1px dashed rgba(211, 84, 0, 0.5) !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(224, 123, 57, 0.35);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(224, 123, 57, 0.60);
+/* ── 6. 强制覆盖所有子元素背景（防止白框残留） ── */
+.page__content, .archive__item {
+  background: transparent !important;
 }
