@@ -1,62 +1,35 @@
-/* ==========================================================================
-   终极锁定版：绝对不丢失背景 + 严谨排版
-   ========================================================================== */
+---
+---
 
-/* 1. 绝对优先级的背景层 */
+/* 1. 强制全屏固定背景 */
 html, body {
-  background-image: url("/assets/images/wall.jpg") !important;
+  background: url("/assets/images/wall.jpg") no-repeat center center fixed !important;
   background-size: cover !important;
-  background-attachment: fixed !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-color: #2c1e15 !important; /* 兜底色 */
+  min-height: 100vh !important;
   margin: 0 !important;
-  padding: 0 !important;
-  height: 100% !important;
 }
 
-/* 2. 移除 Minimal Mistakes 自带的所有背景干扰 */
-.masthead, 
-.masthead__inner-wrap, 
-.page, 
-.sidebar, 
-.archive, 
-.archive__item, 
-.page__footer, 
-.page__header, 
-.page__inner-wrap {
-  /* 确保不清除背景，但清除颜色层 */
-  background-color: rgba(0, 0, 0, 0.2) !important; 
-  background-image: none !important; /* 此处仅针对容器内部 */
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+/* 2. 彻底清洗所有组件的背景颜色（这是解决白框的关键） */
+.masthead, .sidebar, .page, .archive, .archive__item, .page__footer, .page__inner-wrap {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border-radius: 20px !important;
   box-shadow: none !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-radius: 15px !important;
 }
 
-/* 3. 严格排版，杜绝重叠 */
+/* 3. 强制内容布局，消除溢出和重叠 */
 #main {
-  display: block !important;
-  width: 100% !important;
   max-width: 1000px !important;
   margin: 0 auto !important;
   padding: 40px 20px !important;
-  overflow: visible !important;
+  display: block !important;
 }
 
-.sidebar {
-  width: 250px !important;
-  margin-bottom: 30px !important;
-}
-
-/* 4. 清除可能导致的溢出或重叠 */
-*, *:before, *:after {
-  box-sizing: border-box !important;
-}
-
-/* 5. 确保文字可读性 */
-body, h1, h2, h3, p, li, a {
+/* 4. 文字颜色适配 */
+body, h1, h2, h3, p, a {
   color: #ffffff !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8) !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
 }
