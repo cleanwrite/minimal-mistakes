@@ -1,68 +1,79 @@
 <script>
-
   'use strict';
 
-
-
   (function () {
-
     var commentContainer = document.querySelector('#giscus-comments');
 
-
-
     if (!commentContainer) {
-
       return;
-
     }
 
+    // 清空可能存在的旧内容（防止重复渲染）
+    commentContainer.innerHTML = '';
 
+    // 1. 创建并注入密码验证墙的 HTML 结构
+    var gateDiv = document.createElement('div');
+    gateDiv.id = 'vip-gate';
+    gateDiv.style.cssText = 'margin-top: 2.5em; padding: 25px; border: 2px dashed #f0ad4e; background-color: #fcf8e3; border-radius: 6px; text-align: center;';
+    gateDiv.innerHTML = 
+      '<h3 style="margin-top: 0; color: #8a6d3b;"><i class="fas fa-key"></i> 内部内容：请输入专属验证码/密钥</h3>' +
+      '<p style="color: #66512c; font-size: 0.95em;">本帖的追加讨论与隐藏核心资源已被锁定，请输入有效的邀请码或密钥进行解锁。</p>' +
+      '<div style="margin: 20px 0;">' +
+        '<input type="password" id="invite-code-input" placeholder="请输入密钥..." style="padding: 10px; width: 260px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />' +
+        '<button id="verify-btn" style="padding: 10px 20px; background-color: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; margin-left: 10px;">验证解锁</button>' +
+      '</div>' +
+      '<p id="verify-error-msg" style="color: #d9534f; display: none; font-weight: bold; margin-top: 10px;"><i class="fas fa-exclamation-triangle"></i> 密钥无效或已过期，请重新输入！</p>';
 
-    var script = document.createElement('script');
+    // 2. 创建验证成功后用于展示内容的容器
+    var contentDiv = document.createElement('div');
+    contentDiv.id = 'vip-protected-content';
+    contentDiv.style.cssText = 'display: none; margin-top: 2.5em; padding: 20px; border-left: 5px solid #5cb85c; background-color: #f4f9f4; border-radius: 4px;';
+    contentDiv.innerHTML = 
+      '<h4 style="color: #3c763d; margin-top: 0;"><i class="fas fa-unlock"></i> 验证成功！以下为隐藏讨论与核心资源</h4>' +
+      '<div id="decrypted-payload"></div>';
 
+    // 将这些元素塞入评论区容器中
+    commentContainer.appendChild(gateDiv);
+    commentContainer.appendChild(contentDiv);
 
+    // 3. 动态引入 CryptoJS 用于本地安全 MD5 校验
+    var cryptoScript = document.createElement('script');
+    cryptoScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js';
+    cryptoScript.async = true;
+    
+    cryptoScript.onload = function() {
+      // 当 CryptoJS 加载完成后，绑定按钮的点击事件
+      var verifyBtn = document.getElementById('verify-btn');
+      if (verifyBtn) {
+        verifyBtn.addEventListener('click', function() {
+          var inputCode = document.getElementById('invite-code-input').value.trim();
+          var errorMsg = document.getElementById('verify-error-msg');
+          
+          // 从当前文章的 Front Matter 中自动读取预设的邀请码 MD5 散列值
+          var correctHash = "{{ page.invite_code_hash }}"; 
+          
+          if (!correctHash) {
+            alert("这篇文章没有设置邀请码密钥。");
+            return;
+          }
 
-    script.setAttribute('src', 'https://giscus.app/client.js');
+          // 计算用户输入的邀请码的 MD5 值
+          var inputHash = CryptoJS.MD5(inputCode).toString();
 
-    script.setAttribute('data-repo', '{{ site.repository | downcase }}');
+          if (inputHash === correctHash) {
+            errorMsg.style.display = 'none';
+            document.getElementById('vip-gate').style.display = 'none';
+            document.getElementById('vip-protected-content').style.display = 'block';
+            
+            // 动态注入并渲染 Markdown 格式的隐藏内容
+            document.getElementById('decrypted-payload').innerHTML = `{{ page.hidden_resource | markdownify }}`;
+          } else {
+            errorMsg.style.display = 'block';
+          }
+        });
+      }
+    };
 
-    script.setAttribute('data-repo-id', '{{ site.comments.giscus.repo_id }}');
-
-    script.setAttribute('data-category', '{{ site.comments.giscus.category_name }}');
-
-    script.setAttribute('data-category-id', '{{ site.comments.giscus.category_id }}');
-
-    script.setAttribute('data-mapping', '{{ site.comments.giscus.discussion_term | default: "pathname" }}');
-
-    script.setAttribute('data-strict', '{{ site.comments.giscus.strict | default: 0 }}');
-
-    script.setAttribute('data-reactions-enabled', '{{ site.comments.giscus.reactions_enabled | default: 1 }}');
-
-    script.setAttribute('data-emit-metadata', '{{ site.comments.giscus.emit_metadata | default: 0 }}');
-
-    script.setAttribute('data-input-position', '{{ site.comments.giscus.input_position | default: "top" }}');
-
-    script.setAttribute('data-theme', '{{ site.comments.giscus.theme | default: "light" }}');
-
-    script.setAttribute('data-lang',  '{{ site.comments.giscus.lang | default: "en" }}');
-
-    {% if site.comments.giscus.lazy %}
-
-    script.setAttribute('data-loading', 'lazy');
-
-    {% endif %}
-
-    script.setAttribute('crossorigin', 'anonymous');
-
-
-
-    script.setAttribute('async', '');
-
-
-
-    commentContainer.appendChild(script);
-
+    document.head.appendChild(cryptoScript);
   })();
-
-</script> 
-
+</script>
