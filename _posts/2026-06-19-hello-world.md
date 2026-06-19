@@ -5,11 +5,7 @@ date: 2026-06-19
 categories: [技术, 自动化]
 tags: [Python, 资源]
 comments: true
-
-# 🔑 密码锁密文（对应明文密码：ss202）
 invite_code_hash: "c4d038b4bed09fdb1471ef51ec3a32cd"
-
-# 🎁 隐藏资源内容（输入正确密码后可见）
 hidden_resource: |
   ### 🎉 验证成功！欢迎进入内部核心资源区
   
