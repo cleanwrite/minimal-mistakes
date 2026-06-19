@@ -1,19 +1,43 @@
 ---
 ---
 
+/* 背景图 */
 body {
   background-image: url("/assets/images/wall.jpg") !important;
   background-size: cover !important;
   background-attachment: fixed !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  background-color: #f5f5f5 !important;
+  background-color: #0a0615 !important;
 }
 
-/* 组件半透明，让背景图透出来 */
+/* 所有组件渐变半透明 */
 html body .sidebar,
 html body .page,
 html body .archive,
-html body .archive__item {
-  background: rgba(20, 13, 33, 0.55) !important;
+html body .archive__item,
+html body .masthead,
+html body .page__footer {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 13, 33, 0.55) 0%,
+    rgba(107, 33, 168, 0.25) 50%,
+    rgba(20, 13, 33, 0.55) 100%
+  ) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* masthead 导航栏也半透明 */
+html body .masthead {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 101, 190, 0.7) 0%,
+    rgba(147, 51, 234, 0.7) 100%
+  ) !important;
+}
+
+/* footer 半透明 */
+html body .page__footer {
+  background: rgba(10, 6, 21, 0.6) !important;
 }
