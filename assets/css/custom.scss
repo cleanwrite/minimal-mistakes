@@ -1,7 +1,11 @@
 ---
 ---
 
-/* 1. 全局背景：锁定图片 */
+/* ==========================================================================
+   终极修复版：彻底去白框 + 背景强制锁定 + 全局文字增强
+   ========================================================================== */
+
+/* 1. 强制背景层：确保永远不被遮挡 */
 html, body {
   background: url("/assets/images/wall.jpg") no-repeat center center fixed !important;
   background-size: cover !important;
@@ -9,34 +13,56 @@ html, body {
   margin: 0 !important;
 }
 
-/* 2. 核心优化：构建统一的“深色墨水”卡片 */
-.masthead, .sidebar, .page, .archive, .archive__item, .page__footer, .page__inner-wrap {
-  /* 使用强力深色遮罩，彻底覆盖背景色不均匀的问题 */
-  background: rgba(0, 0, 0, 0.5) !important; 
-  /* 移除白框：强制取消边框或改为极淡的线条 */
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+/* 2. 彻底清洗所有容器背景：移除 Neko 皮肤及主题默认的白底干扰 */
+.masthead, 
+.masthead__inner-wrap,
+.page__header,
+.page__inner-wrap,
+.sidebar, 
+.page, 
+.archive, 
+.archive__item, 
+.page__footer,
+.page__content {
+  background: rgba(0, 0, 0, 0.45) !important; /* 统一的半透明深色墨水层 */
+  background-image: none !important;        /* 强制移除所有可能的渐变背景 */
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;              /* 彻底移除阴影白边 */
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border-radius: 20px !important;
-  box-shadow: none !important;
+  margin-bottom: 20px !important;
 }
 
-/* 3. 字体优化：确保在深色遮罩上清晰可见 */
-/* 使用高对比度的白色文字，并加粗阴影 */
-body, h1, h2, h3, p, li, a, .site-title, .nav__links a {
-  color: #ffffff !important; 
-  text-shadow: 0 2px 4px rgba(0,0,0,1) !important;
+/* 3. 导航栏专项处理：确保它是完全悬浮且通透的 */
+.masthead {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 10px 0 !important;
+}
+
+/* 4. 文字对比度专项增强：解决字迹不清 */
+body, h1, h2, h3, h4, p, li, .site-title, .nav__links a, .page__title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important; /* 加重阴影，让文字从背景中浮起 */
   font-weight: 500 !important;
 }
 
-/* 4. 链接颜色：使用亮色以区分 */
+/* 5. 链接与交互优化 */
 a {
   color: #ffcc99 !important;
   border-bottom: 1px dashed rgba(255, 204, 153, 0.8) !important;
 }
 
-/* 5. 强制清除导航栏所有残留 */
-.masthead {
-  background: rgba(0, 0, 0, 0.3) !important;
-  border: none !important;
+a:hover {
+  color: #ffffff !important;
+  border-bottom: 1px solid #ffffff !important;
+}
+
+/* 6. 严禁溢出：强制定义最大宽度防止布局崩坏 */
+#main {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
 }
