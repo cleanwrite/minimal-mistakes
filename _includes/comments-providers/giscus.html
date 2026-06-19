@@ -1,3 +1,11 @@
+<div class="notice--warning" style="margin-top: 2.5em; padding: 20px; border-left: 6px solid #f0ad4e; background-color: #fcf8e3; border-radius: 4px;">
+  <h4 style="margin-top: 0; color: #8a6d3b;"><i class="fas fa-lock"></i> 内部内容：受保护的互动讨论区</h4>
+  <p style="margin-bottom: 0; font-size: 0.95em; color: #66512c;">
+    为了确保讨论质量并防止匿名爬虫，本帖的隐藏资源、追加更新及深度问答均放置在下方的 GitHub Discussions 讨论区中。<br>
+    <strong>查看与参与方法：</strong>请滚动至页面最下方，点击评论框中的 <strong>"Sign in with GitHub"</strong> 按钮登录你的 GitHub 账号。成功认证并登录后，隐藏的内容与历史回复将自动加载。
+  </p>
+</div>
+
 <script>
   'use strict';
 
@@ -19,9 +27,9 @@
     script.setAttribute('data-strict', '{{ site.comments.giscus.strict | default: 0 }}');
     script.setAttribute('data-reactions-enabled', '{{ site.comments.giscus.reactions_enabled | default: 1 }}');
     script.setAttribute('data-emit-metadata', '{{ site.comments.giscus.emit_metadata | default: 0 }}');
-    script.setAttribute('data-input-position', '{{ site.comments.giscus.input_position | default: "top" }}');
+    script.setAttribute('data-input-position', '{{ site.comments.giscus.input_position | default: "bottom" }}'); // 强制设为 bottom 确保输入框在下方
     script.setAttribute('data-theme', '{{ site.comments.giscus.theme | default: "light" }}');
-    script.setAttribute('data-lang',  '{{ site.comments.giscus.lang | default: "en" }}');
+    script.setAttribute('data-lang',  '{{ site.comments.giscus.lang | default: "zh-CN" }}'); // 默认强制简体中文
     {% if site.comments.giscus.lazy %}
     script.setAttribute('data-loading', 'lazy');
     {% endif %}
