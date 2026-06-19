@@ -11,26 +11,26 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 # theme                  : "minimal-mistakes-jekyll"
-# remote_theme           : "mmistakes/minimal-mistakes"
+remote_theme           : "mmistakes/minimal-mistakes@4.28.0"
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "catppuccin_latte", "catppuccin_mocha"
 
 # Site Settings
-locale                   : "en-US"
+locale                   : "zh-CN"
 direction                : # "ltr" (default), "rtl" # set the direction of the page
-title                    : "Site Title"
+title                    : "fw's Blog"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Your Name"
-description              : "An amazing website."
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+subtitle                 : "我草，还是github上的项目好用" # site tagline that appears below site title in masthead
+name                     : "fw"
+description              : "欢迎来到我的个人博客！"
+url                      : # the base hostname & protocol for your site e.g. "https://fw.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : # GitHub username/repo-name e.g. "fw/my-blog"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-breadcrumbs              : # true, false (default)
+breadcrumbs              : true
 words_per_minute         : 200
-enable_copy_code_button  : # true, false (default)
+enable_copy_code_button  : true
 copyright                : # "copyright" name, defaults to site.title
 copyright_url            : # "copyright" URL, defaults to site.url
 comments:
@@ -68,11 +68,11 @@ reCaptcha:
 atom_feed:
   path                   : # blank (default) uses feed.xml
   hide                   : # true, false (default)
-search                   : # true, false (default)
-search_full_content      : # true, false (default)
-search_provider          : # lunr (default), algolia, google
+search                   : true
+search_full_content      : true
+search_provider          : lunr
 lunr:
-  search_within_pages    : # true, false (default)
+  search_within_pages    : true
 algolia:
   application_id         : # YOUR_APPLICATION_ID
   index_name             : # YOUR_INDEX_NAME
@@ -114,16 +114,16 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
-  email            :
+  name               : "fw"
+  avatar             : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio                : "欢迎来到我的空间。"
+  location           : "China"
+  email              : "your.email@email.com"
   # fediverse      : "@you@instance.social"  # used for fediverse:creator meta tag
   links:
     - label: "Email"
       icon: "fas fa-fw fa-square-envelope"
-      # url: "mailto:your.name@email.com"
+      url: "mailto:your.email@email.com"      # 记得把这里的邮箱改成你的
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -135,7 +135,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/your-github-id" # 记得把这里的 ID 改成你的
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -152,7 +152,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
+      url: "https://github.com/your-github-id" # 底部页脚的 GitHub 链接
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
@@ -162,7 +162,7 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url:
-  since: "2013"
+  since: "2026"
 
 
 # Reading Files
@@ -243,7 +243,7 @@ paginate_path: /page:num/
 
 # Pagination with jekyll-paginate-v2
 # See https://github.com/sverrirs/jekyll-paginate-v2/blob/master/README-GENERATOR.md#site-configuration
-#   for configuration details
+#    for configuration details
 pagination:
   # Set enabled to true to use paginate v2
   # enabled: true
@@ -281,33 +281,12 @@ whitelist:
 
 
 # Archives
-#  Type
-#  - GitHub Pages compatible archive pages built with Liquid ~> type: liquid (default)
-#  - Jekyll Archives plugin archive pages ~> type: jekyll-archives
-#  Path (examples)
-#  - Archive page should exist at path when using Liquid method or you can
-#    expect broken links (especially with breadcrumbs enabled)
-#  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
-#  - <base_path>/categories/my-awesome-category/index.html ~> path: /categories/
-#  - <base_path>/my-awesome-category/index.html ~> path: /
 category_archive:
   type: liquid
   path: /categories/
 tag_archive:
   type: liquid
   path: /tags/
-# show_taxonomy: false  # set to false to hide tag/category lists on posts
-# https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
-#   layouts:
-#     category: archive-taxonomy
-#     tag: archive-taxonomy
-#   permalinks:
-#     category: /categories/:name/
-#     tag: /tags/:name/
 
 
 # HTML Compression
@@ -328,7 +307,6 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true # 全局默认开启文章评论
       share: true
       related: true
-
