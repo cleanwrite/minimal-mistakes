@@ -1,52 +1,51 @@
+---
+---
+
 /* ==========================================================================
-   向日葵田优化版 - 增加呼吸感与内边距
+   向日葵田最终优化版：呼吸感与透视整合
    ========================================================================== */
 
-/* 1. 清理所有强制背景与边框，确保存粹透视 */
-.masthead, .masthead__inner-wrap, .page__header, .page__inner-wrap, body, #main {
-  background: transparent !important;
-  background-image: none !important;
-  border: none !important;
-  box-shadow: none !important;
+/* 1. 强制背景锁定：确保向日葵背景全屏覆盖 */
+html, body {
+  background: url("/assets/images/wall.jpg") no-repeat center center fixed !important;
+  background-size: cover !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* 2. 优化卡片布局：增加宽裕的呼吸感 (Padding) */
-.sidebar, .page, .archive, .archive__item {
-  /* 增加内边距，让文字与边框分离 */
-  padding: 40px !important; 
-  /* 增加卡片间的距离 */
-  margin-bottom: 30px !important; 
-  
-  background: rgba(255, 255, 255, 0.3) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  border-radius: 30px !important; /* 更圆润的边角，视觉更柔和 */
+/* 2. 组件净化：彻底移除主题默认的 background 干扰 */
+.masthead, .masthead__inner-wrap, .page__header, .page__inner-wrap, .sidebar, .page, .archive, .archive__item, .page__footer {
+  background: rgba(255, 255, 255, 0.25) !important; /* 调整为更通透的白色遮罩 */
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 30px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+  padding: 40px !important;
+  margin-bottom: 30px !important;
 }
 
-/* 3. 导航栏调整：增加左右空隙，避免挤压 */
-.masthead__inner-wrap {
-  padding: 20px 40px !important; 
+/* 3. 特别修正：导航栏背景 */
+.masthead {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 10px 0 !important;
 }
 
-/* 4. 正文与文字舒适度优化 */
-body {
+/* 4. 文字舒适度：使用深褐色，在亮色磨砂层上阅读感更佳 */
+body, h1, h2, h3, p, li, a {
   color: #3d2b1f !important;
-  font-size: 1.1em !important; /* 稍微放大字号，阅读更舒服 */
-  line-height: 2 !important;   /* 增加行间距，缓解顶格压迫感 */
+  line-height: 1.8 !important;
 }
 
-/* 5. 标题优化：避免标题顶到卡片顶部 */
-h1, h2, h3 {
-  margin-top: 0 !important;
-  margin-bottom: 20px !important;
-  color: #2c1e15 !important;
-}
-
-/* 6. 链接优化 */
+/* 5. 链接优化 */
 a {
   color: #a65100 !important;
-  text-decoration: none !important;
-  border-bottom: 1px dashed rgba(166, 81, 0, 0.3) !important;
+  border-bottom: 1px dashed rgba(166, 81, 0, 0.5) !important;
+}
+
+/* 6. 强力铲除：移除 Neko 皮肤可能残留的底色区块 */
+.page__content, .archive__item {
+  background: transparent !important;
+  border: none !important;
 }
