@@ -1,8 +1,7 @@
 ---
 ---
-
 /* ==========================================================================
-   终极修复版：彻底去白框 + 背景强制锁定 + 全局文字增强
+   终极修复版 v2：彻底去白框 + 背景强制锁定 + 全局文字增强
    ========================================================================== */
 
 /* 1. 强制背景层：确保永远不被遮挡 */
@@ -13,43 +12,95 @@ html, body {
   margin: 0 !important;
 }
 
-/* 2. 彻底清洗所有容器背景：移除 Neko 皮肤及主题默认的白底干扰 */
-.masthead, 
+/* 移动端背景兼容（iOS Safari fixed bug）*/
+@media (max-width: 768px) {
+  html, body {
+    background-attachment: scroll !important;
+  }
+}
+
+/* 2. 彻底清洗所有容器背景：移除主题默认白底干扰 */
+.masthead,
 .masthead__inner-wrap,
 .page__header,
 .page__inner-wrap,
-.sidebar, 
-.page, 
-.archive, 
-.archive__item, 
+.sidebar,
+.page,
+.archive,
+.archive__item,
 .page__footer,
-.page__content {
-  background: rgba(0, 0, 0, 0.45) !important; /* 统一的半透明深色墨水层 */
-  background-image: none !important;        /* 强制移除所有可能的渐变背景 */
+.page__content,
+.page__content .notice,
+.page__content .notice--info,
+.entries-list .list__item,
+.taxonomy__section,
+.search-content,
+.initial-content,
+.results-container,
+.page__related,
+.author__urls-wrapper,
+.nav__list .nav__items,
+.toc.sticky,
+.page__taxonomy-item {
+  background: rgba(0, 0, 0, 0.45) !important;
+  background-image: none !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: none !important;              /* 彻底移除阴影白边 */
+  box-shadow: none !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   border-radius: 20px !important;
   margin-bottom: 20px !important;
 }
 
-/* 3. 导航栏专项处理：确保它是完全悬浮且通透的 */
+/* 3. 导航栏专项处理：完全悬浮通透，无圆角 */
 .masthead {
   background: rgba(0, 0, 0, 0.2) !important;
   border: none !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
   padding: 10px 0 !important;
 }
 
-/* 4. 文字对比度专项增强：解决字迹不清 */
-body, h1, h2, h3, h4, p, li, .site-title, .nav__links a, .page__title {
+/* 4. 头像白框修复 */
+.sidebar .author__avatar img {
+  background: transparent !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 50% !important;
+}
+
+/* 5. 文字对比度：分级设置，保留视觉层级 */
+body, p, li, .nav__links a, .site-title {
   color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important; /* 加重阴影，让文字从背景中浮起 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 400 !important;
+}
+
+h1 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 700 !important;
+  font-size: 2em !important;
+}
+
+h2 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 600 !important;
+}
+
+h3, h4 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
   font-weight: 500 !important;
 }
 
-/* 5. 链接与交互优化 */
+.page__title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95) !important;
+  font-weight: 700 !important;
+}
+
+/* 6. 链接与交互优化 */
 a {
   color: #ffcc99 !important;
   border-bottom: 1px dashed rgba(255, 204, 153, 0.8) !important;
@@ -60,7 +111,7 @@ a:hover {
   border-bottom: 1px solid #ffffff !important;
 }
 
-/* 6. 严禁溢出：强制定义最大宽度防止布局崩坏 */
+/* 7. 严禁溢出：强制最大宽度防止布局崩坏 */
 #main {
   max-width: 1000px !important;
   margin: 0 auto !important;
