@@ -1,15 +1,3 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your entire site, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# `jekyll serve`. If you change this file, please restart the server process.
-
-# Theme Settings
-#
-# Review documentation to determine if you should use `theme` or `remote_theme`
-# https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
-
 # theme                  : "minimal-mistakes-jekyll"
 remote_theme           : "mmistakes/minimal-mistakes@4.28.0"
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise", "catppuccin_latte", "catppuccin_mocha"
@@ -24,7 +12,7 @@ name                     : "fw"
 description              : "欢迎来到我的个人博客！"
 url                      : # the base hostname & protocol for your site e.g. "https://fw.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "fw/my-blog"
+repository               : "cleanwrite/minimal-mistakes" # 自动关联到你的GitHub仓库
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
@@ -34,7 +22,7 @@ enable_copy_code_button  : true
 copyright                : # "copyright" name, defaults to site.title
 copyright_url            : # "copyright" URL, defaults to site.url
 comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
+  provider               : "giscus" # 切换评论系统为 giscus 权限讨论区
   disqus:
     shortname            : # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -48,17 +36,17 @@ comments:
     theme                : # "github-light" (default), "github-dark"
     issue_term           : # "pathname" (default)
   giscus:
-    repo_id              : # Shown during giscus setup at https://giscus.app
-    category_name        : # Full text name of the category
-    category_id          : # Shown during giscus setup at https://giscus.app
-    discussion_term      : # "pathname" (default), "url", "title", "og:title"
-    reactions_enabled    : # '1' for enabled (default), '0' for disabled
-    theme                : # "light" (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
-    strict               : # 1 for enabled, 0 for disabled (default)
-    input_position       : # "top", "bottom" # The comment input box will be placed above or below the comments
-    emit_metadata        : # 1 for enabled, 0 for disabled (default) # https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#imetadatamessage
-    lang                 : # "en" (default)
-    lazy                 : # true, false # Loading of the comments will be deferred until the user scrolls near the comments container.
+    repo_id              : "R_kgDOS-jfew"      # 你的专属仓库 ID
+    category_name        : "Announcements"     # 对应的讨论区分类名称
+    category_id          : "DIC_kwDOS-jfew"    # 对应的分类 ID
+    discussion_term      : "pathname"          # 保持默认，用页面路径关联讨论
+    reactions_enabled    : "1"                 # 开启点赞回应 (1为开启)
+    theme                : "light"             # 评论区皮肤，可选 light, dark 
+    strict               : 0                   # 关闭严格匹配
+    input_position       : "bottom"            # 输入框在评论列表底部
+    emit_metadata        : 0                   # 不向父页面发送元数据
+    lang                 : "zh-CN"             # 评论框界面强制显示为简体中文
+    lazy                 : true                # 懒加载，滚动到低端才加载，提升网页速度
   staticman:
     branch               : # "master"
     endpoint             : # "https://{your Staticman v3 API}/v3/entry/github/"
@@ -135,7 +123,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/your-github-id" # 记得把这里的 ID 改成你的
+      url: "https://github.com/cleanwrite"    # 已自动为您关联对应的 GitHub ID
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -152,7 +140,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/your-github-id" # 底部页脚的 GitHub 链接
+      url: "https://github.com/cleanwrite"    # 底部页脚自动关联 GitHub 链接
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
