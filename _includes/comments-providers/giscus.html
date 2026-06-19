@@ -42,11 +42,13 @@
     cryptoScript.async = true;
     
     cryptoScript.onload = function() {
-      // 当 CryptoJS 加载完成后，绑定按钮的点击事件
       var verifyBtn = document.getElementById('verify-btn');
-      if (verifyBtn) {
-        verifyBtn.addEventListener('click', function() {
-          var inputCode = document.getElementById('invite-code-input').value.trim();
+      var inputField = document.getElementById('invite-code-input');
+
+      if (verifyBtn && inputField) {
+        // 核心验证逻辑抽取
+        function doVerify() {
+          var inputCode = inputField.value.trim();
           var errorMsg = document.getElementById('verify-error-msg');
           
           // 从当前文章的 Front Matter 中自动读取预设的邀请码 MD5 散列值
@@ -65,10 +67,22 @@
             document.getElementById('vip-gate').style.display = 'none';
             document.getElementById('vip-protected-content').style.display = 'block';
             
-            // 动态注入并渲染 Markdown 格式的隐藏内容
-            document.getElementById('decrypted-payload').innerHTML = `{{ page.hidden_resource | markdownify }}`;
+            // 修复点 1：将 Jekyll 渲染出的 HTML 转为纯文本字符串注入，防止多行换行引起 JS 语法报错
+            var payload = {{ page.hidden_resource | markdownify | jsonify }};
+            document.getElementById('decrypted-payload').innerHTML = payload;
           } else {
             errorMsg.style.display = 'block';
+            inputField.value = '';
+          }
+        }
+
+        // 绑定点击事件
+        verifyBtn.addEventListener('click', doVerify);
+
+        // 修复点 2：绑定回车键监听，用户输入完敲回车就能直接验证
+        inputField.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            doVerify();
           }
         });
       }
