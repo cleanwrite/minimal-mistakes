@@ -1,48 +1,56 @@
 /* ==========================================================================
-   Minimal Mistakes 极度透明&净化皮肤：neko (完全穿透版)
-   去除了顶部所有背景色块，实现真正的一体化透明视觉
+   Minimal Mistakes 极度暴力透明版 - 彻底清除所有遮挡
    ========================================================================== */
 
-/* 1. 全局穿透：强制抹除所有容器背景 */
-body, #main, .masthead, .masthead__inner-wrap, .page__header, .page__inner-wrap {
+/* 1. 全局：抹除所有背景、阴影、边框 (彻底让 wall.jpg 接管一切) */
+body, #main, .masthead, .masthead__inner-wrap, 
+.page, .page__header, .page__inner-wrap, 
+.sidebar, .archive__item, .archive, .content {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
   border: none !important;
   box-shadow: none !important;
+  border-radius: 0 !important;
 }
 
-/* 2. 组件磨砂：只保留卡片主体的一点点磨砂，导航栏完全透明 */
-html body {
-  .sidebar, .page, .archive, .archive__item {
-    background: rgba(20, 13, 33, 0.3) !important; /* 透明度调得更低，更通透 */
-    border: 1px solid rgba(255, 101, 190, 0.2) !important;
-    border-radius: 20px !important; 
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-  }
-}
-
-/* 3. 导航栏处理：彻底去背景，去阴影，去边框，仅保留文字 */
-html body .masthead {
-  position: sticky !important; 
-  top: 0 !important; 
-  z-index: 9999 !important;
+/* 2. 导航栏：强制扁平化，删除所有多余高度和色块 */
+.masthead {
+  position: sticky !important;
+  top: 0 !important;
   padding: 10px 0 !important;
-}
-
-/* 4. 文本与链接：保持对比度，确保在透明背景下清晰可见 */
-html body {
-  p, li, .page__meta { color: #ffffff !important; text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important; }
-  a { color: #ffb3e6 !important; text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important; }
-  h1, h2, h3, h4, h5, h6 { color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important; }
-}
-
-/* 5. 终极强力清除：如果还有任何残留，直接强制清空 */
-html body .masthead__inner-wrap, 
-html body .page__title,
-html body .site-title {
+  width: 100% !important;
   background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+}
+
+/* 3. 卡片效果：只留磨砂玻璃，去掉那种丑陋的“方块边框” */
+.sidebar, .page, .archive__item {
+  background: rgba(255, 255, 255, 0.1) !important; /* 非常淡的磨砂层 */
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  margin-bottom: 20px !important;
+  padding: 20px !important;
+  border-radius: 15px !important;
+}
+
+/* 4. 文本：为了在透明背景下清晰，必须强制加粗和阴影 */
+body {
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8) !important;
+}
+
+a {
+  color: #ff99cc !important;
+  font-weight: bold !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5) !important;
+}
+
+h1, h2, h3 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9) !important;
+}
+
+/* 5. 暴力拦截：如果还有东西是白色的，把它透明化 */
+div, section, article, header, nav {
+  background-color: transparent !important;
 }
