@@ -1,8 +1,8 @@
 /* ==========================================================================
-   优化方案：向日葵田专享 - 清透琥珀磨砂版
+   向日葵田优化版 - 增加呼吸感与内边距
    ========================================================================== */
 
-/* 1. 彻底抹除所有不和谐色块 */
+/* 1. 清理所有强制背景与边框，确保存粹透视 */
 .masthead, .masthead__inner-wrap, .page__header, .page__inner-wrap, body, #main {
   background: transparent !important;
   background-image: none !important;
@@ -10,31 +10,43 @@
   box-shadow: none !important;
 }
 
-/* 2. 重新定义卡片：改用“浅色磨砂”适配向日葵的亮色背景 */
+/* 2. 优化卡片布局：增加宽裕的呼吸感 (Padding) */
 .sidebar, .page, .archive, .archive__item {
-  /* 这里的色值改为高透明度的琥珀色/米色，而不是紫色 */
-  background: rgba(255, 255, 255, 0.25) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  border-radius: 20px !important;
+  /* 增加内边距，让文字与边框分离 */
+  padding: 40px !important; 
+  /* 增加卡片间的距离 */
+  margin-bottom: 30px !important; 
+  
+  background: rgba(255, 255, 255, 0.3) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 30px !important; /* 更圆润的边角，视觉更柔和 */
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 3. 导航栏文字：深色化，否则在亮背景下看不清 */
-.site-title, .nav__links a {
-  color: #4a3728 !important; /* 深棕色，比纯黑更有质感 */
-  text-shadow: none !important;
+/* 3. 导航栏调整：增加左右空隙，避免挤压 */
+.masthead__inner-wrap {
+  padding: 20px 40px !important; 
 }
 
-/* 4. 正文文字：适配亮色背景 */
+/* 4. 正文与文字舒适度优化 */
 body {
-  color: #3d2b1f !important; /* 深棕灰，更柔和 */
-  text-shadow: 0 1px 1px rgba(255,255,255,0.5) !important;
+  color: #3d2b1f !important;
+  font-size: 1.1em !important; /* 稍微放大字号，阅读更舒服 */
+  line-height: 2 !important;   /* 增加行间距，缓解顶格压迫感 */
 }
 
-/* 5. 链接颜色：改用柔和的玫瑰棕，呼应向日葵色系 */
+/* 5. 标题优化：避免标题顶到卡片顶部 */
+h1, h2, h3 {
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+  color: #2c1e15 !important;
+}
+
+/* 6. 链接优化 */
 a {
-  color: #b35c00 !important; 
-  font-weight: 600 !important;
+  color: #a65100 !important;
+  text-decoration: none !important;
+  border-bottom: 1px dashed rgba(166, 81, 0, 0.3) !important;
 }
