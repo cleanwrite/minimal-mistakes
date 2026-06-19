@@ -9,3 +9,11 @@ body {
   background-repeat: no-repeat !important;
   background-color: #f5f5f5 !important;
 }
+
+/* 组件半透明，让背景图透出来 */
+html body .sidebar,
+html body .page,
+html body .archive,
+html body .archive__item {
+  background: rgba(20, 13, 33, 0.55) !important;
+}
