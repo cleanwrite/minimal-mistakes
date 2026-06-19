@@ -1,279 +1,73 @@
 /* ==========================================================================
-   Minimal Mistakes 极度清晰&人性化护眼皮肤：neko (二次元温润猫娘控制台)
-   双端全兼容（深色博客底 + 浅色验证页底）文字全面加深清晰版
+   Minimal Mistakes 极度清晰&解耦版：neko (二次元温润猫娘控制台)
+   与 custom.scss 配合，实现背景图 100% 透明透视
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. 人性化全视效护眼色盘（大幅加深链接与正文饱和度，禁止在此处追加 !important）
-   -------------------------------------------------------------------------- */
-$background-color:       #0a0615 !default; /* 极其深邃的静谧夜紫 */
-$text-color:             #ded9e2 !default; /* 核心正文：暖调香草猫毛白 */
-$muted-text-color:       #8a7fa8 !default; /* 辅助文字：提亮加深，确保时间戳和二级文本在双端都清晰 */
-$primary-color:          #ff4da6 !default; /* 标志性猫娘粉：稍微加深饱和度 */
-$border-color:           rgba(255, 101, 190, 0.22) !default;
-$link-color:             #d946a3 !default; /* 链接：大幅加深为中度莓果粉！这样在白色背景下也绝对能看清 */
-$link-color--hover:      #10b981 !default; /* 悬浮：加深为翡翠绿 */
-$code-background-color:  #110922 !default; /* 代码块底色 */
+/* 1. 核心变量区（保持不变，确保色彩系统一致） */
+$text-color:             #ded9e2 !default; 
+$muted-text-color:       #8a7fa8 !default; 
+$primary-color:          #ff4da6 !default; 
+$link-color:             #d946a3 !default; 
+$link-color--hover:      #10b981 !default; 
+$code-background-color:  #110922 !default; 
 
-/* --------------------------------------------------------------------------
-   2. 全局环境渲染（柔和视差背景，不闪烁、不遮光）
-   -------------------------------------------------------------------------- */
+/* 2. 全局重置：彻底移除了 background 相关代码，交给 custom.scss 控制 */
 body, #main {
-  background-color: $background-color !important;
-  background-image: 
-    radial-gradient(circle at 80% 20%, rgba(255, 101, 190, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 15% 75%, rgba(107, 33, 168, 0.05) 0%, transparent 50%) !important;
-  background-size: 100% 100% !important;
+  background-color: transparent !important;
+  background-image: none !important;
   color: $text-color !important;
-  
-  /* 字体人性化升级 */
   font-family: Consolas, Menlo, Monaco, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif !important;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* --------------------------------------------------------------------------
-   3. 双端全对称弹性卡片（防遮挡、高抗疲劳、多维柔化）
-   -------------------------------------------------------------------------- */
-html {
-  box-sizing: border-box !important;
-}
-
-*, *::before, *::after {
-  box-sizing: inherit !important;
-}
-
-/* 强特异性联合声明，彻底隔离层级 */
+/* 3. 卡片容器：半透明磨砂（rgba 透明度设为 0.5） */
 html body {
   .sidebar, .page, .archive, .archive__item {
     position: relative !important;
     z-index: 1 !important; 
-    background: rgba(20, 13, 33, 0.85) !important; 
-    border: 1.5px solid rgba(255, 101, 190, 0.4) !important;
+    background: rgba(20, 13, 33, 0.5) !important; /* 透明度已调至 0.5 */
+    border: 1.5px solid rgba(255, 101, 190, 0.3) !important;
     border-radius: 26px !important; 
-    
-    /* 开启高级高斯模糊滤镜 */
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
-    
-    /* 漫反射阴影 */
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 101, 190, 0.05) !important;
-    
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
     padding: 30px !important;
     margin-bottom: 24px !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    transition: all 0.25s ease-in-out !important;
-  }
-
-  /* PC端平滑微悬浮 */
-  @media (min-width: 60em) {
-    .archive__item:hover, .sidebar:hover {
-      transform: translateY(-3px) !important; 
-      border-color: #6bf2ff !important; 
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(107, 242, 255, 0.15) !important;
-    }
-  }
-
-  /* 移动端无缝对称压缩 */
-  @media (max-width: 60em) {
-    .sidebar, .page, .archive, .archive__item {
-      padding: 20px !important; 
-      border-radius: 20px !important; 
-      margin-bottom: 16px !important;
-    }
   }
 }
 
-/* --------------------------------------------------------------------------
-   4. 顶部导航通栏（安全防硬遮挡、胶囊化多端对齐）
-   -------------------------------------------------------------------------- */
+/* 4. 顶部导航：保持半透明磨砂，确保遮挡效果优雅 */
+html body .masthead {
+  position: sticky !important; top: 0 !important; z-index: 9999 !important;
+  background: rgba(20, 13, 33, 0.7) !important; /* 导航栏改为半透明磨砂，不遮挡背景 */
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255, 101, 190, 0.3) !important;
+  border-radius: 0 0 20px 20px !important;
+}
+
+/* 5. 强效文本亮化：保留阴影以兼容浅色验证页 */
 html body {
-  .masthead {
-    position: sticky !important; 
-    top: 0 !important;
-    z-index: 9999 !important; 
-    
-    background: linear-gradient(90deg, rgba(255, 101, 190, 0.95) 0%, rgba(147, 51, 234, 0.95) 100%) !important;
-    backdrop-filter: blur(10px) !important; 
-    -webkit-backdrop-filter: blur(10px) !important;
-    border-bottom: 2px solid $primary-color !important;
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5) !important;
-    border-radius: 0 0 22px 22px !important;
-    padding: 0.7em 0 !important;
-    
-    .inner {
-      max-width: 1200px !important; 
-      padding: 0 30px !important;
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-    }
-
-    .site-title {
-      color: #ffffff !important;
-      font-weight: 900 !important;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
-      
-      &::after {
-        content: " ฅ(＾・ω・＾)ฅ" !important;
-        font-size: 11px;
-        font-weight: normal;
-        color: #ffffff !important;
-      }
-    }
-
-    .nav__links a {
-      color: #ffffff !important;
-      font-weight: bold !important;
-      border: 1px solid rgba(255,255,255,0.2) !important;
-      padding: 5px 15px !important;
-      border-radius: 50px !important; 
-      background: rgba(0,0,0,0.12) !important;
-      
-      &:hover {
-        background: #ffffff !important;
-        color: $primary-color !important;
-        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3) !important;
-      }
-    }
+  p, li, .page__meta { 
+    color: $text-color !important; 
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2) !important; 
   }
+  a { 
+    color: $link-color !important; 
+    font-weight: 600 !important;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.3) !important;
+    &:hover { color: $link-color--hover !important; }
+  }
+  h1, h2, h3, h4, h5, h6 { color: #ffffff !important; }
 }
 
-/* --------------------------------------------------------------------------
-   5. 终极强效文本亮化与双端对齐（通过给关键文字增加强阴影，使其在白底上也能瞬间剥离出来）
-   -------------------------------------------------------------------------- */
-html body {
-  p, .page__content p, .archive__item-excerpt, li, .fluid-jar, .page__meta, .page__sidebar {
-    color: $text-color !important;
-    line-height: 1.85 !important;
-    letter-spacing: 0.3px !important;
-    /* 增加一层极细的暗色文字投影，在白底环境克制雪盲效应 */
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15) !important;
-  }
-
-  .page__meta, .small, .author__bio, .post__meta, time {
-    color: $muted-text-color !important;
-  }
-
-  /* 【最核心修改】加深核心链接颜色，并为链接文字注入黑边阴影，确保在白底上轮廓清晰可见 */
-  a, .page__content a, .archive__item-title a, .sidebar a {
-    color: $link-color !important;
-    font-weight: 600 !important; /* 稍微加粗，防止细字体在白底中被融化 */
-    text-decoration: none !important;
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25) !important; 
-    transition: all 0.2s ease !important;
-    
-    &:hover {
-      color: $link-color--hover !important;
-      text-shadow: 0 0 6px rgba(16, 185, 129, 0.4) !important;
-    }
-  }
-
-  /* 多级标题对比度绝对增强 */
-  h1, h2, h3, h4, h5, h6, .page__title, .archive__item-title {
-    color: #ffffff !important;
-    font-weight: 800 !important;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.6) !important;
-  }
-
-  .page__content {
-    h2, h3 {
-      border-left: 5px solid #a855f7 !important;
-      padding-left: 14px !important;
-      background: linear-gradient(90deg, rgba(168, 85, 247, 0.15), transparent) !important;
-      border-radius: 6px !important;
-      margin-top: 1.6em !important;
-      margin-bottom: 0.6em !important;
-    }
-  }
-
-  .archive__item-title {
-    font-weight: 800 !important;
-    &::before {
-      content: "🐾 " !important;
-      display: inline-block;
-      transform: rotate(-10deg);
-      margin-right: 6px;
-    }
-  }
+/* 6. 代码块：保持沉浸感 */
+html body div.highlighter-rouge, html body figure.highlight {
+  background-color: rgba(17, 9, 34, 0.6) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  border-radius: 16px !important;
 }
 
-/* --------------------------------------------------------------------------
-   6. 工业级技术代码块重构
-   -------------------------------------------------------------------------- */
-html body {
-  div.highlighter-rouge, figure.highlight {
-    position: relative !important;
-    z-index: 2 !important; 
-    border: 1.5px solid rgba(168, 85, 247, 0.4) !important;
-    background-color: $code-background-color !important;
-    border-radius: 20px !important;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 15px rgba(0,0,0,0.3) !important;
-    margin: 24px 0 !important;
-    overflow: hidden !important; 
-    
-    pre {
-      background-color: transparent !important;
-      padding: 18px !important;
-      font-size: 0.92em !important;
-      line-height: 1.6 !important;
-      overflow-x: auto !important; 
-      white-space: pre !important;
-    }
-    
-    code {
-      font-family: Consolas, Monaco, "Courier New", monospace !important;
-      background: transparent !important;
-      color: #e2daeb !important; 
-    }
-  }
-
-  p code, li code {
-    background-color: #211438 !important;
-    color: #00f0ff !important; /* 加深一点的冰蓝 */
-    border: 1px solid rgba(0, 240, 255, 0.2) !important;
-    padding: 2px 6px !important;
-    border-radius: 8px !important;
-    font-size: 0.88em !important;
-    word-break: break-word !important;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   7. 标签系统与全自适应页脚布局
-   -------------------------------------------------------------------------- */
-html body {
-  .page__taxonomy-item {
-    background: linear-gradient(135deg, #ff4da6, #9333ea) !important;
-    color: #ffffff !important;
-    font-weight: bold !important;
-    border-radius: 30px !important;
-    padding: 4px 14px !important;
-    border: none !important;
-    box-shadow: 0 4px 12px rgba(255, 77, 166, 0.2) !important;
-  }
-
-  .page__footer {
-    background: transparent !important;
-    color: $muted-text-color !important;
-    border-top: 2px dashed rgba(255, 101, 190, 0.3) !important;
-    margin-top: 60px !important;
-    padding: 30px 20px !important;
-    position: relative !important;
-    z-index: 10 !important;
-    
-    a {
-      color: $muted-text-color !important;
-      &:hover {
-        color: $primary-color !important;
-      }
-    }
-  }
-}
-
-/* 终极溢出修剪阀 */
-html, body {
-  overflow-x: hidden !important;
-  scroll-behavior: smooth;
+/* 7. 页脚与标签 */
+html body .page__taxonomy-item {
+  background: rgba(255, 77, 166, 0.3) !important;
+  border: 1px solid rgba(255, 77, 166, 0.5) !important;
 }
