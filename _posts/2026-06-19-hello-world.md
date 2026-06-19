@@ -52,3 +52,5 @@ hidden_resource: |
       root = tk.Tk()
       app = AutoConfigApp(root)
       root.mainloop()
+---
+正文
