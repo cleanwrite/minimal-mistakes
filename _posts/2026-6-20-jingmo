@@ -1,10 +1,14 @@
 ---
 layout: single
-title: "静默无声"
-date: 2026-06-20
+title: "测试"
+date: 2026-06-19
 comments: true
-invite_code_hash: "c4d038b4bed09fdb1471ef51ec3a32cd"
-hidden_resource:|
+
+# 🔑 密码锁密文
+invite_code_hash: "4efce770389369e85579893d58de0f69"
+
+# 🎁 隐藏资源内容
+hidden_resource: |
   ### 🎉 验证成功！欢迎进入内部核心资源区
   
   一个静默音频播放程序。
