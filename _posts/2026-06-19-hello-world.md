@@ -22,8 +22,8 @@ hidden_resource: |
   如果你还在使用 fw 的节点，请在下次使用时访问 <https://myfk.cc.cd/> 获取最新节点 （目前处于可用状态）。
   
   #### 第二代理脚本如下（可用）
-  * **单节点**： `vless://f40e65e8-a0a6-4af0-829c-a5735e866254@blogfw.cc.cd:443?security=tls&type=ws&ech=https%3A%2F%2Fdoh.cmliussss.net%2FCMLiussss&host=blogfw.cc.cd&fp=chrome&sni=blogfw.cc.cd&path=%2F&encryption=none#fw`
-  * **自适应订阅链接**： <https://blogfw.cc.cd/sub?token=e0e89f124677726e9cc796d987796033>
+  * **单节点**： `vless://f40e65e8-a0a6-4af0-829c-a5735e866254@blogfw.cc.cd:443?security=tls&type=ws&ech=cloudflare-ech.com%2Bhttps%3A%2F%2Fdns.alidns.com%2Fdns-query&host=blogfw.cc.cd&fp=chrome&sni=blogfw.cc.cd&path=%2Fitems%2Fajax%2Fapps&encryption=none#fw`
+  * **自适应订阅链接**： <https://blogfw.cc.cd/sub?token=e0e89f124677726e9cc796d987796033>](https://blogfw.cc.cd/sub?token=e0e89f124677726e9cc796d987796033)
   
   #### 第三代理脚本如下（暂时不可使用）
   * **订阅链接v2ray**： <https://fvvblog.us.ci/fw/sub>
