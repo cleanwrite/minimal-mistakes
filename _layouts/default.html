@@ -44,23 +44,26 @@
       </footer>
     </div>
 
-    <!-- 加载动画消散脚本 -->
+    {% include scripts.html locale=locale %}
+
+    <!-- 加载动画消散 -->
     <script>
     (function() {
+      var dismissed = false;
       var loader = document.getElementById('loader');
-      if (!loader) return;
-    function dismiss() {
-        loader.classList.add('done');
-        setTimeout(function() { loader.remove(); }, 800);
+      function dismiss() {
+        if (dismissed || !loader) return;
+        dismissed = true;
+        loader.style.transition = 'opacity 0.4s ease';
+        loader.style.opacity = '0';
+        setTimeout(function() { loader.style.display = 'none'; }, 500);
       }
-      var bgImg = new Image();
-      bgImg.onload = dismiss;
-      bgImg.onerror = dismiss;
-      bgImg.src = '/assets/images/wall.webp';
+      var img = new Image();
+      img.onload = dismiss;
+      img.onerror = dismiss;
+      img.src = '/assets/images/wall.webp';
       setTimeout(dismiss, 3000);
     })();
     </script>
-
-    {% include scripts.html locale=locale %}
   </body>
 </html>
