@@ -10,8 +10,8 @@ title_separator        : "-"
 subtitle               : "我草，还是github上的项目好用"
 name                   : "fw"
 description            : "欢迎来到我的个人博客！"
-url                    : 
-baseurl                : 
+url                    : https://myfk.cc.cd
+baseurl                :
 repository             : "cleanwrite/minimal-mistakes"
 teaser                 : 
 logo                   : 
