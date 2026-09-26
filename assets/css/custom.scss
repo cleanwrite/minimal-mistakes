@@ -99,6 +99,41 @@ body {
   }
 }
 
+/* ── 大屏适配 (1400px+) ── */
+@media (min-width: 1400px) {
+  .page,
+  .masthead__menu,
+  .page__footer footer {
+    max-width: 1320px !important;
+  }
+}
+
+/* ── 超大屏 (1600px+) ── */
+@media (min-width: 1600px) {
+  .page,
+  .masthead__menu,
+  .page__footer footer {
+    max-width: 1480px !important;
+  }
+
+  .page__content {
+    padding: 36px 40px !important;
+  }
+}
+
+/* ── 4K 大屏 (1920px+) ── */
+@media (min-width: 1920px) {
+  .page,
+  .masthead__menu,
+  .page__footer footer {
+    max-width: 1680px !important;
+  }
+
+  html {
+    font-size: 17px;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════
    核心内容区：玻璃磨砂卡片
    ═══════════════════════════════════════════════════════════ */
@@ -469,8 +504,7 @@ a:hover {
 @media (max-width: 768px) {
   /* ── 玻璃卡片紧凑化 ── */
   .page__inner-wrap,
-  .page__content,
-  .quick-access {
+  .page__content {
     padding: 18px 16px !important;
     border-radius: 14px !important;
     margin-bottom: 14px !important;
@@ -571,20 +605,9 @@ a:hover {
   }
 
   .page__inner-wrap,
-  .page__content,
-  .quick-access {
+  .page__content {
     padding: 14px 12px !important;
     border-radius: 12px !important;
-  }
-
-  .quick-access__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-
-  .link-card {
-    padding: 10px 12px;
   }
 
   .site-subtitle {
