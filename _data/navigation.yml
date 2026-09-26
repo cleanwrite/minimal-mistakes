@@ -1,12 +1,7 @@
-# main links
 main:
-  - title: "点我试试"
-    url: https://ak.hypergryph.com/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
+  - title: "首页"
+    url: /
+  - title: "导航站"
+    url: /links/
+  - title: "文章归档"
+    url: /posts/

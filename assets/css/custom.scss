@@ -376,48 +376,6 @@ body {
   pointer-events: auto;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   导航站卡片 (links 页面)
-   ═══════════════════════════════════════════════════════════ */
-
-.links-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 14px;
-}
-
-.link-card {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 18px 16px;
-  background: rgba(255, 255, 255, 0.82) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  border-radius: 14px !important;
-  color: #1a1a1a !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.link-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.95) !important;
-}
-
-.link-card__name {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.link-card__desc {
-  font-size: 0.78rem;
-  color: #666 !important;
-  line-height: 1.4;
-}
 
 /* ═══════════════════════════════════════════════════════════
    字体 & 阅读体验
@@ -590,15 +548,6 @@ a:hover {
     margin: 0 auto !important;
   }
 
-  /* ── 导航站卡片 ── */
-  .links-grid {
-    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-    gap: 10px;
-  }
-
-  .link-card {
-    padding: 12px;
-  }
 
   /* ── Footer ── */
   .page__footer {
@@ -633,10 +582,6 @@ a:hover {
     gap: 8px;
   }
 
-  .links-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
 
   .link-card {
     padding: 10px 12px;
