@@ -15,8 +15,8 @@ baseurl                :
 repository             : "cleanwrite/minimal-mistakes"
 teaser                 : 
 logo                   : 
-masthead_title         : 
-breadcrumbs            : true
+masthead_title         : "fw's Blog"
+breadcrumbs            : false
 words_per_minute       : 200
 enable_copy_code_button  : true
 copyright              : 
@@ -86,8 +86,8 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : 
-og_image_alt             : 
+og_image                 : /assets/images/wall.webp
+og_image_alt             : "fw's Blog - 欢迎来到我的个人博客"
 social:
   type                   : 
   name                   : 
@@ -206,7 +206,7 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-timezone: 
+timezone: Asia/Shanghai
 
 # Pagination
 paginate: 5
@@ -276,5 +276,7 @@ navigation:
   main:
     - title: "首页"
       url: /
+    - title: "导航站"
+      url: /links/
     - title: "文章归档"
       url: /posts/

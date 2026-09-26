@@ -1,0 +1,39 @@
+---
+title: "导航站"
+permalink: /links/
+layout: single
+toc: false
+share: false
+related: false
+comments: false
+links:
+  - name: "GitHub"
+    url: "https://github.com"
+    desc: "代码托管"
+  - name: "Google"
+    url: "https://www.google.com"
+    desc: "搜索"
+  - name: "Bilibili"
+    url: "https://www.bilibili.com"
+    desc: "视频"
+  - name: "知乎"
+    url: "https://www.zhihu.com"
+    desc: "问答社区"
+  - name: "MDN Web Docs"
+    url: "https://developer.mozilla.org/zh-CN/"
+    desc: "前端文档"
+  - name: "Stack Overflow"
+    url: "https://stackoverflow.com"
+    desc: "开发者问答"
+---
+
+<p class="page__lead">常用网站导航。在 <code>_pages/links.html</code> 的 <code>links</code> 列表中增删条目即可。</p>
+
+<div class="links-grid">
+  {% for link in page.links %}
+    <a class="link-card" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+      <span class="link-card__name">{{ link.name }}</span>
+      {% if link.desc %}<span class="link-card__desc">{{ link.desc }}</span>{% endif %}
+    </a>
+  {% endfor %}
+</div>

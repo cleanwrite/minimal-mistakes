@@ -1,21 +1,48 @@
 ---
 ---
 
-/* ── 1. 全局背景锁定 ── */
-html, body {
+/* ═══════════════════════════════════════════════════════════
+   全局背景修复 & 基础设置
+   ═══════════════════════════════════════════════════════════ */
+
+html {
+  background-color: #f5f5f5;
+  scroll-behavior: smooth;
+}
+
+body {
   background: url("/assets/images/wall.webp") no-repeat center center fixed !important;
   background-size: cover !important;
+  background-attachment: fixed !important;
   margin: 0 !important;
   padding: 0 !important;
   min-height: 100vh !important;
 }
 
-/* ── 2. 移除所有覆盖式白框 ── */
-.page, 
-.masthead, 
-.initial-content, 
-.page__footer, 
-.sidebar, 
+/* ── 滚动条美化 ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   布局：移除白框，铺满内容
+   ═══════════════════════════════════════════════════════════ */
+
+.page,
+.masthead,
+.initial-content,
+.page__footer,
+.sidebar,
 .archive,
 .page__header {
   background: transparent !important;
@@ -23,49 +50,454 @@ html, body {
   box-shadow: none !important;
 }
 
-/* ── 3. 核心内容区：白色磨砂质感 (提高不透明度，确保文字清晰) ── */
-.page__inner-wrap, 
+/* ── 桌面端：侧边栏移除，内容铺满 ── */
+@media (min-width: 769px) {
+  .page {
+    width: 100% !important;
+    padding-inline-end: 0 !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   核心内容区：玻璃磨砂卡片
+   ═══════════════════════════════════════════════════════════ */
+
+.page__inner-wrap,
 .page__content {
-  background: rgba(255, 255, 255, 0.7) !important; /* 透明度0.7，文字更易读 */
-  backdrop-filter: blur(15px) !important;
-  -webkit-backdrop-filter: blur(15px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
   border-radius: 20px !important;
-  padding: 30px !important;
-  margin-bottom: 25px !important;
+  padding: 32px !important;
+  margin-bottom: 24px !important;
+  transition: box-shadow 0.25s ease;
 }
 
-/* ── 4. 帖子列表：专项优化，保证文字阅读体验 ── */
+.page__inner-wrap:hover,
+.page__content:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   文章列表：卡片式
+   ═══════════════════════════════════════════════════════════ */
+
 .entries-list .list__item {
-  background: rgba(255, 255, 255, 0.8) !important; /* 列表背景更实，防干扰 */
+  background: rgba(255, 255, 255, 0.82) !important;
   backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  border-radius: 15px !important;
-  padding: 20px !important;
-  margin-bottom: 15px !important;
-  color: #000 !important;
+  border-radius: 14px !important;
+  padding: 20px 24px !important;
+  margin-bottom: 14px !important;
+  color: #1a1a1a !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ── 5. 隐藏右上角按钮 ── */
-.btn--primary, 
+.entries-list .list__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   导航栏 (Masthead)
+   ═══════════════════════════════════════════════════════════ */
+
+.masthead {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 0.6em 1em !important;
+}
+
+.masthead__menu {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.site-title {
+  font-weight: 700 !important;
+  font-size: 1.3rem !important;
+  color: #1a1a1a !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.site-subtitle {
+  display: block;
+  font-size: 0.8rem;
+  color: #666 !important;
+  font-weight: 400 !important;
+}
+
+.visible-links {
+  display: flex;
+  gap: 6px;
+  margin-left: auto !important;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.visible-links a {
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: #3d2b1f !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  border-bottom: none !important;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.visible-links a:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #a65100 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   快速访问区域 (首页)
+   ═══════════════════════════════════════════════════════════ */
+
+.quick-access {
+  margin-bottom: 28px !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 20px !important;
+  padding: 22px 28px !important;
+}
+
+.quick-access__title {
+  margin: 0 0 14px 0 !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #3d2b1f !important;
+}
+
+.quick-access__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.quick-access__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 12px !important;
+  color: #1a1a1a !important;
+  text-decoration: none !important;
+  font-size: 0.9rem !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.quick-access__item i {
+  font-size: 0.9rem;
+  color: #b33939;
+  min-width: 16px;
+  text-align: center;
+}
+
+.quick-access__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 1) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   导航站卡片 (links 页面)
+   ═══════════════════════════════════════════════════════════ */
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 16px;
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 14px !important;
+  color: #1a1a1a !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.link-card__name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.link-card__desc {
+  font-size: 0.78rem;
+  color: #666 !important;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   字体 & 阅读体验
+   ═══════════════════════════════════════════════════════════ */
+
+body, p, li, h1, h2, h3, h4, .site-title, .archive__item-title {
+  color: #1a1a1a !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6) !important;
+}
+
+.page__content p,
+.page__content li {
+  line-height: 1.75 !important;
+}
+
+a {
+  color: #a65100 !important;
+  border-bottom: 1px dashed rgba(166, 81, 0, 0.3) !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+a:hover {
+  color: #3d2b1f !important;
+  border-bottom: 1px solid #3d2b1f !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   隐藏不需要的元素
+   ═══════════════════════════════════════════════════════════ */
+
+.btn--primary,
 .page__nav,
 .page__share {
   display: none !important;
 }
 
-/* ── 6. 字体与阅读体验 ── */
-body, p, li, h1, h2, h3, .site-title, .archive__item-title {
-  color: #1a1a1a !important; /* 使用深色文字 */
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+/* ═══════════════════════════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════════════════════════ */
+
+.page__footer {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 20px 20px 0 0 !important;
+  padding: 20px 30px !important;
+  margin-top: 20px !important;
 }
 
-a {
-  color: #b33939 !important; /* 醒目链接色 */
-  border-bottom: 1px dashed rgba(179, 57, 57, 0.4) !important;
-  text-decoration: none !important;
+.page__footer footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-a:hover {
-  color: #000 !important;
-  border-bottom: 1px solid #000 !important;
+.page__footer .social-icons {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page__footer .social-icons a {
+  border-bottom: none !important;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.page__footer .social-icons a:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   移动端全面优化 (max-width: 768px)
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* ── 玻璃卡片紧凑化 ── */
+  .page__inner-wrap,
+  .page__content,
+  .quick-access {
+    padding: 18px 16px !important;
+    border-radius: 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* ── 快速访问网格 ── */
+  .quick-access__grid {
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+    gap: 8px;
+  }
+
+  .quick-access__item {
+    padding: 9px 10px;
+    justify-content: center;
+    font-size: 0.82rem !important;
+  }
+
+  .quick-access__item i {
+    font-size: 0.8rem;
+  }
+
+  /* ── 文章列表紧凑 ── */
+  .entries-list .list__item {
+    padding: 14px 16px !important;
+    border-radius: 12px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* ── 导航栏：紧凑 ── */
+  .masthead {
+    padding: 0.4em 0.8em !important;
+  }
+
+  .site-title {
+    font-size: 1.1rem !important;
+  }
+
+  .site-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .visible-links a {
+    padding: 5px 10px;
+    font-size: 0.82rem !important;
+  }
+
+  /* ── 正文排版优化 ── */
+  .page__content {
+    font-size: 0.93rem !important;
+    line-height: 1.75 !important;
+  }
+
+  .page__content h1 { font-size: 1.5rem !important; }
+  .page__content h2 { font-size: 1.3rem !important; }
+  .page__content h3 { font-size: 1.1rem !important; }
+
+  /* ── 代码块防溢出 ── */
+  .page__content pre,
+  .page__content code {
+    overflow-x: auto;
+    font-size: 0.82rem !important;
+    border-radius: 8px !important;
+  }
+
+  .page__content pre {
+    padding: 12px !important;
+  }
+
+  /* ── 表格横向滚动 ── */
+  .page__content table {
+    display: block;
+    overflow-x: auto;
+    border-radius: 8px;
+  }
+
+  /* ── 图片自适应 ── */
+  .page__content img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 8px;
+  }
+
+  /* ── 侧边栏隐藏 ── */
+  .sidebar,
+  .author__urls {
+    display: none !important;
+  }
+
+  .page__content {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  /* ── 导航站卡片 ── */
+  .links-grid {
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    gap: 10px;
+  }
+
+  .link-card {
+    padding: 12px;
+  }
+
+  /* ── Footer ── */
+  .page__footer {
+    padding: 16px !important;
+    border-radius: 14px 14px 0 0 !important;
+  }
+
+  .page__footer footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   超小屏 (max-width: 480px)
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .page {
+    padding: 0 8px !important;
+  }
+
+  .page__inner-wrap,
+  .page__content,
+  .quick-access {
+    padding: 14px 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .quick-access__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .links-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .link-card {
+    padding: 10px 12px;
+  }
+
+  .site-subtitle {
+    display: none !important;
+  }
 }

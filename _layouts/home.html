@@ -3,6 +3,21 @@ layout: archive
 ---
 {%- assign locale = page.locale | default: layout.locale | default: site.locale %}
 
+<!-- 快速访问区域 (首页) -->
+{% if page.quick_links %}
+<div class="quick-access" aria-label="快速访问">
+  <h3 class="quick-access__title">快速访问</h3>
+  <div class="quick-access__grid">
+    {% for link in page.quick_links %}
+      <a class="quick-access__item" href="{{ link.url | relative_url }}">
+        {% if link.icon %}<i class="fa-solid {{ link.icon }}"></i>{% endif %}
+        <span>{{ link.name }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
 {{ content }}
 
 <h3 class="archive__subtitle">{{ site.data.ui-text[locale].recent_posts | default: "Recent Posts" }}</h3>

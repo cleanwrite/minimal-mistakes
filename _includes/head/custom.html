@@ -1,6 +1,15 @@
 <!-- start custom head snippets -->
 
-<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<!-- 预加载字体，提升渲染性能 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="/assets/images/wall.webp">
+
+<!-- 移动端视口：禁止缩放，提升 App 体验 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+<!-- 主题色（浏览器地址栏） -->
+<meta name="theme-color" content="#e07b39">
 
 <!-- end custom head snippets -->
 <link rel="stylesheet" href="/assets/css/custom.css">
