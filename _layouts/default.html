@@ -19,7 +19,6 @@
     <div id="loader">
       <div class="loader-content">
         <div class="loader-logo">fw</div>
-        <div class="loader-text">Welcome</div>
         <div class="loader-bar"></div>
       </div>
     </div>
@@ -41,9 +40,26 @@
     <div id="footer" class="page__footer">
       <footer>
         {% include footer/custom.html %}
-        {% include_cached footer.html locale=locale %}
+        {% include_cached footer.html locale=locale %>
       </footer>
     </div>
+
+    <!-- 加载动画消散脚本 -->
+    <script>
+    (function() {
+      var loader = document.getElementById('loader');
+      if (!loader) return;
+    function dismiss() {
+        loader.classList.add('done');
+        setTimeout(function() { loader.remove(); }, 800);
+      }
+      var bgImg = new Image();
+      bgImg.onload = dismiss;
+      bgImg.onerror = dismiss;
+      bgImg.src = '/assets/images/wall.webp';
+      setTimeout(dismiss, 3000);
+    })();
+    </script>
 
     {% include scripts.html locale=locale %}
   </body>
