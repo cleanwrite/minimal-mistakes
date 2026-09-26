@@ -1,15 +1,47 @@
 <!-- start custom head snippets -->
 
-<!-- 预加载字体，提升渲染性能 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 预加载背景图，确保 loader 能快速显示 -->
 <link rel="preload" as="image" href="/assets/images/wall.webp">
 
-<!-- 移动端视口：禁止缩放，提升 App 体验 -->
+<!-- 移动端视口 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-<!-- 主题色（浏览器地址栏） -->
+<!-- 主题色 -->
 <meta name="theme-color" content="#e07b39">
+
+<!-- 加载动画脚本：在 head 中尽早执行，避免 FOUC -->
+<script>
+(function() {
+  var loader = document.getElementById('loader');
+  if (!loader) return;
+
+  // 最小显示时间（避免闪屏）
+  var MIN_MS = 900;
+  var start = Date.now();
+
+  function dismiss() {
+    var elapsed = Date.now() - start;
+    var delay = Math.max(0, MIN_MS - elapsed);
+    setTimeout(function() {
+      loader.classList.add('done');
+      // 清理 DOM，释放内存
+      setTimeout(function() { loader.remove(); }, 900);
+    }, delay);
+  }
+
+  // 页面完全加载后消散
+  if (document.readyState === 'complete') {
+    dismiss();
+  } else {
+    window.addEventListener('load', dismiss);
+  }
+
+  // 安全兜底：5 秒强制关闭
+  setTimeout(function() {
+    if (loader && !loader.classList.contains('done')) dismiss();
+  }, 5000);
+})();
+</script>
 
 <!-- end custom head snippets -->
 <link rel="stylesheet" href="/assets/css/custom.css">
