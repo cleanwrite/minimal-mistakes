@@ -63,17 +63,24 @@
     <script>
     (function(){
       var d=false;
+      var start=Date.now();
       var l=document.getElementById('loader');
       function done(){
         if(d||!l)return;
         d=true;
-        l.style.transition='opacity .4s ease';
+        l.style.transition='opacity .5s ease';
         l.style.opacity='0';
-        setTimeout(function(){l.style.display='none'},500);
+        setTimeout(function(){l.style.display='none'},600);
       }
+      // 背景图加载完毕后，至少显示 1 秒再消散
       var img=new Image();
-      img.onload=done;
-      img.onerror=done;
+      function afterImg(){
+        var elapsed=Date.now()-start;
+        var remain=Math.max(0,1000-elapsed);
+        setTimeout(done,remain);
+      }
+      img.onload=afterImg;
+      img.onerror=afterImg;
       img.src='/assets/images/wall.webp';
       setTimeout(done,3000);
     })();

@@ -140,14 +140,23 @@ body {
 
 .page__inner-wrap,
 .page__content {
-  background: var(--card-bg) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid var(--card-border) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 20px !important;
   padding: 32px !important;
   margin-bottom: 24px !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06) !important;
   transition: box-shadow 0.25s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page__inner-wrap,
+  .page__content {
+    background: rgba(30, 32, 40, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
 }
 
 .page__inner-wrap:hover,
@@ -160,14 +169,15 @@ body {
    ═══════════════════════════════════════════════════════════ */
 
 .entries-list .list__item {
-  background: rgba(255, 255, 255, 0.82) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 14px !important;
   padding: 20px 24px !important;
   margin-bottom: 14px !important;
   color: #1a1a1a !important;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -418,13 +428,38 @@ body {
 
 body, p, li, h1, h2, h3, h4, .site-title, .archive__item-title {
   color: var(--text) !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6) !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 0 1px rgba(0, 0, 0, 0.2) !important;
 }
 
 @media (prefers-color-scheme: dark) {
   body, p, li, h1, h2, h3, h4, .site-title, .archive__item-title {
-    text-shadow: none !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), 0 0 1px rgba(0, 0, 0, 0.5) !important;
   }
+}
+
+/* ── 文章标题增强可读性 ── */
+.archive__item-title,
+.page__title {
+  font-weight: 700 !important;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9), 0 0 2px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ── 链接可读性 ── */
+a {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ── 卡片内文字增强对比度 ── */
+.page__inner-wrap,
+.page__content {
+  color: #2c2c2c !important;
+}
+
+.page__inner-wrap p,
+.page__content p,
+.page__inner-wrap li,
+.page__content li {
+  color: #333 !important;
 }
 
 .page__content p,
