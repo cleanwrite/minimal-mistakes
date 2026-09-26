@@ -6,34 +6,221 @@ toc: false
 share: false
 related: false
 comments: false
-links:
-  - name: "GitHub"
-    url: "https://github.com"
-    desc: "代码托管"
-  - name: "Google"
-    url: "https://www.google.com"
-    desc: "搜索"
-  - name: "Bilibili"
-    url: "https://www.bilibili.com"
-    desc: "视频"
-  - name: "知乎"
-    url: "https://www.zhihu.com"
-    desc: "问答社区"
-  - name: "MDN Web Docs"
-    url: "https://developer.mozilla.org/zh-CN/"
-    desc: "前端文档"
-  - name: "Stack Overflow"
-    url: "https://stackoverflow.com"
-    desc: "开发者问答"
 ---
 
-<p class="page__lead">常用网站导航。在 <code>_pages/links.html</code> 的 <code>links</code> 列表中增删条目即可。</p>
+<style>
+/* ── 导航站分类标题 ── */
+.link-category {
+  margin: 28px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.link-category:first-child { margin-top: 0; }
+.link-category__icon { font-size: 1.3rem; }
+.link-category__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #3d2b1f;
+  margin: 0;
+}
+.link-category__count {
+  font-size: 0.75rem;
+  color: #999;
+  background: rgba(0,0,0,0.05);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
 
-<div class="links-grid">
-  {% for link in page.links %}
-    <a class="link-card" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
-      <span class="link-card__name">{{ link.name }}</span>
-      {% if link.desc %}<span class="link-card__desc">{{ link.desc }}</span>{% endif %}
-    </a>
-  {% endfor %}
+/* ── 链接网格 ── */
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+/* ── 链接卡片 ── */
+.link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 14px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.95);
+}
+.link-card__name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+.link-card__desc {
+  font-size: 0.72rem;
+  color: #777;
+  line-height: 1.35;
+}
+
+/* ── 移动端 ── */
+@media (max-width: 768px) {
+  .link-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+  }
+  .link-card { padding: 10px 12px; }
+}
+@media (max-width: 480px) {
+  .link-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}
+</style>
+
+<p class="page__lead">常用网站导航，按分类整理。</p>
+
+<!-- 🤖 AI 工具 -->
+<h3 class="link-category"><span class="link-category__icon">🤖</span> <span class="link-category__title">AI 工具</span> <span class="link-category__count">7</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://chatgpt.com/" target="_blank" rel="noopener"><span class="link-card__name">ChatGPT</span><span class="link-card__desc">OpenAI 对话</span></a>
+  <a class="link-card" href="https://claude.ai/" target="_blank" rel="noopener"><span class="link-card__name">Claude</span><span class="link-card__desc">Anthropic AI</span></a>
+  <a class="link-card" href="https://gemini.google.com/app" target="_blank" rel="noopener"><span class="link-card__name">Google Gemini</span><span class="link-card__desc">Google AI</span></a>
+  <a class="link-card" href="https://grok.com/" target="_blank" rel="noopener"><span class="link-card__name">Grok</span><span class="link-card__desc">xAI 对话</span></a>
+  <a class="link-card" href="https://hzzx.openai.chaoxing.com/personal/own/agent" target="_blank" rel="noopener"><span class="link-card__name">个人工作台</span><span class="link-card__desc">超星 AI</span></a>
+  <a class="link-card" href="https://ai-panda.xyz/" target="_blank" rel="noopener"><span class="link-card__name">GPTPanda</span><span class="link-card__desc">AI 助手</span></a>
+  <a class="link-card" href="https://www.aicu.cc/" target="_blank" rel="noopener"><span class="link-card__name">AICU</span><span class="link-card__desc">AI 工具</span></a>
+</div>
+
+<!-- 🎬 视频/创作 -->
+<h3 class="link-category"><span class="link-category__icon">🎬</span> <span class="link-category__name">视频 / 创作</span> <span class="link-category__count">6</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://www.genmo.ai/create/video" target="_blank" rel="noopener"><span class="link-card__name">Genmo</span><span class="link-card__desc">AI 视频生成</span></a>
+  <a class="link-card" href="https://runwayml.com/" target="_blank" rel="noopener"><span class="link-card__name">Runway</span><span class="link-card__desc">AI 视频编辑</span></a>
+  <a class="link-card" href="https://replicate.com/explore" target="_blank" rel="noopener"><span class="link-card__name">Replicate</span><span class="link-card__desc">AI 模型平台</span></a>
+  <a class="link-card" href="https://www.aisingers.com/pianoroll/" target="_blank" rel="noopener"><span class="link-card__name">AISingers</span><span class="link-card__desc">虚拟歌声合成</span></a>
+  <a class="link-card" href="https://pv.pixjam.cn/" target="_blank" rel="noopener"><span class="link-card__name">PV Tool</span><span class="link-card__desc">日式 PV 生成</span></a>
+  <a class="link-card" href="https://snapany.com/zh/bilibili" target="_blank" rel="noopener"><span class="link-card__name">B站视频下载</span><span class="link-card__desc">SnapAny 解析</span></a>
+</div>
+
+<!-- 📥 下载工具 -->
+<h3 class="link-category"><span class="link-category__icon">📥</span> <span class="link-category__name">下载 / 工具</span> <span class="link-category__count">7</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://pan.dlck.cn/" target="_blank" rel="noopener"><span class="link-card__name">Pandownload</span><span class="link-card__desc">百度网盘</span></a>
+  <a class="link-card" href="https://youtube.iiilab.com/" target="_blank" rel="noopener"><span class="link-card__name">YouTube 下载</span><span class="link-card__desc">iiilab 解析</span></a>
+  <a class="link-card" href="https://snapany.com/zh/youtube" target="_blank" rel="noopener"><span class="link-card__name">YouTube 高清</span><span class="link-card__desc">SnapAny 下载</span></a>
+  <a class="link-card" href="https://webtor.io/" target="_blank" rel="noopener"><span class="link-card__name">Webtor</span><span class="link-card__desc">在线 torrent</span></a>
+  <a class="link-card" href="https://easychuan.cn/" target="_blank" rel="noopener"><span class="link-card__name">轻松传</span><span class="link-card__desc">文件传输</span></a>
+  <a class="link-card" href="https://bigjpg.com/zh" target="_blank" rel="noopener"><span class="link-card__name">Bigjpg</span><span class="link-card__desc">AI 图片放大</span></a>
+  <a class="link-card" href="https://libuluo.com/" target="_blank" rel="noopener"><span class="link-card__name">狸部落</span><span class="link-card__desc">软件下载站</span></a>
+</div>
+
+<!-- 🎵 音乐 -->
+<h3 class="link-category"><span class="link-category__icon">🎵</span> <span class="link-category__name">音乐 / 吉他</span> <span class="link-category__count">7</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://music.haom.ren/" target="_blank" rel="noopener"><span class="link-card__name">音乐搜索器</span><span class="link-card__desc">多站合一</span></a>
+  <a class="link-card" href="https://tools.liumingye.cn/music/" target="_blank" rel="noopener"><span class="link-card__name">音乐搜索</span><span class="link-card__desc">liumingye</span></a>
+  <a class="link-card" href="https://wyapi.toubiec.cn/" target="_blank" rel="noopener"><span class="link-card__name">网易云无损解析</span><span class="link-card__desc">高音质下载</span></a>
+  <a class="link-card" href="https://www.xiwnn.com/tiaoyin/guitar" target="_blank" rel="noopener"><span class="link-card__name">吉他调音器</span><span class="link-card__desc">网页版</span></a>
+  <a class="link-card" href="https://www.jitashe.org/" target="_blank" rel="noopener"><span class="link-card__name">吉他社</span><span class="link-card__desc">吉他谱下载</span></a>
+  <a class="link-card" href="https://ottohzys.wzq02.top/" target="_blank" rel="noopener"><span class="link-card__name">Otto 鬼叫生成</span><span class="link-card__desc">在线生成</span></a>
+  <a class="link-card" href="https://zhiwen.xfyun.cn/h5" target="_blank" rel="noopener"><span class="link-card__name">讯飞智文</span><span class="link-card__desc">语音转写</span></a>
+</div>
+
+<!-- 🌐 网络/代理 -->
+<h3 class="link-category"><span class="link-category__icon">🌐</span> <span class="link-category__name">网络 / 代理</span> <span class="link-category__count">7</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://clashshare.net/" target="_blank" rel="noopener"><span class="link-card__name">Clash 订阅</span><span class="link-card__name">免费节点</span></a>
+  <a class="link-card" href="https://github.com/Flikify/getNode" target="_blank" rel="noopener"><span class="link-card__name">getNode</span><span class="link-card__desc">节点信息更新</span></a>
+  <a class="link-card" href="https://github.com/yonggekkk/Cloudflare-vless-trojan" target="_blank" rel="noopener"><span class="link-card__name">CF Vless/Trojan</span><span class="link-card__desc">代理脚本</span></a>
+  <a class="link-card" href="https://github.com/cmliu/edgetunnel" target="_blank" rel="noopener"><span class="link-card__name">Edge Tunnel</span><span class="link-card__desc">多功能面板</span></a>
+  <a class="link-card" href="https://www.freedidi.com/17962.html" target="_blank" rel="noopener"><span class="link-card__name">CF 免费 VPN</span><span class="link-card__desc">零度博客</span></a>
+  <a class="link-card" href="https://www.deepl.com/translator?il=zh" target="_blank" rel="noopener"><span class="link-card__name">DeepL 翻译</span><span class="link-card__desc">精准翻译</span></a>
+  <a class="link-card" href="https://ipdb.030101.xyz/" target="_blank" rel="noopener"><span class="link-card__name">IPDB</span><span class="link-card__desc">IP 数据库</span></a>
+</div>
+
+<!-- ☁️ 域名/云服务 -->
+<h3 class="link-category"><span class="link-category__icon">☁️</span> <span class="link-category__name">域名 / 云</span> <span class="link-category__count">6</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://www.namesilo.com/account/" target="_blank" rel="noopener"><span class="link-card__name">Namesilo</span><span class="link-card__desc">域名管理</span></a>
+  <a class="link-card" href="https://my.dnshe.com/index.php?m=domain_hub" target="_blank" rel="noopener"><span class="link-card__name">免费域名</span><span class="link-card__desc">DNSHE</span></a>
+  <a class="link-card" href="https://dash.cloudflare.com/" target="_blank" rel="noopener"><span class="link-card__name">Cloudflare</span><span class="link-card__desc">DNS/CDN</span></a>
+  <a class="link-card" href="https://vercel.com/fwclean" target="_blank" rel="noopener"><span class="link-card__name">Vercel</span><span class="link-card__desc">部署平台</span></a>
+  <a class="link-card" href="https://mybolg.pages.dev/" target="_blank" rel="noopener"><span class="link-card__name">Cloudflare Pages</span><span class="link-card__desc">Pages</span></a>
+  <a class="link-card" href="https://fiber.google.com/speedtest/" target="_blank" rel="noopener"><span class="link-card__name">网速测试</span><span class="link-card__desc">Speedtest</span></a>
+</div>
+
+<!-- 📧 邮箱 -->
+<h3 class="link-category"><span class="link-category__icon">📧</span> <span class="link-category__name">邮箱 / 通讯</span> <span class="link-category__count">3</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://mail.proton.me/" target="_blank" rel="noopener"><span class="link-card__name">Proton Mail</span><span class="link-card__name">加密邮箱</span></a>
+  <a class="link-card" href="https://github.com/" target="_blank" rel="noopener"><span class="link-card__name">GitHub</span><span class="link-card__desc">代码托管</span></a>
+  <a class="link-card" href="https://iot.mi.com/vela/quickapp/" target="_blank" rel="noopener"><span class="link-card__name">Xiaomi Vela</span><span class="link-card__desc">快应用文档</span></a>
+</div>
+
+<!-- 📚 资源 -->
+<h3 class="link-category"><span class="link-category__icon">📚</span> <span class="link-category__name">资源 / 文库</span> <span class="link-category__count">4</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://zh.kgb101.ru/" target="_blank" rel="noopener"><span class="link-card__name">Z-Library</span><span class="link-card__desc">电子图书馆</span></a>
+  <a class="link-card" href="https://yandex.com/images/" target="_blank" rel="noopener"><span class="link-card__name">Yandex 图片</span><span class="link-card__desc">以图搜图</span></a>
+  <a class="link-card" href="https://www.xiaozhongjishu.com/" target="_blank" rel="noopener"><span class="link-card__name">小众技术</span><span class="link-card__desc">工具分享</span></a>
+  <a class="link-card" href="https://ywyj.cn/" target="_blank" rel="noopener"><span class="link-card__name">一网一匠</span><span class="link-card__desc">新产品发现</span></a>
+</div>
+
+<!-- 🎮 游戏 -->
+<h3 class="link-category"><span class="link-category__icon">🎮</span> <span class="link-category__name">游戏 / 娱乐</span> <span class="link-category__count">7</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://www.bilibili.com/" target="_blank" rel="noopener"><span class="link-card__name">Bilibili</span><span class="link-card__name">视频弹幕</span></a>
+  <a class="link-card" href="https://www.minecraftforum.net/" target="_blank" rel="noopener"><span class="link-card__name">Minecraft Forum</span><span class="link-card__desc">MC 论坛</span></a>
+  <a class="link-card" href="https://www.chunkbase.com/apps/seed-map" target="_blank" rel="noopener"><span class="link-card__name">Chunkbase</span><span class="link-card__desc">MC 地图工具</span></a>
+  <a class="link-card" href="https://mclt.cn/shop" target="_blank" rel="noopener"><span class="link-card__name">木牌商店</span><span class="link-card__desc">MC JE 1.19</span></a>
+  <a class="link-card" href="https://www.gamer520.com/" target="_blank" rel="noopener"><span class="link-card__name">Switch520</span><span class="link-card__desc">游戏资源</span></a>
+  <a class="link-card" href="https://smash-cs.ru/" target="_blank" rel="noopener"><span class="link-card__name">CS:S Mods</span><span class="link-card__desc">CS 起源模组</span></a>
+  <a class="link-card" href="https://www.thc.org/" target="_blank" rel="noopener"><span class="link-card__name">黑客之选</span><span class="link-card__desc">THC 工具</span></a>
+</div>
+
+<!-- 🔍 查询/工具 -->
+<h3 class="link-category"><span class="link-category__icon">🔍</span> <span class="link-category__name">查询 / 工具</span> <span class="link-category__count">6</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://uutool.cn/phone-restore/" target="_blank" rel="noopener"><span class="link-card__name">手机号还原</span><span class="link-card__desc">UU 工具</span></a>
+  <a class="link-card" href="https://www.bmcx.com/phonegenerate/" target="_blank" rel="noopener"><span class="link-card__name">手机号生成</span><span class="link-card__desc">BMCX</span></a>
+  <a class="link-card" href="https://manageyp.github.io/python/2017/11/28/china-mobiles-to-md5.html" target="_blank" rel="noopener"><span class="link-card__name">手机号 MD5</span><span class="link-card__desc">号段转 MD5</span></a>
+  <a class="link-card" href="https://www.shegongku.top/" target="_blank" rel="noopener"><span class="link-card__name">社工库</span><span class="link-card__desc">信息查询</span></a>
+  <a class="link-card" href="https://en.softonic.com/download/keytweak/windows/post-download" target="_blank" rel="noopener"><span class="link-card__name">KeyTweak</span><span class="link-card__desc">键盘重映射</span></a>
+  <a class="link-card" href="https://github.com/byJoey/cfnew" target="_blank" rel="noopener"><span class="link-card__name">CF 新方案</span><span class="link-card__desc">GitHub</span></a>
+</div>
+
+<!-- 🔞 NSFW -->
+<h3 class="link-category"><span class="link-category__icon">🔞</span> <span class="link-category__name">NSFW</span> <span class="link-category__count">4</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://nhentai.net/" target="_blank" rel="noopener"><span class="link-card__name">nhentai</span><span class="link-card__desc">漫画</span></a>
+  <a class="link-card" href="https://www.hanime1.fun/enter" target="_blank" rel="noopener"><span class="link-card__name">hanime1</span><span class="link-card__desc">H 动漫</span></a>
+  <a class="link-card" href="http://rem.asia/" target="_blank" rel="noopener"><span class="link-card__name">rem.asia</span><span class="link-card__desc">rem</span></a>
+  <a class="link-card" href="http://husinimee.com/dxhzj/" target="_blank" rel="noopener"><span class="link-card__name">短信轰炸机</span><span class="link-card__desc">网页版</span></a>
+</div>
+
+<!-- 🔒 定位/追踪 -->
+<h3 class="link-category"><span class="link-category__icon">🔒</span> <span class="link-category__name">定位 / 追踪</span> <span class="link-category__count">3</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://cn.find-phone.online/" target="_blank" rel="noopener"><span class="link-card__name">号码定位 GPS</span><span class="link-card__desc">NT-Locator</span></a>
+  <a class="link-card" href="https://locateanumber.com/locate/" target="_blank" rel="noopener"><span class="link-card__name">号码定位</span><span class="link-card__desc">LocateANumber</span></a>
+  <a class="link-card" href="https://ktlsj.my.canva.site/o" target="_blank" rel="noopener"><span class="link-card__name">菜单发布页</span><span class="link-card__desc">Canva</span></a>
+</div>
+
+<!-- 🛒 其他 -->
+<h3 class="link-category"><span class="link-category__icon">🛒</span> <span class="link-category__name">其他</span> <span class="link-category__count">5</span></h3>
+<div class="link-grid">
+  <a class="link-card" href="https://www.lanzoui.com/b950718" target="_blank" rel="noopener"><span class="link-card__name">Win10 激活工具</span><span class="link-card__desc">数字权利</span></a>
+  <a class="link-card" href="https://apph4bevy055233.xet.citv.cn/" target="_blank" rel="noopener"><span class="link-card__name">吉他谱</span><span class="link-card__desc">草东没有派对</span></a>
+  <a class="link-card" href="https://www.limestart.cn/" target="_blank" rel="noopener"><span class="link-card__name">青柠起始页</span><span class="link-card__desc">浏览器主页</span></a>
+  <a class="link-card" href="https://github.com/Flikify/getNode" target="_blank" rel="noopener"><span class="link-card__name">Clash 节点</span><span class="link-card__desc">Flikify</span></a>
+  <a class="link-card" href="https://iot.mi.com/vela/quickapp/" target="_blank" rel="noopener"><span class="link-card__name">小米快应用</span><span class="link-card__desc">开发文档</span></a>
 </div>
