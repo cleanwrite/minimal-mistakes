@@ -29,12 +29,60 @@
           <i class="fas fa-search"></i>
         </button>
         {% endif %}
-        <button class="greedy-nav__toggle hidden" type="button">
+        <button class="greedy-nav__toggle" type="button" id="navToggle">
           <span class="visually-hidden">{{ site.data.ui-text[locale].menu_label | default: "Toggle menu" }}</span>
           <div class="navicon"></div>
         </button>
-        <ul class="hidden-links hidden"></ul>
+
+        <!-- 抽屉菜单 -->
+        <div class="nav-drawer" id="navDrawer">
+          <div class="nav-drawer__header">
+            <span class="nav-drawer__title">菜单</span>
+            <button class="nav-drawer__close" id="navClose" aria-label="关闭菜单">×</button>
+          </div>
+          <ul class="nav-drawer__links">
+            {%- for link in site.data.navigation.main -%}
+              <li><a href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+          <!-- 快速访问 -->
+          <div class="nav-drawer__divider"></div>
+          <div class="nav-drawer__section">
+            <span class="nav-drawer__label">快速访问</span>
+            <div class="nav-drawer__quick">
+              <a class="nav-drawer__quick-item" href="/links/"><i class="fa-solid fa-link"></i><span>导航站</span></a>
+              <a class="nav-drawer__quick-item" href="/posts/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-drawer__overlay" id="navOverlay"></div>
       </nav>
     </div>
   </div>
 </div>
+
+<script>
+(function() {
+  const toggle = document.getElementById('navToggle');
+  const drawer = document.getElementById('navDrawer');
+  const closeBtn = document.getElementById('navClose');
+  const overlay = document.getElementById('navOverlay');
+
+  function open() {
+    drawer.classList.add('open');
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    drawer.classList.contains('open') ? close() : open();
+  });
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+})();
+</script>
