@@ -7,13 +7,26 @@
 <html lang="{{ locale | replace: '_', '-' | default: 'en' }}" class="no-js" dir="{{ page.direction | default: layout.direction | default: site.direction | default: 'ltr' }}">
   <head>
     {% include head.html locale=locale %}
+    <style>
+      /* ── Loader: 内联关键样式，不依赖外部 CSS ── */
+      #loader{position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#f5f5f5;transition:opacity .4s ease}
+      @media(prefers-color-scheme:dark){#loader{background:#0f1117}}
+      #loader::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 30% 40%,rgba(224,123,57,.12),transparent),radial-gradient(ellipse 50% 40% at 70% 60%,rgba(166,81,0,.06),transparent);animation:lg 2.5s ease-in-out infinite alternate}
+      @keyframes lg{0%{opacity:.5}100%{opacity:1}}
+      .loader-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px}
+      .loader-logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#e07b39,#a65100);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;font-weight:800;animation:lb .6s cubic-bezier(.34,1.56,.64,1) both}
+      @keyframes lb{from{opacity:0;transform:scale(.6) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+      .loader-bar{width:140px;height:3px;border-radius:3px;background:rgba(127,127,127,.15);overflow:hidden}
+      .loader-bar::after{content:'';display:block;height:100%;width:30%;border-radius:3px;background:linear-gradient(90deg,transparent,#e07b39,transparent);animation:lbar 1.2s linear infinite}
+      @keyframes lbar{0%{transform:translateX(-233%)}100%{transform:translateX(433%)}}
+    </style>
     {% include head/custom.html %}
     <script>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
-  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
+  <body>
 
     <!-- 加载动画 -->
     <div id="loader">
@@ -40,7 +53,7 @@
     <div id="footer" class="page__footer">
       <footer>
         {% include footer/custom.html %}
-        {% include_cached footer.html locale=locale %>
+        {% include_cached footer.html locale=locale %}
       </footer>
     </div>
 
@@ -48,21 +61,21 @@
 
     <!-- 加载动画消散 -->
     <script>
-    (function() {
-      var dismissed = false;
-      var loader = document.getElementById('loader');
-      function dismiss() {
-        if (dismissed || !loader) return;
-        dismissed = true;
-        loader.style.transition = 'opacity 0.4s ease';
-        loader.style.opacity = '0';
-        setTimeout(function() { loader.style.display = 'none'; }, 500);
+    (function(){
+      var d=false;
+      var l=document.getElementById('loader');
+      function done(){
+        if(d||!l)return;
+        d=true;
+        l.style.transition='opacity .4s ease';
+        l.style.opacity='0';
+        setTimeout(function(){l.style.display='none'},500);
       }
-      var img = new Image();
-      img.onload = dismiss;
-      img.onerror = dismiss;
-      img.src = '/assets/images/wall.webp';
-      setTimeout(dismiss, 3000);
+      var img=new Image();
+      img.onload=done;
+      img.onerror=done;
+      img.src='/assets/images/wall.webp';
+      setTimeout(done,3000);
     })();
     </script>
   </body>
