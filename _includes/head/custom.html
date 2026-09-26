@@ -9,37 +9,26 @@
 <!-- 主题色 -->
 <meta name="theme-color" content="#e07b39">
 
-<!-- 加载动画脚本：在 head 中尽早执行，避免 FOUC -->
+<!-- 加载动画脚本：背景图 ready 后立刻消散 -->
 <script>
 (function() {
   var loader = document.getElementById('loader');
   if (!loader) return;
 
-  // 最小显示时间（避免闪屏）
-  var MIN_MS = 900;
-  var start = Date.now();
-
   function dismiss() {
-    var elapsed = Date.now() - start;
-    var delay = Math.max(0, MIN_MS - elapsed);
-    setTimeout(function() {
-      loader.classList.add('done');
-      // 清理 DOM，释放内存
-      setTimeout(function() { loader.remove(); }, 900);
-    }, delay);
+    loader.classList.add('done');
+    setTimeout(function() { loader.remove(); }, 800);
   }
 
-  // 页面完全加载后消散
-  if (document.readyState === 'complete') {
-    dismiss();
-  } else {
-    window.addEventListener('load', dismiss);
-  }
+  // 背景图加载完就关，没加载也等 3 秒兜底
+  var bgImg = new Image();
+  bgImg.onload = dismiss;
+  bgImg.onerror = dismiss;
+  bgImg.src = '/assets/images/wall.webp';
 
-  // 安全兜底：5 秒强制关闭
   setTimeout(function() {
     if (loader && !loader.classList.contains('done')) dismiss();
-  }, 5000);
+  }, 3000);
 })();
 </script>
 
