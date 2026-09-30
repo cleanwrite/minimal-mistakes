@@ -5,4 +5,11 @@ layout: archive
 author_profile: false
 ---
 
-{{ content }}
+{% if site.posts.size > 0 %}
+  {{ content }}
+{% else %}
+  <div style="text-align:center;padding:60px 20px;">
+    <h2 style="font-size:1.5rem;margin-bottom:12px;">暂无文章</h2>
+    <p style="opacity:0.6;">博客正在建设中，敬请期待。</p>
+  </div>
+{% endif %}

@@ -1,11 +1,19 @@
 <!-- start custom head snippets -->
 
 <!-- 安全策略: CSP + 其他安全 Headers -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://waynegeng.github.io; connect-src 'self' https://waynegeng.github.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://waynegeng.github.io; connect-src 'self' https://waynegeng.github.io;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- SEO -->
+<meta name="description" content="fw's Blog - 个人技术博客，分享开发经验与工具导航">
+<meta property="og:title" content="fw's Blog">
+<meta property="og:description" content="个人技术博客，分享开发经验与工具导航">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/assets/images/wall.webp">
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- 预加载背景图 -->
 <link rel="preload" as="image" href="/assets/images/wall.webp">
@@ -15,6 +23,9 @@
 
 <!-- 主题色 -->
 <meta name="theme-color" content="#e07b39">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 
 <!-- end custom head snippets -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
