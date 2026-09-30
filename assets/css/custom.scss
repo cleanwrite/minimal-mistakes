@@ -168,12 +168,15 @@ body {
 .visible-links a:hover { background: rgba(0,0,0,0.05); }
 
 /* ── 汉堡按钮 ── */
-#navToggle { display: none; }
+.greedy-nav__toggle { display: none !important; }
+#navToggle { display: none !important; }
 
 @media (max-width: 768px) {
   .visible-links { display: none !important; }
   #navToggle {
-    display: flex;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     cursor: pointer;
