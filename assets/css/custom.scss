@@ -8,6 +8,15 @@
   }
 }
 
+/* ── 页面内容基础渐显 ── */
+.initial-content {
+  animation: pageIn 0.5s 0.15s ease both;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 :root {
   --bg: #f5f5f5;
   --text: #3d2b1f;
@@ -285,6 +294,29 @@ body {
 /* ── 字体 ── */
 body, p, li, h1, h2, h3, h4, .site-title, .archive__item-title {
   color: var(--text) !important;
+}
+
+/* ── 背景图上的文字可读性 ── */
+.page__title,
+.archive__item-title,
+.page__content h1,
+.page__content h2,
+.page__content h3,
+.links-hero__title,
+.cat-section__title {
+  text-shadow: 0 1px 4px rgba(255,255,255,0.85), 0 0 2px rgba(255,255,255,0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page__title,
+  .archive__item-title,
+  .page__content h1,
+  .page__content h2,
+  .page__content h3,
+  .links-hero__title,
+  .cat-section__title {
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.4);
+  }
 }
 
 a {
