@@ -1,10 +1,17 @@
 <!-- start custom head snippets -->
 
-<!-- 预加载背景图，确保 loader 能快速显示 -->
+<!-- 安全策略: CSP + 其他安全 Headers -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://waynegeng.github.io; connect-src 'self' https://waynegeng.github.io;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- 预加载背景图 -->
 <link rel="preload" as="image" href="/assets/images/wall.webp">
 
 <!-- 移动端视口 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 
 <!-- 主题色 -->
 <meta name="theme-color" content="#e07b39">

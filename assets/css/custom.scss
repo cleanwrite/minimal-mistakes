@@ -150,15 +150,22 @@ body::before {
 
 .page__inner-wrap,
 .page__content {
-  background: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 20px !important;
   padding: 32px !important;
   margin-bottom: 24px !important;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06) !important;
   transition: box-shadow 0.25s ease;
+}
+
+@supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
+  .page__inner-wrap,
+  .page__content {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -179,9 +186,7 @@ body::before {
    ═══════════════════════════════════════════════════════════ */
 
 .entries-list .list__item {
-  background: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 14px !important;
   padding: 20px 24px !important;
@@ -189,6 +194,14 @@ body::before {
   color: #1a1a1a !important;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@supports (backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px)) {
+  .entries-list .list__item {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
 }
 
 .entries-list .list__item:hover {
