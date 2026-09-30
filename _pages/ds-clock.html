@@ -1,0 +1,54 @@
+---
+title: "DeepSeek 峰谷时钟"
+permalink: /ds-clock/
+layout: single
+share: false
+related: false
+comments: false
+---
+
+<style>
+.ds-iframe-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.ds-iframe-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 520px;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .ds-iframe-wrap {
+    border-radius: 14px;
+    margin: 0 -4px;
+    width: calc(100% + 8px);
+  }
+  .ds-iframe-wrap iframe {
+    height: 460px;
+  }
+}
+</style>
+
+<div class="ds-iframe-wrap">
+  <iframe
+    src="https://waynegeng.github.io/ds-price-clock/"
+    loading="lazy"
+    title="DeepSeek 峰谷时钟"
+    allow="fullscreen">
+  </iframe>
+</div>
+
+<p style="text-align:center;font-size:0.8rem;color:#999;margin-top:12px;">
+  数据来源: <a href="https://waynegeng.github.io/ds-price-clock/" target="_blank" rel="noopener">waynegeng/ds-price-clock</a> · 纯静态零依赖
+</p>

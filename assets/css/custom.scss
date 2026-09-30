@@ -648,6 +648,19 @@ a:hover {
   }
 }
 
+/* ── DeepSeek 峰谷时钟嵌入 ── */
+@media (max-width: 768px) {
+  .ds-clock-embed > div {
+    border-radius: 14px !important;
+    margin: 0 -4px !important;
+    width: calc(100% + 8px) !important;
+    max-width: none !important;
+  }
+  .ds-clock-embed iframe {
+    height: 440px !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════
    超小屏 (max-width: 480px)
    ═══════════════════════════════════════════════════════════ */
