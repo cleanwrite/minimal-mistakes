@@ -271,12 +271,3 @@ defaults:
       share: true
       related: true
 
-# 强制重置导航菜单，移除 Quick-Start Guide
-navigation:
-  main:
-    - title: "首页"
-      url: /
-    - title: "导航站"
-      url: /links/
-    - title: "文章归档"
-      url: /posts/
