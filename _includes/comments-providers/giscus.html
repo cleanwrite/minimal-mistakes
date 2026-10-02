@@ -37,9 +37,20 @@
     commentContainer.appendChild(contentDiv);
 
     // 3. 内联 MD5 实现（无外部依赖，不受 CSP 限制）
+    // 使用标准 RFC 1321 MD5 算法，addUnsigned 正确处理 32 位溢出
     function md5(string) {
       function rotateLeft(val, shift) { return (val << shift) | (val >>> (32 - shift)); }
-      function addUnsigned(x, y) { return (x & 0x7fffffff) + (y & 0x7fffffff) ^ (x & 0x80000000) ^ (y & 0x80000000); }
+      function addUnsigned(x, y) {
+        var x8 = x & 0x80000000, y8 = y & 0x80000000;
+        var x4 = x & 0x40000000, y4 = y & 0x40000000;
+        var result = (x & 0x3fffffff) + (y & 0x3fffffff);
+        if (x4 & y4) return result ^ 0x80000000 ^ x8 ^ y8;
+        if (x4 | y4) {
+          if (result & 0x40000000) return result ^ 0xc0000000 ^ x8 ^ y8;
+          return result ^ 0x40000000 ^ x8 ^ y8;
+        }
+        return result ^ x8 ^ y8;
+      }
       function F(x, y, z) { return (x & y) | (~x & z); }
       function G(x, y, z) { return (x & z) | (y & ~z); }
       function H(x, y, z) { return x ^ y ^ z; }
@@ -51,7 +62,8 @@
       function convertToWordArray(str) {
         var len = str.length;
         var numWords = ((len + 8) >>> 6) + 1;
-        var words = new Array(numWords * 16).fill(0);
+        var words = [];
+        for (var i = 0; i < numWords * 16; i++) words[i] = 0;
         for (var i = 0; i < len; i++) words[i >>> 2] |= str.charCodeAt(i) << ((i % 4) * 8);
         words[len >>> 2] |= 0x80 << ((len % 4) * 8);
         words[(numWords * 16) - 2] = len * 8;
