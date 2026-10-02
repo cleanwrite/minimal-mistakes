@@ -261,7 +261,7 @@ permalink: /zxy/
         return rh(a)+rh(b)+rh(c)+rh(d);
     }
 
-    var CORRECT_HASH = "9ff7888dd112d3e0";
+    var CORRECT_PASSWORD = "114514";
     var inputField = document.getElementById('invite-code-input');
     var btn = document.getElementById('verify-btn');
     var error = document.getElementById('verify-error-msg');
@@ -270,9 +270,7 @@ permalink: /zxy/
     function verify() {
         var code = inputField.value.trim();
         if (!code) return;
-        var hash32 = md5(code);
-        var hash16 = hash32.substring(8, 24);
-        if (hash16 === CORRECT_HASH) {
+        if (code === CORRECT_PASSWORD) {
             error.style.display = 'none';
             document.getElementById('vip-gate').style.display = 'none';
             var grid = document.getElementById('vip-protected-content');
