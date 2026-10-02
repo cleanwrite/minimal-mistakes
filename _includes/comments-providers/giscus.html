@@ -3,15 +3,11 @@
 
   (function () {
     var commentContainer = document.querySelector('#giscus-comments');
+    if (!commentContainer) return;
 
-    if (!commentContainer) {
-      return;
-    }
-
-    // 清空可能存在的旧内容（防止重复渲染）
     commentContainer.innerHTML = '';
 
-    // 1. 创建并注入密码验证墙的 HTML 结构
+    // 1. 密码验证墙
     var gateDiv = document.createElement('div');
     gateDiv.id = 'vip-gate';
     gateDiv.style.cssText = 'margin-top: 2.5em; padding: 25px; border: 2px dashed #f0ad4e; background-color: #fcf8e3; border-radius: 6px; text-align: center;';
@@ -24,7 +20,7 @@
       '</div>' +
       '<p id="verify-error-msg" style="color: #d9534f; display: none; font-weight: bold; margin-top: 10px;"><i class="fas fa-exclamation-triangle"></i> 密钥无效或已过期，请重新输入！</p>';
 
-    // 2. 创建验证成功后用于展示内容的容器
+    // 2. 验证成功后的内容容器
     var contentDiv = document.createElement('div');
     contentDiv.id = 'vip-protected-content';
     contentDiv.style.cssText = 'display: none; margin-top: 2.5em; padding: 25px; border-left: 5px solid #5cb85c; background-color: #f4f9f4; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);';
@@ -32,166 +28,88 @@
       '<h4 style="color: #3c763d; margin-top: 0; margin-bottom: 15px;"><i class="fas fa-unlock"></i> 验证成功！以下为隐藏讨论与核心资源</h4>' +
       '<div id="decrypted-payload"></div>';
 
-    // 将这些元素塞入评论区容器中
     commentContainer.appendChild(gateDiv);
     commentContainer.appendChild(contentDiv);
 
-    // 3. MD5 — 使用经过验证的 blueimp MD5 实现（MIT License）
-    function computeMD5(str) {
-      function md5Blue(inputString) {
-        var hc="0123456789abcdef";
-        function rh(n){var s="";for(var j=0;j<=3;j++)s+=hc.charAt((n>>(j*8+4))&0xF)+hc.charAt((n>>(j*8))&0xF);return s;}
-        function ad(x,y){var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return(m<<16)|(l&0xFFFF);}
-        function rl(n,c){return(n<<c)|(n>>>(32-c));}
-        function cm(q,a,b,x,s,t){return ad(rl(ad(ad(a,q),ad(x,t)),s),b);}
-        function ff(a,b,c,d,x,s,t){return cm((b&c)|((~b)&d),a,b,x,s,t);}
-        function gg(a,b,c,d,x,s,t){return cm((b&d)|(c&(~d)),a,b,x,s,t);}
-        function hh(a,b,c,d,x,s,t){return cm(b^c^d,a,b,x,s,t);}
-        function ii(a,b,c,d,x,s,t){return cm(c^(b|(~d)),a,b,x,s,t);}
-        function sb(x){
-          var blk=[];var i=0;
-          while(i<x.length){var bl=[];
-            for(var j=0;j<16;j++){
-              var c=i+j<x.length?x.charCodeAt(i+j):0;
-              bl[j]=c;
-            }
-            blk.push(bl);i+=16;
-          }
-          return blk;
-        }
-        function rst(){return[0x67452301,0xefcdab89,0x98badcfe,0x10325476];}
-        function cntLen(x){var l=x.length,n=((l+8)>>>6)+1;var m=n*16;var r=[];
-          for(var i=0;i<m;i++)r[i]=0;
-          for(var i=0;i<l;i++)r[i>>>2]|=x.charCodeAt(i)<<((i%4)*8);
-          r[i>>>2]|=0x80<<((i%4)*8);
-          r[m-1]=l*8;
-          return r;
-        }
-        function eng(x){
-          var [a,b,c,d]=rst();
-          var S1=[7,12,17,22],S2=[5,9,14,20],S3=[4,11,16,23],S4=[6,10,15,21];
-          var blocks=cntLen(x);
-          for(var i=0;i<blocks.length;i+=16){
-            var [aa,bb,cc,dd]=[a,b,c,d];
-            a=ff(a,b,c,d,blocks[i+0],S1[0],0xd76aa478);d=ff(d,a,b,c,blocks[i+1],S1[1],0xe8c7b756);
-            c=ff(c,d,a,b,blocks[i+2],S1[2],0x242070db);b=ff(b,c,d,a,blocks[i+3],S1[3],0xc1bdceee);
-            a=ff(a,b,c,d,blocks[i+4],S1[0],0xf57c0faf);d=ff(d,a,b,c,blocks[i+5],S1[1],0x4787c62a);
-            c=ff(c,d,a,b,blocks[i+6],S1[2],0xa8304613);b=ff(b,c,d,a,blocks[i+7],S1[3],0xfd469501);
-            a=ff(a,b,c,d,blocks[i+8],S1[0],0x698098d8);d=ff(d,a,b,c,blocks[i+9],S1[1],0x8b44f7af);
-            c=ff(c,d,a,b,blocks[i+10],S1[2],0xffff5bb1);b=ff(b,c,d,a,blocks[i+11],S1[3],0x895cd7be);
-            a=ff(a,b,c,d,blocks[i+12],S1[0],0x6b901122);d=ff(d,a,b,c,blocks[i+13],S1[1],0xfd987193);
-            c=ff(c,d,a,b,blocks[i+14],S1[2],0xa679438e);b=ff(b,c,d,a,blocks[i+15],S1[3],0x49b40821);
-            a=gg(a,b,c,d,blocks[i+1],S2[0],0xf61e2562);d=gg(d,a,b,c,blocks[i+6],S2[1],0xc040b340);
-            c=gg(c,d,a,b,blocks[i+11],S2[2],0x265e5a51);b=gg(b,c,d,a,blocks[i+0],S2[3],0xe9b6c7aa);
-            a=gg(a,b,c,d,blocks[i+5],S2[0],0xd62f105d);d=gg(d,a,b,c,blocks[i+10],S2[1],0x2441453);
-            c=gg(c,d,a,b,blocks[i+15],S2[2],0xd8a1e681);b=gg(b,c,d,a,blocks[i+4],S2[3],0xe7d3fbc8);
-            a=gg(a,b,c,d,blocks[i+9],S2[0],0x21e1cde6);d=gg(d,a,b,c,blocks[i+14],S2[1],0xc33707d6);
-            c=gg(c,d,a,b,blocks[i+3],S2[2],0xf4d50d87);b=gg(b,c,d,a,blocks[i+8],S2[3],0x455a14ed);
-            a=gg(a,b,c,d,blocks[i+13],S2[0],0xa9e3e905);d=gg(d,a,b,c,blocks[i+2],S2[1],0xfce3f3e0);
-            c=gg(c,d,a,b,blocks[i+7],S2[2],0x676f02d9);b=gg(b,c,d,a,blocks[i+12],S2[3],0x8d2a4c8a);
-            a=hh(a,b,c,d,blocks[i+5],S3[0],0xfffa3942);d=hh(d,a,b,c,blocks[i+8],S3[1],0x8771f681);
-            c=hh(c,d,a,b,blocks[i+11],S3[2],0x6d9d6122);b=hh(b,c,d,a,blocks[i+14],S3[3],0xfde5380c);
-            a=hh(a,b,c,d,blocks[i+1],S3[0],0xa4beea44);d=hh(d,a,b,c,blocks[i+4],S3[1],0x4bdecfa9);
-            c=hh(c,d,a,b,blocks[i+7],S3[2],0xf6bb4b60);b=hh(b,c,d,a,blocks[i+10],S3[3],0xbebfbc70);
-            a=hh(a,b,c,d,blocks[i+13],S3[0],0x289b7ec6);d=hh(d,a,b,c,blocks[i+0],S3[1],0xeaa127fa);
-            c=hh(c,d,a,b,blocks[i+3],S3[2],0xd4ef3085);b=hh(b,c,d,a,blocks[i+6],S3[3],0x4881d05);
-            a=hh(a,b,c,d,blocks[i+9],S3[0],0xd9d4d039);d=hh(d,a,b,c,blocks[i+12],S3[1],0xe6db99e5);
-            c=hh(c,d,a,b,blocks[i+15],S3[2],0x1fa27cf8);b=hh(b,c,d,a,blocks[i+2],S3[3],0xc4ac5665);
-            a=ii(a,b,c,d,blocks[i+0],S4[0],0xf4292244);d=ii(d,a,b,c,blocks[i+7],S4[1],0x432aff97);
-            c=ii(c,d,a,b,blocks[i+14],S4[2],0xab9423a7);b=ii(b,c,d,a,blocks[i+5],S4[3],0xfc93a039);
-            a=ii(a,b,c,d,blocks[i+12],S4[0],0x655b59c3);d=ii(d,a,b,c,blocks[i+3],S4[1],0x8f0ccc92);
-            c=ii(c,d,a,b,blocks[i+10],S4[2],0xffeff47d);b=ii(b,c,d,a,blocks[i+1],S4[3],0x85845dd1);
-            a=ii(a,b,c,d,blocks[i+8],S4[0],0x6fa87e4f);d=ii(d,a,b,c,blocks[i+15],S4[1],0xfe2ce6e0);
-            c=ii(c,d,a,b,blocks[i+6],S4[2],0xa3014314);b=ii(b,c,d,a,blocks[i+13],S4[3],0x4e0811a1);
-            a=ii(a,b,c,d,blocks[i+4],S4[0],0xf7537e82);d=ii(d,a,b,c,blocks[i+11],S4[1],0xbd3af235);
-            c=ii(c,d,a,b,blocks[i+2],S4[2],0x2ad7d2bb);b=ii(b,c,d,a,blocks[i+9],S4[3],0xeb86d391);
-            a=ad(a,aa);b=ad(b,bb);c=ad(c,cc);d=ad(d,dd);
-          }
-          return rh(a)+rh(b)+rh(c)+rh(d);
+    // 3. MD5 — blueimp 实现 (MIT License)
+    function computeMD5(inputString) {
+      function rh(n){var s="";for(var j=0;j<=3;j++)s+="0123456789abcdef".charAt((n>>(j*8+4))&0xF)+"0123456789abcdef".charAt((n>>(j*8))&0xF);return s;}
+      function ad(x,y){var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return(m<<16)|(l&0xFFFF);}
+      function rl(n,c){return(n<<c)|(n>>>(32-c));}
+      function cm(q,a,b,x,s,t){return ad(rl(ad(ad(a,q),ad(x,t)),s),b);}
+      function ff(a,b,c,d,x,s,t){return cm((b&c)|((~b)&d),a,b,x,s,t);}
+      function gg(a,b,c,d,x,s,t){return cm((b&d)|(c&(~d)),a,b,x,s,t);}
+      function hh(a,b,c,d,x,s,t){return cm(b^c^d,a,b,x,s,t);}
+      function ii(a,b,c,d,x,s,t){return cm(c^(b|(~d)),a,b,x,s,t);}
+      function cntLen(x){var l=x.length,n=((l+8)>>>6)+1;var m=n*16;var r=[];for(var i=0;i<m;i++)r[i]=0;for(var i=0;i<l;i++)r[i>>>2]|=x.charCodeAt(i)<<((i%4)*8);r[i>>>2]|=0x80<<((i%4)*8);r[m-1]=l*8;return r;}
+      var x=cntLen(inputString);var a=0x67452301,b=0xefcdab89,c=0x98badcfe,d=0x10325476;
+      var S1=[7,12,17,22],S2=[5,9,14,20],S3=[4,11,16,23],S4=[6,10,15,21];
+      for(var i=0;i<x.length;i+=16){var aa=a,bb=b,cc=c,dd=d;
+        a=ff(a,b,c,d,x[i+0],S1[0],0xd76aa478);d=ff(d,a,b,c,x[i+1],S1[1],0xe8c7b756);
+        c=ff(c,d,a,b,x[i+2],S1[2],0x242070db);b=ff(b,c,d,a,x[i+3],S1[3],0xc1bdceee);
+        a=ff(a,b,c,d,x[i+4],S1[0],0xf57c0faf);d=ff(d,a,b,c,x[i+5],S1[1],0x4787c62a);
+        c=ff(c,d,a,b,x[i+6],S1[2],0xa8304613);b=ff(b,c,d,a,x[i+7],S1[3],0xfd469501);
+        a=ff(a,b,c,d,x[i+8],S1[0],0x698098d8);d=ff(d,a,b,c,x[i+9],S1[1],0x8b44f7af);
+        c=ff(c,d,a,b,x[i+10],S1[2],0xffff5bb1);b=ff(b,c,d,a,x[i+11],S1[3],0x895cd7be);
+        a=ff(a,b,c,d,x[i+12],S1[0],0x6b901122);d=ff(d,a,b,c,x[i+13],S1[1],0xfd987193);
+        c=ff(c,d,a,b,x[i+14],S1[2],0xa679438e);b=ff(b,c,d,a,x[i+15],S1[3],0x49b40821);
+        a=gg(a,b,c,d,x[i+1],S2[0],0xf61e2562);d=gg(d,a,b,c,x[i+6],S2[1],0xc040b340);
+        c=gg(c,d,a,b,x[i+11],S2[2],0x265e5a51);b=gg(b,c,d,a,x[i+0],S2[3],0xe9b6c7aa);
+        a=gg(a,b,c,d,x[i+5],S2[0],0xd62f105d);d=gg(d,a,b,c,x[i+10],S2[1],0x2441453);
+        c=gg(c,d,a,b,x[i+15],S2[2],0xd8a1e681);b=gg(b,c,d,a,x[i+4],S2[3],0xe7d3fbc8);
+        a=gg(a,b,c,d,x[i+9],S2[0],0x21e1cde6);d=gg(d,a,b,c,x[i+14],S2[1],0xc33707d6);
+        c=gg(c,d,a,b,x[i+3],S2[2],0xf4d50d87);b=gg(b,c,d,a,x[i+8],S2[3],0x455a14ed);
+        a=gg(a,b,c,d,x[i+13],S2[0],0xa9e3e905);d=gg(d,a,b,c,x[i+2],S2[1],0xfce3f3e0);
+        c=gg(c,d,a,b,x[i+7],S2[2],0x676f02d9);b=gg(b,c,d,a,x[i+12],S2[3],0x8d2a4c8a);
+        a=hh(a,b,c,d,x[i+5],S3[0],0xfffa3942);d=hh(d,a,b,c,x[i+8],S3[1],0x8771f681);
+        c=hh(c,d,a,b,x[i+11],S3[2],0x6d9d6122);b=hh(b,c,d,a,x[i+14],S3[3],0xfde5380c);
+        a=hh(a,b,c,d,x[i+1],S3[0],0xa4beea44);d=hh(d,a,b,c,x[i+4],S3[1],0x4bdecfa9);
+        c=hh(c,d,a,b,x[i+7],S3[2],0xf6bb4b60);b=hh(b,c,d,a,x[i+10],S3[3],0xbebfbc70);
+        a=hh(a,b,c,d,x[i+13],S3[0],0x289b7ec6);d=hh(d,a,b,c,x[i+0],S3[1],0xeaa127fa);
+        c=hh(c,d,a,b,x[i+3],S3[2],0xd4ef3085);b=hh(b,c,d,a,x[i+6],S3[3],0x4881d05);
+        a=hh(a,b,c,d,x[i+9],S3[0],0xd9d4d039);d=hh(d,a,b,c,x[i+12],S3[1],0xe6db99e5);
+        c=hh(c,d,a,b,x[i+15],S3[2],0x1fa27cf8);b=hh(b,c,d,a,x[i+2],S3[3],0xc4ac5665);
+        a=ii(a,b,c,d,x[i+0],S4[0],0xf4292244);d=ii(d,a,b,c,x[i+7],S4[1],0x432aff97);
+        c=ii(c,d,a,b,x[i+14],S4[2],0xab9423a7);b=ii(b,c,d,a,x[i+5],S4[3],0xfc93a039);
+        a=ii(a,b,c,d,x[i+12],S4[0],0x655b59c3);d=ii(d,a,b,c,x[i+3],S4[1],0x8f0ccc92);
+        c=ii(c,d,a,b,x[i+10],S4[2],0xffeff47d);b=ii(b,c,d,a,x[i+1],S4[3],0x85845dd1);
+        a=ii(a,b,c,d,x[i+8],S4[0],0x6fa87e4f);d=ii(d,a,b,c,x[i+15],S4[1],0xfe2ce6e0);
+        c=ii(c,d,a,b,x[i+6],S4[2],0xa3014314);b=ii(b,c,d,a,x[i+13],S4[3],0x4e0811a1);
+        a=ii(a,b,c,d,x[i+4],S4[0],0xf7537e82);d=ii(d,a,b,c,x[i+11],S4[1],0xbd3af235);
+        c=ii(c,d,a,b,x[i+2],S4[2],0x2ad7d2bb);b=ii(b,c,d,a,x[i+9],S4[3],0xeb86d391);
+        a=ad(a,aa);b=ad(b,bb);c=ad(c,cc);d=ad(d,dd);
       }
-      return md5Blue(str);
-    }
-
-    // 4. 验证逻辑（同步包装）
-    var verifyBtn = document.getElementById('verify-btn');
-    var inputField = document.getElementById('invite-code-input');
-
-    if (verifyBtn && inputField) {
-      function doVerify() {
-        var inputCode = inputField.value.trim();
-        var errorMsg = document.getElementById('verify-error-msg');
-        var correctHash = "{{ page.invite_code_hash }}";
-        if (!correctHash) {
-          alert("这篇文章没有设置邀请码密钥。");
-          return;
-        }
-        var inputHash = computeMD5(inputCode);
-        if (inputHash === correctHash) {
-          errorMsg.style.display = 'none';
-          document.getElementById('vip-gate').style.display = 'none';
-          document.getElementById('vip-protected-content').style.display = 'block';
-          var payload = {{ page.hidden_resource | markdownify | jsonify }};
-          var payloadContainer = document.getElementById('decrypted-payload');
-          payloadContainer.style.cssText = 'word-break: break-all; word-wrap: break-word; line-height: 1.6; font-size: 15px;';
-          payloadContainer.innerHTML = payload;
-        } else {
-          errorMsg.style.display = 'block';
-          inputField.value = '';
-          inputField.focus();
-        }
-      }
-      verifyBtn.addEventListener('click', doVerify);
-      inputField.addEventListener('keypress', function(e) { if (e.key === 'Enter') doVerify(); });
+      return rh(a)+rh(b)+rh(c)+rh(d);
     }
 
     // 4. 验证逻辑
     var verifyBtn = document.getElementById('verify-btn');
     var inputField = document.getElementById('invite-code-input');
+    if (!verifyBtn || !inputField) return;
 
-    if (verifyBtn && inputField) {
-      function doVerify() {
-        var inputCode = inputField.value.trim();
-        var errorMsg = document.getElementById('verify-error-msg');
-
-        // 从当前文章的 Front Matter 中自动读取预设的邀请码 MD5 散列值
-        var correctHash = "{{ page.invite_code_hash }}";
-
-        if (!correctHash) {
-          alert("这篇文章没有设置邀请码密钥。");
-          return;
-        }
-
-        // 计算用户输入的邀请码的 MD5 值
-        var inputHash = md5(inputCode);
-
-        if (inputHash === correctHash) {
-          errorMsg.style.display = 'none';
-          document.getElementById('vip-gate').style.display = 'none';
-          document.getElementById('vip-protected-content').style.display = 'block';
-
-          // 将 Jekyll 渲染出的 HTML 转为纯文本字符串注入
-          var payload = {{ page.hidden_resource | markdownify | jsonify }};
-          var payloadContainer = document.getElementById('decrypted-payload');
-
-          // 强制连续的长英文字符与长链接在容器边缘自动折行，防止撑爆文本框
-          payloadContainer.style.cssText = 'word-break: break-all; word-wrap: break-word; line-height: 1.6; font-size: 15px;';
-          payloadContainer.innerHTML = payload;
-        } else {
-          errorMsg.style.display = 'block';
-          inputField.value = '';
-          inputField.focus();
-        }
+    function doVerify() {
+      var inputCode = inputField.value.trim();
+      if (!inputCode) return;
+      var errorMsg = document.getElementById('verify-error-msg');
+      var correctHash = "{{ page.invite_code_hash }}";
+      if (!correctHash) { alert("这篇文章没有设置邀请码密钥。"); return; }
+      var inputHash = computeMD5(inputCode);
+      if (inputHash === correctHash) {
+        errorMsg.style.display = 'none';
+        document.getElementById('vip-gate').style.display = 'none';
+        document.getElementById('vip-protected-content').style.display = 'block';
+        var payload = {{ page.hidden_resource | markdownify | jsonify }};
+        var payloadContainer = document.getElementById('decrypted-payload');
+        payloadContainer.style.cssText = 'word-break: break-all; word-wrap: break-word; line-height: 1.6; font-size: 15px;';
+        payloadContainer.innerHTML = payload;
+      } else {
+        errorMsg.style.display = 'block';
+        inputField.value = '';
+        inputField.focus();
       }
-
-      // 绑定点击事件
-      verifyBtn.addEventListener('click', doVerify);
-
-      // 绑定回车键监听
-      inputField.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          doVerify();
-        }
-      });
     }
+
+    verifyBtn.addEventListener('click', doVerify);
+    inputField.addEventListener('keypress', function(e) { if (e.key === 'Enter') doVerify(); });
   })();
 </script>
