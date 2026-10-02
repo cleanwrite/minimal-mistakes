@@ -89,10 +89,10 @@ body {
   html { font-size: 17px; }
 }
 
-/* ── 卡片 (纯色不透背景) ── */
+/* ── 卡片 ── */
 .page__inner-wrap,
 .page__content {
-  background: #ffffff !important;
+  background: #fff !important;
   border: 1px solid rgba(0,0,0,0.1) !important;
   border-radius: 16px;
   padding: 28px;
@@ -101,7 +101,7 @@ body {
 }
 
 .entries-list .list__item {
-  background: #ffffff !important;
+  background: #fff !important;
   border: 1px solid rgba(0,0,0,0.1) !important;
   border-radius: 12px;
   padding: 18px 22px;
@@ -116,19 +116,6 @@ body {
 }
 
 .page__content p, .page__content li { line-height: 1.75; }
-
-/* ── 文章列表 ── */
-.entries-list .list__item {
-  background: rgba(255,255,255,0.97) !important;
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 18px 22px;
-  margin-bottom: 12px;
-  color: var(--text) !important;
-  transition: transform 0.15s ease;
-}
-
-.entries-list .list__item:hover { transform: translateY(-1px); }
 
 /* ── 导航栏 ── */
 .masthead {
