@@ -136,11 +136,12 @@
       }
 
       function fmtTime(sec){
-        var h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
-        var hh=String(h).padStart(2,'0');
+        var h=Math.floor(sec/3600);
+        var m=Math.floor((sec%3600)/60);
+        var s=sec%60;
         var mm=String(m).padStart(2,'0');
         var ss=String(s).padStart(2,'0');
-        return hh+':'+mm+':'+ss;
+        return h+'时'+mm+'分'+ss+'秒';
       }
 
       function tick(){
@@ -149,7 +150,7 @@
         var rem=calcRemaining();
         dot.classList.toggle('peak',peak);
         var status=peak?'高峰':'空闲';
-        cd.textContent=status+' '+fmtTime(rem);
+        cd.textContent=status+' · 剩余 '+fmtTime(rem);
         if(label)label.textContent=peak?'🔴 高峰时段':'🟢 空闲时段';
       }
       tick();
