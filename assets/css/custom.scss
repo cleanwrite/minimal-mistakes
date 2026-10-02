@@ -261,88 +261,70 @@ a:hover {
 // ── 隐藏元素 ──
 .btn--primary, .page__nav, .page__share { display: none !important; }
 
-// ── DS peak hour clock ──
-.ds-clock-mini {
+// ── DS clock embed (homepage, collapsed by default) ──
+.ds-clock-embed {
   margin: 16px 0 24px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.ds-clock-mini__link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 20px;
-  border-radius: 10px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  text-decoration: none;
-  color: var(--text);
-  width: 100%;
-  box-sizing: border-box;
-}
-.ds-clock-mini__link:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-.ds-clock-mini__dot {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: #2fd35c;
-  flex-shrink: 0;
-}
-.ds-clock-mini__dot.peak { background: #ff453a; }
-.ds-clock-mini__label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.ds-clock-mini__countdown {
-  margin-left: auto;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.9rem;
-  font-weight: 600;
-  white-space: nowrap;
-  flex-shrink: 0;
-  color: var(--text);
-  min-width: 100px;
-  text-align: right;
-  overflow: visible;
-}
-.ds-clock-mini__link {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 28px;
   border-radius: 12px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  text-decoration: none;
-  color: var(--text);
-  box-sizing: border-box;
-  width: 100%;
+  overflow: hidden;
 }
-.ds-clock-mini__dot {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: #2fd35c;
-  flex-shrink: 0;
-}
-.ds-clock-mini__dot.peak { background: #ff453a; }
-.ds-clock-mini__label {
+.ds-clock-embed > summary {
+  padding: 12px 20px;
+  cursor: pointer;
   font-weight: 600;
-  font-size: 1rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.ds-clock-mini__countdown {
-  flex: 1;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 1.05rem;
-  font-weight: 700;
-  white-space: nowrap;
+  font-size: 0.95rem;
   color: var(--text);
-  text-align: right;
-  min-width: 150px;
-  overflow: visible;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
 }
+.ds-clock-embed > summary::-webkit-details-marker { display: none; }
+.ds-clock-embed > summary::before {
+  content: '▸';
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+.ds-clock-embed[open] > summary::before { transform: rotate(90deg); }
+.ds-clock-embed__inner {
+  max-width: 520px;
+  margin: 0 auto;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.ds-clock-embed iframe {
+  display: block;
+  width: 100%;
+  height: 480px;
+  border: none;
+}
+.ds-clock-embed__cite {
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin: 8px 0;
+  color: var(--text);
+}
+
+// ── DS clock full page ──
+.ds-clock-full {
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1px solid var(--card-border);
+}
+.ds-clock-full iframe {
+  display: block;
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
+// ── DS clock embed (homepage) ──
 
 // ── Footer ──
 .page__footer {
