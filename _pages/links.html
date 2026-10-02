@@ -8,20 +8,17 @@ related: false
 comments: false
 ---
 
-{% assign total_links = 0 %}
-{% for section in page.sections %}{% assign total_links = total_links | plus: section.links.size %}{% endfor %}
-
 <!-- Hero -->
 <div class="links-hero">
   <h1 class="links-hero__title">🧭 导航站</h1>
   <p class="links-hero__subtitle">常用网站精选 · 分类整理 · 快速访问</p>
   <div class="links-hero__stats">
     <div class="links-hero__stat">
-      <div class="links-hero__stat-num">{{ page.sections | size }}</div>
+      <div class="links-hero__stat-num" id="catCount">12</div>
       <div class="links-hero__stat-label">分类</div>
     </div>
     <div class="links-hero__stat">
-      <div class="links-hero__stat-num">{{ total_links }}</div>
+      <div class="links-hero__stat-num" id="linkCount">76</div>
       <div class="links-hero__stat-label">链接</div>
     </div>
   </div>
@@ -287,11 +284,18 @@ comments: false
 
 <script>
 (function() {
+  // 动态计算分类和链接数量
+  var sections = document.querySelectorAll('.cat-section');
+  var totalLinks = 0;
+  sections.forEach(function(s) { totalLinks += s.querySelectorAll('.link-card').length; });
+  var catEl = document.getElementById('catCount');
+  var linkEl = document.getElementById('linkCount');
+  if (catEl) catEl.textContent = sections.length;
+  if (linkEl) linkEl.textContent = totalLinks;
+
   const backTop = document.getElementById('backTop');
-  const sections = document.querySelectorAll('.cat-section');
   const catItems = document.querySelectorAll('.cat-bar__item');
 
-  // 缓存 offsetTop，避免每次 scroll 触发 reflow
   let sectionTops = [];
   function cacheTops() {
     sectionTops = Array.from(sections).map(s => ({ id: s.id, top: s.offsetTop - 80 }));
@@ -299,7 +303,6 @@ comments: false
   cacheTops();
   window.addEventListener('resize', cacheTops, { passive: true });
 
-  // RAF 节流的 scroll 处理
   let ticking = false;
   function onScroll() {
     if (ticking) return;
@@ -307,7 +310,6 @@ comments: false
     requestAnimationFrame(() => {
       const y = window.scrollY;
       backTop.classList.toggle('visible', y > 400);
-
       let current = '';
       for (let i = sectionTops.length - 1; i >= 0; i--) {
         if (y >= sectionTops[i].top) { current = sectionTops[i].id; break; }
