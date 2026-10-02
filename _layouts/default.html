@@ -137,7 +137,10 @@
 
       function fmtTime(sec){
         var h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
-        return String(h).padStart(2,'0')+'时'+String(m).padStart(2,'0')+'分'+String(s).padStart(2,'0')+'秒';
+        var hh=String(h).padStart(2,'0');
+        var mm=String(m).padStart(2,'0');
+        var ss=String(s).padStart(2,'0');
+        return hh+':'+mm+':'+ss;
       }
 
       function tick(){
@@ -145,8 +148,8 @@
         var peak=isPeak(bj);
         var rem=calcRemaining();
         dot.classList.toggle('peak',peak);
-        var prefix=peak?'剩余 ':'距高峰 ';
-        cd.textContent=prefix+fmtTime(rem);
+        var status=peak?'高峰':'空闲';
+        cd.textContent=status+' '+fmtTime(rem);
         if(label)label.textContent=peak?'🔴 高峰时段':'🟢 空闲时段';
       }
       tick();
