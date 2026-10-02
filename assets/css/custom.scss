@@ -265,21 +265,22 @@ a:hover {
 .ds-clock-mini {
   margin: 16px 0 24px;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .ds-clock-mini__link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 24px;
+  gap: 16px;
+  padding: 16px 28px;
   border-radius: 12px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   text-decoration: none;
   color: var(--text);
   box-sizing: border-box;
+  width: 100%;
 }
-.ds-clock-mini__link:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .ds-clock-mini__dot {
   width: 12px; height: 12px;
   border-radius: 50%;
@@ -289,18 +290,20 @@ a:hover {
 .ds-clock-mini__dot.peak { background: #ff453a; }
 .ds-clock-mini__label {
   font-weight: 600;
-  font-size: 0.95rem;
-  white-space: nowrap;
-}
-.ds-clock-mini__countdown {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1rem;
   white-space: nowrap;
   flex-shrink: 0;
+}
+.ds-clock-mini__countdown {
+  flex: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  white-space: nowrap;
   color: var(--text);
-  min-width: 120px;
   text-align: right;
+  min-width: 150px;
+  overflow: visible;
 }
 
 // ── Footer ──
