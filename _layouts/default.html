@@ -136,5 +136,46 @@
       setInterval(tick,1000);
     })();
     </script>
+
+    <!-- 节日祝福 -->
+    <script>
+    (function(){
+      var el=document.getElementById('holidayGreeting');
+      if(!el)return;
+      var d=new Date();
+      var m=d.getMonth()+1,day=d.getDate(),week=d.getDay();
+
+      // 农历节日（按公历近似日期）
+      var lunarHolidays={
+        '1-1':'元旦', '2-14':'情人节', '3-8':'妇女节', '3-12':'植树节',
+        '4-1':'愚人节', '5-1':'劳动节', '5-4':'青年节', '6-1':'儿童节',
+        '7-1':'建党节', '8-1':'建军节', '9-10':'教师节', '10-1':'国庆节',
+        '12-24':'平安夜', '12-25':'圣诞节'
+      };
+
+      // 特殊农历节日（近似公历日期，每年微调）
+      var lunarSpecial={
+        '2026-1-28':'春节','2026-2-12':'元宵','2026-4-4':'清明',
+        '2026-5-31':'端午','2026-9-25':'中秋','2026-10-1':'重阳'
+      };
+
+      var todayKey=m+'-'+day;
+      var todayFull=d.getFullYear()+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+      var msg='';
+
+      // 优先检查特殊节日
+      if(lunarSpecial[todayFull]){
+        msg='🎉 祝您'+lunarSpecial[todayFull]+'快乐！';
+      }else if(lunarHolidays[todayKey]){
+        msg='🎉 祝您'+lunarHolidays[todayKey]+'快乐！';
+      }else if(week===0){
+        msg='🌞 祝您周末愉快！';
+      }else if(week===6){
+        msg='🌞 祝您周末愉快！';
+      }
+
+      el.textContent=msg;
+    })();
+    </script>
   </body>
 </html>
