@@ -89,15 +89,30 @@ body {
   html { font-size: 17px; }
 }
 
-/* ── 卡片 (纯色 + 轻阴影) ── */
+/* ── 卡片 (纯色不透背景) ── */
 .page__inner-wrap,
 .page__content {
-  background: rgba(255,255,255,0.97) !important;
-  border: 1px solid var(--card-border) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
   border-radius: 16px;
   padding: 28px;
   margin-bottom: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+
+.entries-list .list__item {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  color: #222 !important;
+  transition: transform 0.15s ease;
+}
+
+.entries-list .list__item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
 }
 
 .page__content p, .page__content li { line-height: 1.75; }
@@ -298,8 +313,20 @@ body {
 .nav-drawer__overlay.show { opacity: 1; pointer-events: auto; }
 
 /* ── 字体 ── */
-body, p, li, h1, h2, h3, h4, .site-title, .archive__item-title {
-  color: var(--text) !important;
+body, p, li, h1, h2, h3, h4, .site-title, .archive__item-title,
+.page__content, .page__content p, .page__content li,
+.page__content h1, .page__content h2, .page__content h3, .page__content h4 {
+  color: #222 !important;
+}
+
+.page__content a,
+.page__content a:visited {
+  color: #a65100 !important;
+}
+
+.page__content a:hover {
+  color: #3d2b1f !important;
+  border-bottom-color: #3d2b1f !important;
 }
 
 a {
