@@ -358,10 +358,10 @@ a:hover {
   gap: 12px;
   padding: 12px 20px;
   border-radius: 10px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.12);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   text-decoration: none;
-  color: #222;
+  color: var(--text);
   overflow: hidden;
 }
 .ds-clock-mini__link:hover {
@@ -387,8 +387,12 @@ a:hover {
   flex-shrink: 0;
   min-width: 140px;
   text-align: right;
-  color: #333;
   letter-spacing: -0.02em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ds-clock-mini__link { background: rgba(40,42,50,0.95); border-color: rgba(255,255,255,0.1); }
+  .ds-clock-mini__link:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
 }
 
 /* ── DeepSeek 峰谷时钟（独立页面） ── */
