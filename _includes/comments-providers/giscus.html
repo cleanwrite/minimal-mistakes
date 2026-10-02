@@ -36,10 +36,8 @@
     commentContainer.appendChild(gateDiv);
     commentContainer.appendChild(contentDiv);
 
-    // 3. MD5 — 使用 Web Crypto API (crypto.subtle) + 降级方案
-    async function computeMD5(str) {
-      // 优先使用 Web Crypto (SHA-256 截断前32位十六进制 ≠ MD5，所以用纯JS)
-      // 使用经过验证的 blueimp MD5 实现（MIT License）
+    // 3. MD5 — 使用经过验证的 blueimp MD5 实现（MIT License）
+    function computeMD5(str) {
       function md5Blue(inputString) {
         var hc="0123456789abcdef";
         function rh(n){var s="";for(var j=0;j<=3;j++)s+=hc.charAt((n>>(j*8+4))&0xF)+hc.charAt((n>>(j*8))&0xF);return s;}
