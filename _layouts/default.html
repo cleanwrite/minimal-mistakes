@@ -163,15 +163,15 @@
       var todayFull=d.getFullYear()+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
       var msg='';
 
-      // 优先检查特殊节日
       if(lunarSpecial[todayFull]){
         msg='🎉 祝您'+lunarSpecial[todayFull]+'快乐！';
       }else if(lunarHolidays[todayKey]){
         msg='🎉 祝您'+lunarHolidays[todayKey]+'快乐！';
-      }else if(week===0){
+      }else if(week===0||week===6){
         msg='🌞 祝您周末愉快！';
-      }else if(week===6){
-        msg='🌞 祝您周末愉快！';
+      }else{
+        var weekdays=['周一','周二','周三','周四','周五'];
+        msg='☀️ 今天是'+weekdays[week-1]+'，祝您工作顺利！';
       }
 
       el.textContent=msg;
