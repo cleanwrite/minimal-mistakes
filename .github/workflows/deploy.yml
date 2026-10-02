@@ -1,33 +1,31 @@
-name: Build and Deploy
+name: Deploy
 
 on:
   push:
     branches: [master]
-  workflow_dispatch:
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
     container: jekyll/jekyll:4.3
+    env:
+      JEKYLL_ENV: production
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build site
+      - name: Build
         run: jekyll build
-        env:
-          JEKYLL_ENV: production
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install Vercel CLI and Deploy
+      - name: Deploy
         run: |
-          npm install -g vercel
-          vercel deploy --prod --yes --token=$VERCEL_TOKEN
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          npm install -g vercel@latest
+          vercel deploy --prod --yes --token="$VERCEL_TOKEN"
         working-directory: ./_site

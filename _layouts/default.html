@@ -89,72 +89,60 @@
     (function(){
       var dot=document.querySelector('.ds-clock-mini__dot');
       var cd=document.querySelector('.ds-clock-mini__countdown');
-      var label=document.querySelector('.ds-clock-mini__label');
       if(!dot||!cd)return;
 
-      // 获取北京时间
-      function getBJDate(){
+      function beijingNow(){
         var now=new Date();
-        var utcMs=now.getTime()+now.getTimezoneOffset()*60000;
-        return new Date(utcMs+8*3600000);
+        return new Date(now.getTime()+(now.getTimezoneOffset()+480)*60000);
       }
 
-      // 是否高峰时段（工作日 9-12, 14-18）
-      function isPeak(bj){
-        var day=bj.getDay(),h=bj.getHours();
+      function isPeakHour(h,day){
         if(day===0||day===6)return false;
         return(h>=9&&h<12)||(h>=14&&h<18);
       }
 
-      // 计算到下一个切换点的秒数
-      function calcRemaining(){
-        var bj=getBJDate();
+      function nextSwitch(bj){
         var day=bj.getDay(),h=bj.getHours();
-        var peak=isPeak(bj);
-        var targetH;
-
+        var peak=isPeakHour(h,day);
+        var targets=[];
         if(peak){
-          if(h<12)targetH=12;
-          else targetH=18;
+          if(h<12)targets.push([12,0,0]);
+          else targets.push([18,0,0]);
         }else{
-          if(h<9)targetH=9;
-          else if(h>=12&&h<14)targetH=14;
+          if(h<9)targets.push([9,0,0]);
+          else if(h<14)targets.push([14,0,0]);
           else{
-            // 18点后或周末，找下一个工作日9点
-            var daysAhead=1;
-            var nextDay=(day+1)%7;
-            while(nextDay===0||nextDay===6){daysAhead++;nextDay=(nextDay+1)%7;}
-            var nextBj=new Date(bj.getTime()+daysAhead*86400000);
-            var diffMs=new Date(nextBj.getFullYear(),nextBj.getMonth(),nextBj.getDate(),9,0,0).getTime()-bj.getTime();
-            return Math.floor(diffMs/1000);
+            // after 18:00 or weekend: find next workday 9:00
+            var d=day,add=1;
+            while(add<8){
+              d=(day+add)%7;
+              if(d!==0&&d!==6)break;
+              add++;
+            }
+            var next=new Date(bj.getTime()+add*86400000);
+            return new Date(next.getFullYear(),next.getMonth(),next.getDate(),9,0,0);
           }
         }
-
-        var targetMs=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate(),targetH,0,0).getTime();
-        var diff=Math.floor((targetMs-bj.getTime())/1000);
-        return diff>0?diff:0;
+        return new Date(bj.getFullYear(),bj.getMonth(),bj.getDate(),targets[0][0],targets[0][1],targets[0][2]);
       }
 
-      function fmtTime(sec){
+      function fmt(sec){
         var h=Math.floor(sec/3600);
         var m=Math.floor((sec%3600)/60);
         var s=sec%60;
-        var mm=String(m).padStart(2,'0');
-        var ss=String(s).padStart(2,'0');
-        return h+'时'+mm+'分'+ss+'秒';
+        return h+'时'+String(m).padStart(2,'0')+'分'+String(s).padStart(2,'0')+'秒';
       }
 
-      function tick(){
-        var bj=getBJDate();
-        var peak=isPeak(bj);
-        var rem=calcRemaining();
+      function update(){
+        var bj=beijingNow();
+        var peak=isPeakHour(bj.getHours(),bj.getDay());
+        var sw=nextSwitch(bj);
+        var diff=Math.max(0,Math.floor((sw.getTime()-bj.getTime())/1000));
         dot.classList.toggle('peak',peak);
-        var status=peak?'高峰':'空闲';
-        cd.textContent=status+' · 剩余 '+fmtTime(rem);
-        if(label)label.textContent=peak?'🔴 高峰时段':'🟢 空闲时段';
+        cd.textContent=(peak?'高峰 ':'空闲 ')+fmt(diff);
       }
-      tick();
-      setInterval(tick,1000);
+      update();
+      setInterval(update,1000);
     })();
     </script>
 
