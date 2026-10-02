@@ -133,10 +133,15 @@
       }
 
       function fmt(sec){
-        var h=Math.floor(sec/3600);
+        var d=Math.floor(sec/86400);
+        var h=Math.floor((sec%86400)/3600);
         var m=Math.floor((sec%3600)/60);
         var s=sec%60;
-        return h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+        var hh=String(h).padStart(2,'0');
+        var mm=String(m).padStart(2,'0');
+        var ss=String(s).padStart(2,'0');
+        if(d>0)return d+'天'+hh+':'+mm+':'+ss;
+        return hh+':'+mm+':'+ss;
       }
 
       function tick(){

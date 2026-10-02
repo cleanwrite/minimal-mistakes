@@ -261,12 +261,51 @@ a:hover {
 // ── 隐藏元素 ──
 .btn--primary, .page__nav, .page__share { display: none !important; }
 
-// ── DeepSeek 峰谷时钟 ──
+// ── DS peak hour clock ──
 .ds-clock-mini {
   margin: 16px 0 24px;
   width: 100%;
-  max-width: 100%;
   box-sizing: border-box;
+  overflow: visible;
+}
+.ds-clock-mini__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  text-decoration: none;
+  color: var(--text);
+  width: 100%;
+  box-sizing: border-box;
+}
+.ds-clock-mini__link:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ds-clock-mini__dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #2fd35c;
+  flex-shrink: 0;
+}
+.ds-clock-mini__dot.peak { background: #ff453a; }
+.ds-clock-mini__label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ds-clock-mini__countdown {
+  margin-left: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--text);
+  min-width: 100px;
+  text-align: right;
+  overflow: visible;
 }
 .ds-clock-mini__link {
   display: flex;
