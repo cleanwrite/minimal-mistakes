@@ -374,7 +374,9 @@ a:hover {
   margin-left: auto;
   font-family: ui-monospace, monospace;
   font-size: 0.8rem;
-  opacity: 0.7;
+  white-space: nowrap;
+  min-width: 90px;
+  text-align: right;
 }
 
 /* ── DeepSeek 峰谷时钟（独立页面） ── */
