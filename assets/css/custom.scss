@@ -92,8 +92,8 @@ body {
 /* ── 卡片 ── */
 .page__inner-wrap,
 .page__content {
-  background: #fff !important;
-  border: 1px solid rgba(0,0,0,0.1) !important;
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
   border-radius: 16px;
   padding: 28px;
   margin-bottom: 20px;
@@ -101,12 +101,12 @@ body {
 }
 
 .entries-list .list__item {
-  background: #fff !important;
-  border: 1px solid rgba(0,0,0,0.1) !important;
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
   border-radius: 12px;
   padding: 18px 22px;
   margin-bottom: 12px;
-  color: #222 !important;
+  color: var(--text) !important;
   transition: transform 0.15s ease;
 }
 
@@ -312,32 +312,23 @@ body {
 body, p, li, h1, h2, h3, h4, .site-title, .archive__item-title,
 .page__content, .page__content p, .page__content li,
 .page__content h1, .page__content h2, .page__content h3, .page__content h4 {
-  color: #222 !important;
-}
-
-.page__content a,
-.page__content a:visited {
-  color: #a65100 !important;
-}
-
-.page__content a:hover {
-  color: #3d2b1f !important;
-  border-bottom-color: #3d2b1f !important;
+  color: var(--text) !important;
 }
 
 a {
-  color: #a65100;
+  color: var(--link-color, #a65100);
   text-decoration: none;
   border-bottom: 1px dashed rgba(166,81,0,0.3);
 }
 a:hover {
-  color: #3d2b1f;
-  border-bottom: 1px solid #3d2b1f;
+  color: var(--text);
+  border-bottom: 1px solid var(--text);
 }
 
 @media (prefers-color-scheme: dark) {
-  a { color: #d4894a; }
-  a:hover { color: #fff; border-color: #fff; }
+  :root {
+    --link-color: #d4894a;
+  }
 }
 
 /* ── 隐藏元素 ── */
@@ -388,8 +379,8 @@ a:hover {
 }
 
 @media (prefers-color-scheme: dark) {
-  .ds-clock-mini__link { background: rgba(40,42,50,0.95); border-color: rgba(255,255,255,0.1); color: #eee; }
-  .ds-clock-mini__countdown { color: #eee; }
+  .ds-clock-mini__link { background: var(--card-bg); border-color: var(--card-border); color: var(--text); }
+  .ds-clock-mini__countdown { color: var(--text); }
 }
 
 /* ── DeepSeek 峰谷时钟（独立页面） ── */
@@ -597,10 +588,10 @@ a:hover {
   gap: 2px;
   padding: 12px;
   border-radius: 10px;
-  color: #1a1a1a;
+  color: var(--text);
   text-decoration: none;
   border: 1px solid var(--card-border);
-  background: rgba(255,255,255,0.97);
+  background: var(--card-bg);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .link-card:hover {
