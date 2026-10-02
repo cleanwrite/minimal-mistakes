@@ -83,6 +83,53 @@
       img.src='/assets/images/wall.webp';
       setTimeout(done,3000);
     })();
+
+    // DS 峰谷时钟紧凑版
+    (function(){
+      var dot=document.querySelector('.ds-clock-mini__dot');
+      var cd=document.querySelector('.ds-clock-mini__countdown');
+      if(!dot||!cd)return;
+      function isPeak(){
+        var d=new Date();
+        var bjMs=d.getTime()+(d.getTimezoneOffset()-480)*60000;
+        var bj=new Date(bjMs);
+        var day=bj.getDay(),h=bj.getHours();
+        if(day===0||day===6)return false;
+        return(h>=9&&h<12)||(h>=14&&h<18);
+      }
+      function nextSwitch(){
+        var d=new Date();
+        var bjMs=d.getTime()+(d.getTimezoneOffset()-480)*60000;
+        var bj=new Date(bjMs);
+        var day=bj.getDay(),h=bj.getHours(),m=bj.getMinutes(),s=bj.getSeconds();
+        var target;
+        if(day===0||day===6)target=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate()+(day===6?2:1),9,0,0);
+        else if(h<9)target=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate(),9,0,0);
+        else if(h<12)target=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate(),12,0,0);
+        else if(h<14)target=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate(),14,0,0);
+        else if(h<18)target=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate(),18,0,0);
+        else{
+          var nextDay=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate()+1);
+          var nd=nextDay.getDay();
+          if(nd===6)target=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate()+3,9,0,0);
+          else if(nd===0)target=new Date(bj.getFullYear(),bj.getMonth(),bj.getDate()+2,9,0,0);
+          else target=nextDay;
+          target.setHours(9,0,0,0);
+        }
+        var diff=Math.floor((target.getTime()-bj.getTime())/1000);
+        if(diff<0)diff+=86400;
+        return diff;
+      }
+      function fmt(n){return String(n).padStart(2,'0');}
+      function tick(){
+        var peak=isPeak();
+        dot.classList.toggle('peak',peak);
+        var rem=nextSwitch();
+        cd.textContent=fmt(Math.floor(rem/3600))+':'+fmt(Math.floor((rem%3600)/60))+':'+fmt(rem%60);
+      }
+      tick();
+      setInterval(tick,1000);
+    })();
     </script>
   </body>
 </html>

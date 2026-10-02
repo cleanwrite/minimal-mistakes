@@ -339,7 +339,45 @@ a:hover {
 /* ── 隐藏元素 ── */
 .btn--primary, .page__nav, .page__share { display: none !important; }
 
-/* ── DeepSeek 峰谷时钟嵌入 ── */
+/* ── DeepSeek 峰谷时钟（紧凑版） ── */
+.ds-clock-mini {
+  margin: 16px 0 24px;
+}
+.ds-clock-mini__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: var(--text);
+  transition: box-shadow 0.15s ease;
+}
+.ds-clock-mini__link:hover {
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.ds-clock-mini__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2fd35c;
+  flex-shrink: 0;
+}
+.ds-clock-mini__dot.peak { background: #ff453a; }
+.ds-clock-mini__label {
+  font-weight: 500;
+}
+.ds-clock-mini__countdown {
+  margin-left: auto;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* ── DeepSeek 峰谷时钟（独立页面） ── */
 .ds-clock-embed,
 .ds-clock { margin-top: 28px; }
 .ds-clock {
