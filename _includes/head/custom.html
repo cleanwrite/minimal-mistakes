@@ -1,10 +1,9 @@
 <!-- start custom head snippets -->
 
-<!-- 安全策略: CSP + 其他安全 Headers -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io https://cdnjs.cloudflare.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://waynegeng.github.io; connect-src 'self' https://waynegeng.github.io https://va.vercel-scripts.com;">
+<!-- CSP -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io https://cdnjs.cloudflare.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; frame-src https://waynegeng.github.io; connect-src 'self' https://waynegeng.github.io https://va.vercel-scripts.com;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- SEO -->
@@ -13,18 +12,9 @@
 <meta property="og:description" content="个人技术博客，分享开发经验与工具导航">
 <meta property="og:type" content="website">
 <meta property="og:image" content="/assets/images/wall.webp">
-<meta name="twitter:card" content="summary_large_image">
 
-<!-- 预加载背景图 -->
+<!-- Preload -->
 <link rel="preload" as="image" href="/assets/images/wall.webp">
-
-<!-- 移动端视口 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-
-<!-- 主题色 -->
-<meta name="theme-color" content="#e07b39">
-
-<!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 
 <!-- end custom head snippets -->
