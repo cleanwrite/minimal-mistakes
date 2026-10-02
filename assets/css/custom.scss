@@ -347,29 +347,28 @@ a:hover {
 /* ── 隐藏元素 ── */
 .btn--primary, .page__nav, .page__share { display: none !important; }
 
-/* ── DeepSeek 峰谷时钟（紧凑版） ── */
+/* ── DeepSeek 峰谷时钟 ── */
 .ds-clock-mini {
   margin: 16px 0 24px;
+  max-width: 100%;
 }
 .ds-clock-mini__link {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 24px;
+  gap: 12px;
+  padding: 12px 20px;
   border-radius: 10px;
   background: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.12);
   text-decoration: none;
-  font-size: 0.95rem;
   color: #222;
-  transition: box-shadow 0.15s ease;
+  overflow: hidden;
 }
 .ds-clock-mini__link:hover {
-  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 .ds-clock-mini__dot {
-  width: 10px;
-  height: 10px;
+  width: 10px; height: 10px;
   border-radius: 50%;
   background: #2fd35c;
   flex-shrink: 0;
@@ -377,18 +376,19 @@ a:hover {
 .ds-clock-mini__dot.peak { background: #ff453a; }
 .ds-clock-mini__label {
   font-weight: 600;
-  color: #222;
-  min-width: 130px;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 .ds-clock-mini__countdown {
   margin-left: auto;
-  font-family: ui-monospace, monospace;
-  font-size: 0.95rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
   white-space: nowrap;
-  min-width: 180px;
+  flex-shrink: 0;
+  min-width: 140px;
   text-align: right;
-  font-weight: 600;
-  color: #222;
+  color: #333;
+  letter-spacing: -0.02em;
 }
 
 /* ── DeepSeek 峰谷时钟（独立页面） ── */

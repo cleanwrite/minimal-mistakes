@@ -8,3 +8,5 @@ gem "jekyll-feed", "~> 0.9"
 gem "jekyll-include-cache", "~> 0.1"
 gem "jekyll-remote-theme", "~> 0.4"
 gem "webrick", "~> 1.8"
+
+# Explicitly require minimal-mistakes-jekyll from local gemspec
