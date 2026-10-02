@@ -71,17 +71,18 @@
         l.style.opacity='0';
         setTimeout(function(){l.style.display='none'},600);
       }
-      // 背景图加载完毕后，至少显示 1 秒再消散
-      var img=new Image();
-      function afterImg(){
+      // 页面加载完成后消散
+      if(document.readyState==='complete'){
         var elapsed=Date.now()-start;
-        var remain=Math.max(0,1000-elapsed);
-        setTimeout(done,remain);
+        setTimeout(done,Math.max(0,800-elapsed));
+      }else{
+        window.addEventListener('load',function(){
+          var elapsed=Date.now()-start;
+          setTimeout(done,Math.max(0,800-elapsed));
+        });
       }
-      img.onload=afterImg;
-      img.onerror=afterImg;
-      img.src='/assets/images/wall.webp';
-      setTimeout(done,3000);
+      // 安全兜底：5秒强制关闭
+      setTimeout(done,5000);
     })();
 
     // DS 峰谷时钟
@@ -108,17 +109,14 @@
       // 计算到下一个切换点的秒数
       function calcRemaining(){
         var bj=getBJDate();
-        var day=bj.getDay(),h=bj.getHours(),m=bj.getMinutes(),s=bj.getSeconds();
+        var day=bj.getDay(),h=bj.getHours();
         var peak=isPeak(bj);
-
-        // 找到下一个切换时间点（小时）
         var targetH;
+
         if(peak){
-          // 当前在高峰，下次切换是 12 或 18
           if(h<12)targetH=12;
           else targetH=18;
         }else{
-          // 当前在空闲，下次切换是 9 或 14 或明天9点
           if(h<9)targetH=9;
           else if(h>=12&&h<14)targetH=14;
           else{
@@ -126,9 +124,9 @@
             var daysAhead=1;
             var nextDay=(day+1)%7;
             while(nextDay===0||nextDay===6){daysAhead++;nextDay=(nextDay+1)%7;}
-                var nextBj=new Date(bj.getTime()+daysAhead*86400000);
-                var diffMs=new Date(nextBj.getFullYear(),nextBj.getMonth(),nextBj.getDate(),9,0,0).getTime()-bj.getTime();
-                return Math.floor(diffMs/1000);
+            var nextBj=new Date(bj.getTime()+daysAhead*86400000);
+            var diffMs=new Date(nextBj.getFullYear(),nextBj.getMonth(),nextBj.getDate(),9,0,0).getTime()-bj.getTime();
+            return Math.floor(diffMs/1000);
           }
         }
 
@@ -147,7 +145,7 @@
         var peak=isPeak(bj);
         var rem=calcRemaining();
         dot.classList.toggle('peak',peak);
-        var prefix=peak?'剩余 ':'距高峰 ";
+        var prefix=peak?'剩余 ':'距高峰 ';
         cd.textContent=prefix+fmtTime(rem);
         if(label)label.textContent=peak?'🔴 高峰时段':'🟢 空闲时段';
       }

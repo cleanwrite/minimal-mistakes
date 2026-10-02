@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Deploy to Vercel
 
 on:
   push:
@@ -6,30 +6,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    container:
+      image: jekyll/jekyll:4.3
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.2"
-
-      - name: Install dependencies
-        run: |
-          gem install bundler --no-document
-          bundle install --jobs 4
-
-      - name: Build Jekyll site
-        run: bundle exec jekyll build
+      - name: Build site
+        run: jekyll build --trace
         env:
           JEKYLL_ENV: production
 
+      - name: List output
+        run: ls -la _site/ | head -20
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
       - name: Deploy to Vercel
-        run: |
-          npm install --global vercel@latest
-          vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prod --yes --token=$VERCEL_TOKEN _site
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        working-directory: ./_site
