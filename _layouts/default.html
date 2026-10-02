@@ -140,8 +140,8 @@
         var hh=String(h).padStart(2,'0');
         var mm=String(m).padStart(2,'0');
         var ss=String(s).padStart(2,'0');
-        if(d>0)return d+'天'+hh+':'+mm+':'+ss;
-        return hh+':'+mm+':'+ss;
+        if(d>0)return d+'天'+hh+'时'+mm+'分'+ss+'秒';
+        return hh+'时'+mm+'分'+ss+'秒';
       }
 
       function tick(){
@@ -149,7 +149,7 @@
         var peak=isPeak(bj.getHours(),bj.getDay());
         var sec=calcSec(bj);
         dot.classList.toggle('peak',peak);
-        cd.textContent=(peak?'peak ':'off ')+fmt(sec);
+        cd.textContent=(peak?'高峰 ':'空闲 ')+fmt(sec);
       }
       tick();
       setInterval(tick,1000);
