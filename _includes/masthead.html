@@ -72,11 +72,13 @@
   function open() {
     drawer.classList.add('open');
     overlay.classList.add('show');
+    toggle.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
   function close() {
     drawer.classList.remove('open');
     overlay.classList.remove('show');
+    toggle.classList.remove('open');
     document.body.style.overflow = '';
   }
 

@@ -9,16 +9,19 @@
     {% include head.html locale=locale %}
     <style>
       /* ── Loader ── */
-      #loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#f5f5f5;animation:loaderFade 0.5s 1.5s ease forwards}
+      :root{--loader-accent:#e07b39}
+      #loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#f5f5f5;animation:loaderFade .6s 1.8s ease forwards}
       @media(prefers-color-scheme:dark){#loader{background:#0f1117}}
-      .loader-content{display:flex;flex-direction:column;align-items:center;gap:14px;animation:loaderIn .4s .1s ease forwards}
-      .loader-logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#e07b39,#a65100);display:flex;align-items:center;justify-content:center;font-size:1.15rem;color:#fff;font-weight:800;animation:logoBounce .5s cubic-bezier(.34,1.56,.64,1) both}
-      .loader-bar{width:140px;height:4px;border-radius:4px;background:rgba(127,127,127,.12);overflow:hidden}
-      .loader-bar::after{content:'';display:block;height:100%;width:0%;border-radius:4px;background:#e07b39;animation:barGrow 1.6s .3s ease forwards}
-      @keyframes loaderIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-      @keyframes logoBounce{from{opacity:0;transform:scale(.7) translateY(10px)}60%{transform:scale(1.05) translateY(-2px)}to{opacity:1;transform:scale(1) translateY(0)}}
-      @keyframes barGrow{0%{width:0%}50%{width:65%}80%{width:85%}100%{width:100%}}
-      @keyframes loaderFade{to{opacity:0;visibility:hidden}}
+      .loader-content{display:flex;flex-direction:column;align-items:center;gap:16px;animation:loaderIn .5s .15s ease both}
+      .loader-logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--loader-accent),#a65100);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;font-weight:800;box-shadow:0 4px 20px rgba(224,123,57,.35);animation:logoBounce .6s cubic-bezier(.34,1.56,.64,1) both}
+      .loader-bar{width:160px;height:4px;border-radius:4px;background:rgba(127,127,127,.12);overflow:hidden}
+      .loader-bar::after{content:'';display:block;height:100%;width:0%;border-radius:4px;background:linear-gradient(90deg,var(--loader-accent),#f5a623);animation:barSlide 1.5s .4s ease forwards}
+      .loader-text{font-size:0.75rem;opacity:0;animation:fadeIn .4s .6s ease both;color:rgba(127,127,127,.6)}
+      @keyframes loaderIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+      @keyframes logoBounce{0%{opacity:0;transform:scale(.5) translateY(16px)}60%{transform:scale(1.08) translateY(-3px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+      @keyframes barSlide{0%{width:0%}100%{width:100%}}
+      @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+      @keyframes loaderFade{to{opacity:0;visibility:hidden;pointer-events:none}}
     </style>
     {% include head/custom.html %}
     <script>
@@ -31,8 +34,9 @@
     <!-- 加载动画 (CSS-only auto-dismiss) -->
     <div id="loader" aria-hidden="true">
       <div class="loader-content">
-        <div class="loader-logo">fw</div>
-        <div class="loader-bar"></div>
+      <div class="loader-logo">fw</div>
+      <div class="loader-bar"></div>
+      <div class="loader-text">loading...</div>
       </div>
     </div>
 
