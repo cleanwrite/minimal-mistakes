@@ -45,28 +45,11 @@
             {%- for link in site.data.navigation.main -%}
               <li>
                 <a href="{{ link.url | relative_url }}" {% if link.url contains 'http' %}target="_blank" rel="noopener"{% endif %}>
-                  <span class="nav-drawer__icon">
-                    {%- case link.title -%}
-                      {%- when '首页 -%}<i class="fa-solid fa-house"></i>
-                      {%- when '导航站 -%}<i class="fa-solid fa-link"></i>
-                      {%- when '文章归档 -%}<i class="fa-solid fa-archive"></i>
-                      {%- when '吉他谱 -%}<i class="fa-solid fa-guitar"></i>
-                    {%- endcase -%}
-                  </span>
                   {{ link.title }}
-                  {%- if link.url contains 'http' -%}<i class="fa-solid fa-external-link-alt nav-drawer__ext"></i>{%- endif -%}
                 </a>
               </li>
             {%- endfor -%}
           </ul>
-          <div class="nav-drawer__divider"></div>
-          <div class="nav-drawer__section">
-            <span class="nav-drawer__label">快速访问</span>
-            <div class="nav-drawer__quick">
-              <a class="nav-drawer__quick-item" href="/links/"><i class="fa-solid fa-link"></i><span>导航站</span></a>
-              <a class="nav-drawer__quick-item" href="/posts/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a>
-            </div>
-          </div>
           <div class="nav-drawer__divider"></div>
           <div class="nav-drawer__section">
             <span class="nav-drawer__label">社交</span>
