@@ -77,6 +77,11 @@ body {
   body { background-attachment: scroll; }
 }
 
+/* ── 抽屉菜单底部安全区 ── */
+.nav-drawer__section:last-child {
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }

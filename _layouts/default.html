@@ -56,6 +56,8 @@
         <div class="loader-bar"></div>
       </div>
     </div>
+    <!-- Loader 兜底：5秒后强制隐藏 -->
+    <script>setTimeout(function(){var l=document.getElementById('loader');if(l)l.style.display='none';},5000);</script>
 
     {% include_cached skip-links.html locale=locale %}
     {% include_cached masthead.html locale=locale %}
@@ -107,9 +109,11 @@
         '7-1':'建党节','8-1':'建军节','9-10':'教师节','10-1':'国庆节',
         '12-24':'平安夜','12-25':'圣诞节'
       };
+      // 农历节日近似公历日期（2025-2027）
       var lunar={
-        '2026-1-28':'春节','2026-2-12':'元宵','2026-4-4':'清明',
-        '2026-5-31':'端午','2026-9-25':'中秋','2026-10-1':'重阳'
+        '2025-1-29':'春节','2025-2-12':'元宵','2025-4-4':'清明','2025-5-1':'端午','2025-10-6':'中秋',
+        '2026-2-17':'春节','2026-2-28':'元宵','2026-4-5':'清明','2026-5-31':'端午','2026-9-25':'中秋',
+        '2027-2-6':'春节','2027-2-20':'元宵','2027-4-5':'清明','2027-5-21':'端午','2027-9-15':'中秋'
       };
       var today=m+'-'+day;
       var todayFull=d.getFullYear()+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
