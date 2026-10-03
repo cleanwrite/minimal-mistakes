@@ -215,17 +215,14 @@ body {
   border-color: var(--accent);
 }
 
-/* Staggered animation */
-.entries-list .list__item:nth-child(1) { animation: fadeInUp 0.4s 0.05s ease both; }
-.entries-list .list__item:nth-child(2) { animation: fadeInUp 0.4s 0.10s ease both; }
-.entries-list .list__item:nth-child(3) { animation: fadeInUp 0.4s 0.15s ease both; }
-.entries-list .list__item:nth-child(4) { animation: fadeInUp 0.4s 0.20s ease both; }
-.entries-list .list__item:nth-child(5) { animation: fadeInUp 0.4s 0.25s ease both; }
-.entries-list .list__item:nth-child(6) { animation: fadeInUp 0.4s 0.30s ease both; }
-.entries-list .list__item:nth-child(7) { animation: fadeInUp 0.4s 0.35s ease both; }
-.entries-list .list__item:nth-child(8) { animation: fadeInUp 0.4s 0.40s ease both; }
-.entries-list .list__item:nth-child(9) { animation: fadeInUp 0.4s 0.45s ease both; }
-.entries-list .list__item:nth-child(10) { animation: fadeInUp 0.4s 0.50s ease both; }
+/* Entrance: simple opacity transition, no transform (avoids MM JS conflict) */
+.entries-list .list__item {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.entries-list .list__item.visible {
+  opacity: 1;
+}
 
 /* ═══════════════════════════════════════════════════════════
    Typography

@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JEKYLL_ENV: production
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -26,7 +23,6 @@ jobs:
         with:
           node-version: "20"
 
-      - run: |
-          npm i -g vercel@latest
-          npx vercel deploy --prod --yes --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID
+      - name: Deploy
+        run: npx vercel@32.5.0 deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
         working-directory: ./_site
