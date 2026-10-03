@@ -279,12 +279,8 @@ comments: false
 
 </div>
 
-<!-- 回到顶部 -->
-<a class="back-top" href="#" id="backTop" title="回到顶部">↑</a>
-
 <script>
 (function() {
-  // 动态计算分类和链接数量
   var sections = document.querySelectorAll('.cat-section');
   var totalLinks = 0;
   sections.forEach(function(s) { totalLinks += s.querySelectorAll('.link-card').length; });
@@ -293,35 +289,51 @@ comments: false
   if (catEl) catEl.textContent = sections.length;
   if (linkEl) linkEl.textContent = totalLinks;
 
-  const backTop = document.getElementById('backTop');
-  const catItems = document.querySelectorAll('.cat-bar__item');
+  var catItems = document.querySelectorAll('.cat-bar__item');
+  var masthead = document.querySelector('.masthead');
+  var mastheadH = masthead ? masthead.offsetHeight + 16 : 70;
 
-  let sectionTops = [];
+  // 缓存每个分类的位置
+  var sectionTops = [];
   function cacheTops() {
-    sectionTops = Array.from(sections).map(s => ({ id: s.id, top: s.offsetTop - 80 }));
+    mastheadH = masthead ? masthead.offsetHeight + 16 : 70;
+    sectionTops = Array.from(sections).map(function(s) {
+      return { id: s.id, top: s.getBoundingClientRect().top + window.scrollY - mastheadH };
+    });
   }
   cacheTops();
   window.addEventListener('resize', cacheTops, { passive: true });
+  window.addEventListener('load', cacheTops, { passive: true });
 
-  let ticking = false;
+  var ticking = false;
   function onScroll() {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      backTop.classList.toggle('visible', y > 400);
-      let current = '';
-      for (let i = sectionTops.length - 1; i >= 0; i--) {
+    requestAnimationFrame(function() {
+      var y = window.scrollY;
+      var current = '';
+      for (var i = sectionTops.length - 1; i >= 0; i--) {
         if (y >= sectionTops[i].top) { current = sectionTops[i].id; break; }
       }
-      catItems.forEach(a => {
-        const match = a.getAttribute('href') === '#' + current;
+      catItems.forEach(function(a) {
+        var match = a.getAttribute('href') === '#' + current;
         a.classList.toggle('active', match);
-        if (match) a.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       });
       ticking = false;
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  // 点击分类跳转（带 sticky header 偏移）
+  catItems.forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        var top = target.getBoundingClientRect().top + window.scrollY - mastheadH;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+    });
+  });
 })();
 </script>

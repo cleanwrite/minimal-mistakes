@@ -87,6 +87,7 @@
     <script>
     (function(){
       var bt=document.getElementById('backTop');
+      if(!bt)return;
       window.addEventListener('scroll',function(){
         bt.classList.toggle('visible',window.scrollY>400);
       },{passive:true});
