@@ -4,7 +4,7 @@
 
 <!doctype html>
 {% include copyright.html %}
-<html lang="{{ locale | replace: '_', '-' | default: 'en' }}" class="no-js" dir="{{ page.direction | default: layout.direction | default: site.direction | default: 'ltr' }}">
+<html lang="{{ locale | replace: '_', '-' | default: 'zh-CN' }}" class="no-js" dir="{{ page.direction | default: layout.direction | default: site.direction | default: 'ltr' }}">
   <head>
     {% include head.html locale=locale %}
     <style>
@@ -13,7 +13,7 @@
         position:fixed;inset:0;z-index:99999;
         display:flex;align-items:center;justify-content:center;
         background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);
-        animation:loaderFade .6s 2s ease forwards;
+        animation:loaderFade .5s 1.2s ease forwards;
       }
       @media(prefers-color-scheme:dark){
         #loader{background:linear-gradient(135deg,#0f1117 0%,#1a1d24 100%)}

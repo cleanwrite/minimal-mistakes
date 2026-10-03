@@ -62,7 +62,7 @@ html {
 }
 
 body {
-  background: url("../images/wall.webp") no-repeat center center fixed;
+  background: url("/assets/images/wall.webp") no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -262,9 +262,9 @@ a:hover {
   padding: 0.6em 1em;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  position: -webkit-sticky;
   position: sticky;
-  top: 0;
-  top: env(safe-area-inset-top, 0);
+  top: env(safe-area-inset-top, 0px);
   z-index: 100;
   transition: box-shadow var(--transition);
   box-shadow: 0 1px 0 rgba(0,0,0,0.04);

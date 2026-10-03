@@ -18,7 +18,7 @@ logo                   :
 masthead_title         : "fw's Blog"
 breadcrumbs            : false
 words_per_minute       : 200
-enable_copy_code_button  : true
+enable_copy_code_button : true
 copyright              : 
 copyright_url          : 
 
@@ -42,7 +42,7 @@ comments:
     category_id          : "DIC_kwDOS-jfew"
     discussion_term      : "pathname"
     reactions_enabled    : "1"
-    theme                : "light"
+    theme                : "preferred_color_scheme"
     strict               : 0
     input_position       : "bottom"
     emit_metadata        : 0
@@ -59,7 +59,7 @@ atom_feed:
   path                   : 
   hide                   : 
 search                   : true
-search_full_content      : true
+search_full_content     : true
 search_provider          : lunr
 lunr:
   search_within_pages    : true
