@@ -1,7 +1,7 @@
 <!-- start custom head snippets -->
 
-<!-- Security Headers -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io https://cdnjs.cloudflare.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; frame-src https://waynegeng.github.io https://myfk.cc.cd; connect-src 'self' https://waynegeng.github.io https://va.vercel-scripts.com;">
+<!-- CSP -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://waynegeng.github.io;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -14,13 +14,40 @@
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- Fonts: preload for performance -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 <meta name="theme-color" content="#e07b39">
+
+<!-- Critical: mobile nav drawer must be hidden by default -->
+<style>
+  .nav-drawer {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 280px !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background: var(--card-bg, #fff) !important;
+    z-index: 1000 !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.1) !important;
+  }
+  .nav-drawer.open { transform: translateX(0) !important; }
+  .nav-drawer__overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0,0,0,0.3) !important;
+    z-index: 999 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.25s ease !important;
+  }
+  .nav-drawer__overlay.show { opacity: 1 !important; pointer-events: auto !important; }
+</style>
 
 <!-- end custom head snippets -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
