@@ -24,4 +24,9 @@ jobs:
           node-version: "20"
 
       - name: Deploy
-        run: npx --yes vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }} --cwd ./_site
+        uses: vercel/action@v1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./_site
