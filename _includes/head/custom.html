@@ -1,21 +1,26 @@
 <!-- start custom head snippets -->
 
-<!-- CSP -->
+<!-- Security Headers -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://waynegeng.github.io https://cdnjs.cloudflare.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; frame-src https://waynegeng.github.io; connect-src 'self' https://waynegeng.github.io https://va.vercel-scripts.com;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- SEO -->
-<meta name="description" content="fw's Blog - 个人技术博客，分享开发经验与工具导航">
-<meta property="og:title" content="fw's Blog">
-<meta property="og:description" content="个人技术博客，分享开发经验与工具导航">
-<meta property="og:type" content="website">
-<meta property="og:image" content="/assets/images/wall.webp">
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html }}{% else %}fw's Blog - 个人技术博客{% endif %}">
+<meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}">
+<meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html }}{% else %}fw's Blog{% endif %}">
+<meta property="og:type" content="{% if page.layout == 'single' %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
 
-<!-- Preload -->
-<link rel="preload" as="image" href="/assets/images/wall.webp">
+<!-- Fonts: preload for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+<meta name="theme-color" content="#e07b39">
 
 <!-- end custom head snippets -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">

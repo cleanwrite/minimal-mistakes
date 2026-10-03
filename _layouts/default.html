@@ -9,18 +9,36 @@
     {% include head.html locale=locale %}
     <style>
       /* ── Loader ── */
-      :root{--loader-accent:#e07b39}
-      #loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#f5f5f5;animation:loaderFade .6s 1.8s ease forwards}
-      @media(prefers-color-scheme:dark){#loader{background:#0f1117}}
-      .loader-content{display:flex;flex-direction:column;align-items:center;gap:16px;animation:loaderIn .5s .15s ease both}
-      .loader-logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--loader-accent),#a65100);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;font-weight:800;box-shadow:0 4px 20px rgba(224,123,57,.35);animation:logoBounce .6s cubic-bezier(.34,1.56,.64,1) both}
-      .loader-bar{width:160px;height:4px;border-radius:4px;background:rgba(127,127,127,.12);overflow:hidden}
-      .loader-bar::after{content:'';display:block;height:100%;width:0%;border-radius:4px;background:linear-gradient(90deg,var(--loader-accent),#f5a623);animation:barSlide 1.5s .4s ease forwards}
-      .loader-text{font-size:0.75rem;opacity:0;animation:fadeIn .4s .6s ease both;color:rgba(127,127,127,.6)}
-      @keyframes loaderIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-      @keyframes logoBounce{0%{opacity:0;transform:scale(.5) translateY(16px)}60%{transform:scale(1.08) translateY(-3px)}100%{opacity:1;transform:scale(1) translateY(0)}}
-      @keyframes barSlide{0%{width:0%}100%{width:100%}}
-      @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+      #loader{
+        position:fixed;inset:0;z-index:99999;
+        display:flex;align-items:center;justify-content:center;
+        background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);
+        animation:loaderFade .6s 2s ease forwards;
+      }
+      @media(prefers-color-scheme:dark){
+        #loader{background:linear-gradient(135deg,#0f1117 0%,#1a1d24 100%)}
+      }
+      .loader-inner{display:flex;flex-direction:column;align-items:center;gap:18px;animation:loaderIn .5s .15s ease both}
+      .loader-logo{
+        width:52px;height:52px;border-radius:16px;
+        background:linear-gradient(135deg,#e07b39,#c0392b);
+        display:flex;align-items:center;justify-content:center;
+        font-size:1.3rem;color:#fff;font-weight:800;
+        box-shadow:0 8px 32px rgba(224,123,57,.35);
+        animation:logoBounce .6s cubic-bezier(.34,1.56,.64,1) both;
+      }
+      .loader-bar{width:180px;height:4px;border-radius:4px;background:rgba(127,127,127,.12);overflow:hidden}
+      .loader-bar::after{
+        content:'';display:block;height:100%;width:0%;
+        border-radius:4px;
+        background:linear-gradient(90deg,#e07b39,#f5a623,#e07b39);
+        background-size:200% 100%;
+        animation:barSlide 1.8s .4s ease forwards,barShimmer 1.5s linear infinite;
+      }
+      @keyframes loaderIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+      @keyframes logoBounce{0%{opacity:0;transform:scale(.5) rotate(-10deg)}60%{transform:scale(1.08) rotate(3deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+      @keyframes barSlide{to{width:100%}}
+      @keyframes barShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
       @keyframes loaderFade{to{opacity:0;visibility:hidden;pointer-events:none}}
     </style>
     {% include head/custom.html %}
@@ -31,75 +49,74 @@
   </head>
   <body>
 
-    <!-- 加载动画 (CSS-only auto-dismiss) -->
+    <!-- Loading screen -->
     <div id="loader" aria-hidden="true">
-      <div class="loader-content">
-      <div class="loader-logo">fw</div>
-      <div class="loader-bar"></div>
-      <div class="loader-text">loading...</div>
+      <div class="loader-inner">
+        <div class="loader-logo">fw</div>
+        <div class="loader-bar"></div>
       </div>
     </div>
 
     {% include_cached skip-links.html locale=locale %}
     {% include_cached masthead.html locale=locale %}
 
-    <div class="initial-content">
-      {{ content }}
-      {% include after-content.html %}
-    </div>
+    <main class="main-content">
+      <div class="initial-content">
+        {{ content }}
+        {% include after-content.html %}
+      </div>
 
-    {% if site.search == true %}
+      {% if site.search == true %}
       <div class="search-content">
         {% include_cached search/search_form.html locale=locale %}
       </div>
-    {% endif %}
+      {% endif %}
 
-    <div id="footer" class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include_cached footer.html locale=locale %}
+      <footer id="footer" class="page__footer">
+        <div class="page__footer-inner">
+          {% include footer/custom.html %}
+          {% include_cached footer.html locale=locale %}
+        </div>
       </footer>
-    </div>
+    </main>
 
     {% include scripts.html locale=locale %}
 
-    <!-- 节日祝福 -->
+    <!-- Back to top -->
+    <a class="back-top" href="#" id="backTop">↑</a>
+    <script>
+    (function(){
+      var bt=document.getElementById('backTop');
+      window.addEventListener('scroll',function(){
+        bt.classList.toggle('visible',window.scrollY>400);
+      },{passive:true});
+    })();
+    </script>
+
+    <!-- Holiday greeting -->
     <script>
     (function(){
       var el=document.getElementById('holidayGreeting');
       if(!el)return;
       var d=new Date();
-      var m=d.getMonth()+1,day=d.getDate(),week=d.getDay();
-
-      // 农历节日（按公历近似日期）
-      var lunarHolidays={
-        '1-1':'元旦', '2-14':'情人节', '3-8':'妇女节', '3-12':'植树节',
-        '4-1':'愚人节', '5-1':'劳动节', '5-4':'青年节', '6-1':'儿童节',
-        '7-1':'建党节', '8-1':'建军节', '9-10':'教师节', '10-1':'国庆节',
-        '12-24':'平安夜', '12-25':'圣诞节'
+      var m=d.getMonth()+1,day=d.getDate(),w=d.getDay();
+      var holidays={
+        '1-1':'元旦','2-14':'情人节','3-8':'妇女节','3-12':'植树节',
+        '4-1':'愚人节','5-1':'劳动节','5-4':'青年节','6-1':'儿童节',
+        '7-1':'建党节','8-1':'建军节','9-10':'教师节','10-1':'国庆节',
+        '12-24':'平安夜','12-25':'圣诞节'
       };
-
-      // 特殊农历节日（近似公历日期，每年微调）
-      var lunarSpecial={
+      var lunar={
         '2026-1-28':'春节','2026-2-12':'元宵','2026-4-4':'清明',
         '2026-5-31':'端午','2026-9-25':'中秋','2026-10-1':'重阳'
       };
-
-      var todayKey=m+'-'+day;
+      var today=m+'-'+day;
       var todayFull=d.getFullYear()+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
       var msg='';
-
-      if(lunarSpecial[todayFull]){
-        msg='🎉 祝您'+lunarSpecial[todayFull]+'快乐！';
-      }else if(lunarHolidays[todayKey]){
-        msg='🎉 祝您'+lunarHolidays[todayKey]+'快乐！';
-      }else if(week===0||week===6){
-        msg='🌞 祝您周末愉快！';
-      }else{
-        var weekdays=['周一','周二','周三','周四','周五'];
-        msg='☀️ 今天是'+weekdays[week-1]+'，祝您工作顺利！';
-      }
-
+      if(lunar[todayFull])msg='🎉 祝您'+lunar[todayFull]+'快乐！';
+      else if(holidays[today])msg='🎉 祝您'+holidays[today]+'快乐！';
+      else if(w===0||w===6)msg='🌞 祝您周末愉快！';
+      else{var wd=['周一','周二','周三','周四','周五'];msg='☀️ 今天是'+wd[w-1]+'，祝您工作顺利！'}
       el.textContent=msg;
     })();
     </script>

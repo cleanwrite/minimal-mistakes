@@ -9,7 +9,7 @@ title                  : "fw's Blog"
 title_separator        : "-"
 subtitle               : "我草，还是github上的项目好用"
 name                   : "fw"
-description            : "欢迎来到我的个人博客！"
+description            : "欢迎来到我的个人博客！分享技术、工具与日常"
 url                    : https://myfk.cc.cd
 baseurl                :
 repository             : "cleanwrite/minimal-mistakes"
@@ -86,8 +86,8 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : /assets/images/wall.webp
-og_image_alt             : "fw's Blog - 欢迎来到我的个人博客"
+og_image                 :
+og_image_alt             :
 social:
   type                   : 
   name                   : 
