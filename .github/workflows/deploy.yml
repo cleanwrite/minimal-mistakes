@@ -27,6 +27,6 @@ jobs:
           node-version: "20"
 
       - run: |
-          npm i -g vercel
-          vercel deploy --prod --yes --token="$VERCEL_TOKEN"
+          npm i -g vercel@latest
+          npx vercel deploy --prod --yes --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID
         working-directory: ./_site
