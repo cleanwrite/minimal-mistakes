@@ -438,14 +438,20 @@ a:hover {
   background: var(--card-bg);
   z-index: 1000;
   transform: translateX(100%);
+  -webkit-transform: translateX(100%);
   transition: transform 0.3s var(--ease);
+  -webkit-transition: -webkit-transform 0.3s var(--ease);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+  visibility: hidden;
 }
-.nav-drawer.open { transform: translateX(0); }
+.nav-drawer.open {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+  visibility: visible;
+}
 
 .nav-drawer__header {
   display: flex;

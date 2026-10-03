@@ -30,16 +30,25 @@
     background: var(--card-bg, #fff) !important;
     z-index: 1000 !important;
     transform: translateX(100%) !important;
+    -webkit-transform: translateX(100%) !important;
     transition: transform 0.3s ease !important;
+    -webkit-transition: -webkit-transform 0.3s ease !important;
     display: flex !important;
     flex-direction: column !important;
     overflow-y: auto !important;
-    box-shadow: -4px 0 24px rgba(0,0,0,0.1) !important;
+    visibility: hidden !important;
   }
-  .nav-drawer.open { transform: translateX(0) !important; }
+  .nav-drawer.open {
+    transform: translateX(0) !important;
+    -webkit-transform: translateX(0) !important;
+    visibility: visible !important;
+  }
   .nav-drawer__overlay {
     position: fixed !important;
-    inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     background: rgba(0,0,0,0.3) !important;
     z-index: 999 !important;
     opacity: 0 !important;
