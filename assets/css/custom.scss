@@ -462,22 +462,11 @@ a:hover {
 .nav-drawer__header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 20px 22px;
+  justify-content: space-between;
+  padding: 18px 22px;
   border-bottom: 1px solid var(--card-border);
-  background: linear-gradient(135deg, var(--accent-light), transparent);
 }
-.nav-drawer__avatar {
-  width: 40px; height: 40px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent), #c0392b);
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-weight: 800; font-size: 0.9rem;
-  flex-shrink: 0;
-}
-.nav-drawer__meta { flex: 1; min-width: 0; }
-.nav-drawer__title { font-weight: 700; font-size: 0.95rem; color: var(--text); display: block; }
-.nav-drawer__subtitle { font-size: 0.7rem; opacity: 0.55; color: var(--text); display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nav-drawer__title { font-weight: 700; font-size: 1rem; color: var(--text); }
 .nav-drawer__close {
   background: none; border: none;
   font-size: 1.4rem; opacity: 0.4;
