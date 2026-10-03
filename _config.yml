@@ -106,39 +106,18 @@ author:
   avatar             : 
   bio                : "欢迎来到我的空间。"
   location           : "China"
-  email              : "your.email@email.com"
+  email              : ""
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-square-envelope"
-      url: "mailto:your.email@email.com"      
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-square-x-twitter"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-square-facebook"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/cleanwrite"    
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
+      url: "https://github.com/cleanwrite"
 
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-square-x-twitter"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-square-facebook"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/cleanwrite"    
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
+      url: "https://github.com/cleanwrite"
   since: "2026"
 
 # Reading Files
@@ -208,10 +187,7 @@ sass:
 permalink: /:categories/:title/
 timezone: Asia/Shanghai
 
-# Pagination
-paginate: 5
-paginate_path: /page:num/
-
+# Pagination (jekyll-paginate-v2 style)
 pagination:
   debug: false
   collection: 'posts'
@@ -236,12 +212,6 @@ plugins:
   - jekyll-include-cache
   - jekyll-remote-theme
 
-whitelist:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-feed
-  - jekyll-include-cache
-  - jekyll-remote-theme
 
 # Archives
 category_archive:

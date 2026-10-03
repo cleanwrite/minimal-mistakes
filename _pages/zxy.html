@@ -1,14 +1,28 @@
 ---
-layout: null
-permalink: /zxy/
+layout: single
+permalink: zxy
+author_profile: false
+share: false
+related: false
+comments: false
 ---
+<style>
+  body {
+    background: #0d1117 !important;
+    background-image: none !important;
+  }
+  .page__content, .page__inner-wrap {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+</style>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数据展示中心</title>
-    <link rel="stylesheet" href="/assets/css/custom.css">
     <style>
         :root {
             --bg-color: #030712;
@@ -148,7 +162,7 @@ permalink: /zxy/
 <div class="secure-container">
     <div class="profile-header">
         <div class="avatar">
-            <img src="/assets/images/sleep.jpg" alt="Profile">
+            <img src="{{ '/assets/images/sleep.jpg' | relative_url }}" alt="Profile">
         </div>
         <div class="user-info">
             <h1>数据展示中心</h1>
@@ -235,7 +249,7 @@ permalink: /zxy/
     }
 
     btn.addEventListener('click', verify);
-    inputField.addEventListener('keypress', function(e) { if (e.key === 'Enter') verify(); });
+    inputField.addEventListener('keydown', function(e) { if (e.key === 'Enter') verify(); });
 })();
 </script>
 </body>

@@ -62,7 +62,7 @@ html {
 }
 
 body {
-  background: url("/assets/images/wall.webp") no-repeat center center fixed;
+  background: url("../images/wall.webp") no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -70,6 +70,11 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile: disable fixed background for performance */
+@media (max-width: 768px) {
+  body { background-attachment: scroll; }
 }
 
 /* Scrollbar */
