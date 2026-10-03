@@ -56,6 +56,10 @@ api.scoreLoaded.on((score) => {
 
 alphaTab 的 CDN 版用 Blob Worker 跑 Web Worker，Cloudflare Pages 静态托管没遇到问题，但保险起见还是关掉了 `useWorkers: false`。
 
+## 两层导航
+
+一级是分类卡片（按艺术家或风格），二级是标签筛选。数据全部前台 JSON 渲染，没有后端接口。分类卡片用 CSS Grid 自适应，手机端自动变成单列。
+
 ## 部署
 
 Cloudflare Pages 连 GitHub 仓库，Framework preset 选 None，Build command 留空，Output directory 填 `/`。git push 后自动上线。
