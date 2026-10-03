@@ -72,9 +72,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Mobile: disable fixed background for performance */
+/* Mobile: fix background positioning */
 @media (max-width: 768px) {
-  body { background-attachment: scroll; }
+  body { background-attachment: scroll; background-position: center top; }
 }
 
 /* ── 抽屉菜单底部安全区 ── */
