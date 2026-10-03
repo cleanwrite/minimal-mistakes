@@ -294,52 +294,43 @@ a:hover {
   color: var(--accent);
 }
 
-/* ── Hamburger ── */
+/* ── Hamburger (desktop: hidden) ── */
 .greedy-nav__toggle { display: none !important; }
-#navToggle { display: none !important; }
-
-@media (max-width: 768px) {
-  .visible-links { display: none !important; }
-  #navToggle {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background var(--transition);
-    margin-left: 8px;
-  }
-  #navToggle:hover { background: var(--accent-light); }
-  #navToggle .navicon,
-  #navToggle .navicon::before,
-  #navToggle .navicon::after {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--text);
-    border-radius: 2px;
-    position: relative;
-    transition: all var(--transition);
-  }
-  #navToggle .navicon::before {
-    content: '';
-    position: absolute;
-    top: -6px;
-  }
-  #navToggle .navicon::after {
-    content: '';
-    position: absolute;
-    top: 6px;
-  }
-  #navToggle.open .navicon { background: transparent; }
-  #navToggle.open .navicon::before { transform: rotate(45deg); top: 0; }
-  #navToggle.open .navicon::after { transform: rotate(-45deg); top: 0; }
-  .masthead__menu { flex-wrap: nowrap !important; }
+#navToggle {
+  display: none !important;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background var(--transition);
+  flex-shrink: 0;
 }
+#navToggle:hover { background: var(--accent-light); }
+#navToggle .navicon {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  position: relative;
+  transition: all var(--transition);
+}
+#navToggle .navicon::before,
+#navToggle .navicon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+#navToggle .navicon::before { top: -6px; }
+#navToggle .navicon::after { top: 6px; }
+#navToggle.open .navicon { background: transparent; }
+#navToggle.open .navicon::before { transform: rotate(45deg); top: 0; }
+#navToggle.open .navicon::after { transform: rotate(-45deg); top: 0; }
 
 /* ═══════════════════════════════════════════════════════════
    Code blocks
@@ -947,10 +938,25 @@ code.highlighter-rouge {
   .entries-list .list__item:active { transform: scale(0.98); }
 
   /* ── 导航栏 ── */
-  .masthead { padding: 0.5em 0.8em; }
-  .site-title { font-size: 1.1rem !important; }
-  .site-subtitle { font-size: 0.65rem; }
-  .site-badge-visible { font-size: 0.65rem !important; padding: 3px 8px !important; margin-left: 6px !important; }
+  .masthead { padding: 0.5em 0.8em !important; }
+  .masthead__menu { flex-wrap: nowrap !important; max-width: 100% !important; }
+
+  .site-title { font-size: 1.1rem !important; flex-shrink: 0; }
+  .site-subtitle { font-size: 0.65rem; display: none !important; }
+  .site-badge-visible { font-size: 0.65rem !important; padding: 3px 8px !important; margin-left: 6px !important; flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+  /* 隐藏导航链接，显示汉堡按钮 */
+  .visible-links { display: none !important; }
+  .search__toggle { display: none !important; }
+  #navToggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px !important;
+    height: 40px !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+  }
 
   /* ── VIP ── */
   .vip-gate { padding: 20px 16px; }
