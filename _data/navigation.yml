@@ -5,3 +5,5 @@ main:
     url: /links/
   - title: "文章归档"
     url: /posts/
+  - title: "吉他谱"
+    url: https://fwjita-share.pages.dev/

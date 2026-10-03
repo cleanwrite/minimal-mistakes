@@ -1,12 +1,14 @@
 ---
 layout: single
-title: "GPX 在线预览：用 alphaTab 搭了个吉他谱站"
+title: "基于 Cloudflare Pages + alphaTab 搭建在线吉他谱预览站"
 date: 2026-10-03
 comments: true
 tags: [Cloudflare, alphaTab, 前端, 项目]
 ---
 
-一直想找地方放吉他谱，GPX 文件散落在各个网盘，找一个要翻半天。干脆自己搭了个：上传 GPX，浏览器里直接看谱、听音、下载 PDF。纯前端，零后端。
+吉他谱散落在各个网盘和微信群里，每次找一首都要翻半天。GPX 格式只能在 Guitar Pro 里打开，手机上根本看不了。于是搭了这个：上传 GPX，浏览器里直接渲染五线谱 + TAB，支持 PDF 预览和图片画廊，纯前端零后端。
+
+技术选型上，Cloudflare Pages 提供免费托管 + 全球 CDN，alphaTab 是目前最成熟的 Web 乐谱渲染库，两者搭配刚好够用。
 
 <!-- TOC -->
 
@@ -131,8 +133,9 @@ git add . && git commit -m "add new scores" && git push
 
 ## 项目地址
 
-🎸 **fwjita-share** — <https://fwjita-share.pages.dev>
-
-GitHub: <https://github.com/cleanwrite/fwjita-share>
-
-GPX 曲库在持续扩充中，欢迎提 issue 贡献谱子。
+<div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px 24px;margin:24px 0;text-align:center;">
+  <p style="font-size:1.1rem;font-weight:600;margin:0 0 8px;">🎸 fwjita-share — 在线吉他谱预览</p>
+  <p style="opacity:0.7;font-size:0.85rem;margin:0 0 12px;">GPX / PDF / 图片 · 全局搜索 · 纯前端 · 零后端</p>
+  <a href="https://fwjita-share.pages.dev/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 24px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;">打开项目站 →</a>
+  <p style="margin:12px 0 0;font-size:0.75rem;opacity:0.5;"><a href="https://github.com/cleanwrite/fwjita-share" target="_blank" rel="noopener noreferrer">GitHub</a> · 欢迎提 issue 贡献谱子</p>
+</div>
