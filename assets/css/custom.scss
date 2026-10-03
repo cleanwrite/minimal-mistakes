@@ -91,8 +91,12 @@ body {
   .sidebar { display: none !important; }
   .masthead__menu { flex-wrap: nowrap; }
 
-  /* Hide holiday badge on mobile to save space */
-  .site-badge-visible { display: none !important; }
+  /* Holiday badge: smaller on mobile */
+  .site-badge-visible {
+    font-size: 0.65rem !important;
+    padding: 3px 8px !important;
+    margin-left: 6px !important;
+  }
 
   /* Prevent horizontal scroll from fixed elements */
   html, body { overflow-x: hidden !important; }
