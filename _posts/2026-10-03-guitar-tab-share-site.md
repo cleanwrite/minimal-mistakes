@@ -1,9 +1,9 @@
 ---
 layout: single
-title: "吉他谱个人分享站：Cloudflare Pages + alphaTab"
+title: "吉他谱个人分享站：Vercel + alphaTab"
 date: 2026-10-03
 comments: true
-tags: [Cloudflare, alphaTab, 前端, 项目]
+tags: [Vercel, alphaTab, 前端, 项目]
 ---
 
 做了个吉他谱分享站。GPX 文件能在浏览器里直接渲染成五线谱 + 六线谱，PDF 和图片也能在线看。纯前端，挂在 Cloudflare Pages 上。
@@ -62,14 +62,14 @@ alphaTab 的 CDN 版用 Blob Worker 跑 Web Worker，Cloudflare Pages 静态托�
 
 ## 部署
 
-Cloudflare Pages 连 GitHub 仓库，Framework preset 选 None，Build command 留空，Output directory 填 `/`。git push 后自动上线。
+Vercel 连 GitHub 仓库，自动识别静态站点，git push 后自动上线。
 
 项目地址：[https://github.com/cleanwrite/fwjita-share](https://github.com/cleanwrite/fwjita-share)
 
-线上地址：[https://fwjita-share.pages.dev](https://fwjita-share.pages.dev)
+线上地址：[https://fwjita.cc.cd](https://fwjita.cc.cd)
 
 <div style="background:linear-gradient(135deg,rgba(224,123,57,.15),rgba(224,123,57,.05));border:2px solid rgba(224,123,57,.3);border-radius:16px;padding:28px 32px;margin:32px 0;text-align:center;">
-  <p style="font-size:1.3rem;font-weight:700;margin:0 0 8px;">🎸 GPX 在线预览站</p>
+  <p style="font-size:1.3rem;font-weight:700;margin:0 0 8px;">🎸 吉他谱个人分享站</p>
   <p style="opacity:.7;font-size:.9rem;margin:0 0 18px;">GPX · PDF · 图片 · 全局搜索 · 纯前端零后端</p>
   <a href="https://fwjita.cc.cd/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:14px 36px;background:#e07b39;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:1.05rem;transition:all .2s;box-shadow:0 4px 16px rgba(224,123,57,.3);">打开吉他谱站 →</a>
   <p style="margin:14px 0 0;font-size:.75rem;opacity:.5;"><a href="https://github.com/cleanwrite/fwjita-share" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://fwjita-share.pages.dev" target="_blank" rel="noopener noreferrer">Pages.dev 镜像</a></p>
