@@ -106,8 +106,11 @@ author:
   avatar             : 
   bio                : "欢迎来到我的空间。"
   location           : "China"
-  email              : ""
+  email              : "439109032@qq.com"
   links:
+    - label: "Email"
+      icon: "fas fa-fw fa-square-envelope"
+      url: "mailto:439109032@qq.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/cleanwrite"
