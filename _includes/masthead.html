@@ -38,21 +38,45 @@
         <!-- 抽屉菜单 -->
         <div class="nav-drawer" id="navDrawer">
           <div class="nav-drawer__header">
-            <span class="nav-drawer__title">菜单</span>
+            <div class="nav-drawer__avatar">fw</div>
+            <div class="nav-drawer__meta">
+              <span class="nav-drawer__title">fw's Blog</span>
+              <span class="nav-drawer__subtitle">我草，还是github上的项目好用</span>
+            </div>
             <button class="nav-drawer__close" id="navClose" aria-label="关闭菜单">×</button>
           </div>
           <ul class="nav-drawer__links">
             {%- for link in site.data.navigation.main -%}
-              <li><a href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
+              <li>
+                <a href="{{ link.url | relative_url }}" {% if link.url contains 'http' %}target="_blank" rel="noopener"{% endif %}>
+                  <span class="nav-drawer__icon">
+                    {%- case link.title -%}
+                      {%- when '首页 -%}<i class="fa-solid fa-house"></i>
+                      {%- when '导航站 -%}<i class="fa-solid fa-link"></i>
+                      {%- when '文章归档 -%}<i class="fa-solid fa-archive"></i>
+                      {%- when '吉他谱 -%}<i class="fa-solid fa-guitar"></i>
+                    {%- endcase -%}
+                  </span>
+                  {{ link.title }}
+                  {%- if link.url contains 'http' -%}<i class="fa-solid fa-external-link-alt nav-drawer__ext"></i>{%- endif -%}
+                </a>
+              </li>
             {%- endfor -%}
           </ul>
-          <!-- 快速访问 -->
           <div class="nav-drawer__divider"></div>
           <div class="nav-drawer__section">
             <span class="nav-drawer__label">快速访问</span>
             <div class="nav-drawer__quick">
               <a class="nav-drawer__quick-item" href="/links/"><i class="fa-solid fa-link"></i><span>导航站</span></a>
               <a class="nav-drawer__quick-item" href="/posts/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a>
+            </div>
+          </div>
+          <div class="nav-drawer__divider"></div>
+          <div class="nav-drawer__section">
+            <span class="nav-drawer__label">社交</span>
+            <div class="nav-drawer__social">
+              <a href="https://github.com/cleanwrite" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="mailto:439109032@qq.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
           </div>
         </div>
