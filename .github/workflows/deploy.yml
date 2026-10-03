@@ -7,7 +7,6 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    container: jekyll/jekyll:4.3
     env:
       JEKYLL_ENV: production
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -16,11 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build
-        run: jekyll build
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Build
+        run: bundle exec jekyll build
+
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
 
