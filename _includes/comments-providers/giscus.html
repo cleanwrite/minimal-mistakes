@@ -1,60 +1,49 @@
+<!-- Hidden payload source -->
+<div id="vip-payload-source" style="display:none">{{ page.hidden_resource | markdownify }}</div>
+
+<div id="vip-gate" class="vip-gate">
+  <h3><i class="fas fa-key"></i> 内部内容：请输入专属验证码/密钥</h3>
+  <p class="vip-gate__text">本帖的追加讨论与隐藏核心资源已被锁定，请输入有效的邀请码或密钥进行解锁。</p>
+  <div class="vip-gate__form">
+    <input type="password" id="invite-code-input" placeholder="请输入密钥..." />
+    <button id="verify-btn">验证解锁</button>
+  </div>
+  <p id="verify-error-msg" class="vip-gate__error"><i class="fas fa-exclamation-triangle"></i> 密钥无效或已过期，请重新输入！</p>
+</div>
+
+<div id="vip-protected-content" class="vip-content" style="display:none;">
+  <h4><i class="fas fa-unlock"></i> 验证成功！以下为隐藏讨论与核心资源</h4>
+  <div id="vip-payload-output" class="vip-content__body"></div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
-  'use strict';
-  (function () {
-    var commentContainer = document.querySelector('#giscus-comments');
-    if (!commentContainer) return;
-    commentContainer.innerHTML = '';
+(function() {
+  var correctHash = "{{ page.invite_code_hash }}";
+  var verifyBtn = document.getElementById('verify-btn');
+  var inputField = document.getElementById('invite-code-input');
+  if (!verifyBtn || !inputField) return;
 
-    var gateDiv = document.createElement('div');
-    gateDiv.id = 'vip-gate';
-    gateDiv.style.cssText = 'margin-top: 2.5em; padding: 25px; border: 2px dashed #f0ad4e; background-color: #fcf8e3; border-radius: 6px; text-align: center;';
-    gateDiv.innerHTML =
-      '<h3 style="margin-top: 0; color: #8a6d3b;"><i class="fas fa-key"></i> 内部内容：请输入专属验证码/密钥</h3>' +
-      '<p style="color: #66512c; font-size: 0.95em;">本帖的追加讨论与隐藏核心资源已被锁定，请输入有效的邀请码或密钥进行解锁。</p>' +
-      '<div style="margin: 20px 0;">' +
-        '<input type="password" id="invite-code-input" placeholder="请输入密钥..." style="padding: 10px; width: 260px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />' +
-        '<button id="verify-btn" style="padding: 10px 20px; background-color: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; margin-left: 10px;">验证解锁</button>' +
-      '</div>' +
-      '<p id="verify-error-msg" style="color: #d9534f; display: none; font-weight: bold; margin-top: 10px;"><i class="fas fa-exclamation-triangle"></i> 密钥无效或已过期，请重新输入！</p>';
-
-    var contentDiv = document.createElement('div');
-    contentDiv.id = 'vip-protected-content';
-    contentDiv.style.cssText = 'display: none; margin-top: 2.5em; padding: 25px; border-left: 5px solid #5cb85c; background-color: #f4f9f4; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); color: #1a1a1a !important;';
-    contentDiv.className = 'vip-content';
-    contentDiv.innerHTML =
-      '<h4 style="color: #3c763d; margin-top: 0; margin-bottom: 15px;"><i class="fas fa-unlock"></i> 验证成功！以下为隐藏讨论与核心资源</h4>' +
-      '<div id="decrypted-payload"></div>';
-
-    commentContainer.appendChild(gateDiv);
-    commentContainer.appendChild(contentDiv);
-
-    var correctHash = "{{ page.invite_code_hash }}";
-    var verifyBtn = document.getElementById('verify-btn');
-    var inputField = document.getElementById('invite-code-input');
-    if (!verifyBtn || !inputField) return;
-
-    function doVerify() {
-      var inputCode = inputField.value.trim();
-      if (!inputCode) return;
-      var errorMsg = document.getElementById('verify-error-msg');
-      var inputHash = CryptoJS.MD5(inputCode).toString();
-      if (inputHash === correctHash) {
-        errorMsg.style.display = 'none';
-        document.getElementById('vip-gate').style.display = 'none';
-        document.getElementById('vip-protected-content').style.display = 'block';
-        var payload = {{ page.hidden_resource | markdownify | jsonify }};
-        var payloadContainer = document.getElementById('decrypted-payload');
-        payloadContainer.style.cssText = 'word-break: break-all; word-wrap: break-word; line-height: 1.6; font-size: 15px; color: #1a1a1a !important;';
-        payloadContainer.innerHTML = payload;
-      } else {
-        errorMsg.style.display = 'block';
-        inputField.value = '';
-        inputField.focus();
-      }
+  function doVerify() {
+    var inputCode = inputField.value.trim();
+    if (!inputCode) return;
+    var errorMsg = document.getElementById('verify-error-msg');
+    var inputHash = CryptoJS.MD5(inputCode).toString();
+    if (inputHash === correctHash) {
+      errorMsg.style.display = 'none';
+      document.getElementById('vip-gate').style.display = 'none';
+      document.getElementById('vip-protected-content').style.display = 'block';
+      var src = document.getElementById('vip-payload-source');
+      var out = document.getElementById('vip-payload-output');
+      out.innerHTML = src.innerHTML;
+    } else {
+      errorMsg.style.display = 'block';
+      inputField.value = '';
+      inputField.focus();
     }
+  }
 
-    verifyBtn.addEventListener('click', doVerify);
-    inputField.addEventListener('keypress', function(e) { if (e.key === 'Enter') doVerify(); });
-  })();
+  verifyBtn.addEventListener('click', doVerify);
+  inputField.addEventListener('keypress', function(e) { if (e.key === 'Enter') doVerify(); });
+})();
 </script>
