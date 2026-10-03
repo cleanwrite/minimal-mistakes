@@ -492,6 +492,72 @@ a:hover {
 }
 .nav-drawer__overlay.show { opacity: 1; pointer-events: auto; }
 
+/* ── Code blocks: force readable contrast ── */
+.highlight,
+.highlighter-rouge .highlight,
+div.highlight,
+figure.highlight {
+  background: #1e2228 !important;
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+}
+
+.highlight pre,
+.highlight code,
+.highlight .lineno {
+  background: transparent !important;
+  color: #e2e2e2 !important;
+}
+
+/* Rouge token colors — high contrast on dark bg */
+.highlight .k  { color: #ff7b72 !important; } /* keyword */
+.highlight .s  { color: #a5d6ff !important; } /* string */
+.highlight .mi { color: #79c0ff !important; } /* number */
+.highlight .na { color: #ffa657 !important; } /* name */
+.highlight .nf { color: #d2a8ff !important; } /* function */
+.highlight .c1 { color: #8b949e !important; } /* comment */
+.highlight .o  { color: #ff7b72 !important; } /* operator */
+.highlight .p  { color: #e2e2e2 !important; } /* punctuation */
+.highlight .nc { color: #ffa657 !important; } /* class */
+.highlight .no { color: #79c0ff !important; } /* constant */
+.highlight .nb { color: #ffa657 !important; } /* builtin */
+.highlight .kp { color: #ff7b72 !important; } */
+.highlight .sr { color: #a5d6ff !important; } /* regex */
+.highlight .ss { color: #a5d6ff !important; } /* symbol */
+.highlight .nt { color: #7ee787 !important; } /* tag */
+.highlight .nv { color: #ffa657 !important; } /* variable */
+.highlight .vc { color: #79c0ff !important; } */
+.highlight .vg { color: #ffa657 !important; } */
+.highlight .vi { color: #ffa657 !important; } */
+
+/* Inline code */
+code.highlighter-rouge,
+.page__content code.highlighter-rouge {
+  background: rgba(127,127,127,0.15) !important;
+  color: #c0392b !important;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+@media (prefers-color-scheme: dark) {
+  code.highlighter-rouge {
+    color: #ff7b72 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .highlight,
+  .highlighter-rouge .highlight {
+    background: #0d1117 !important;
+  }
+  .highlight pre,
+  .highlight code {
+    color: #e6edf3 !important;
+  }
+}
+
 /* ── VIP gate ── */
 .vip-gate {
   margin-top: 2.5em;

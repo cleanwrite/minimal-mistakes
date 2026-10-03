@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "GPX 在线预览站：Cloudflare Pages + alphaTab"
+title: "吉他谱个人分享站：Cloudflare Pages + alphaTab"
 date: 2026-10-03
 comments: true
 tags: [Cloudflare, alphaTab, 前端, 项目]
