@@ -74,7 +74,7 @@ body {
 
 /* Mobile: fix background positioning */
 @media (max-width: 768px) {
-  body { background-attachment: scroll; background-position: center top; }
+  body { background-attachment: scroll; background-position: center center; }
 }
 
 /* ── 抽屉菜单底部安全区 ── */
@@ -152,11 +152,15 @@ body {
   box-shadow: none !important;
 }
 
+.page {
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+}
+
 @media (min-width: 769px) {
   .page {
     width: 100% !important;
     max-width: 1200px !important;
-    margin: 0 auto !important;
     padding: 0 20px !important;
   }
   .sidebar { display: none !important; }
