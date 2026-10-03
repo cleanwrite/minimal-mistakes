@@ -1,17 +1,93 @@
-<!-- Giscus comments -->
-<script src="https://giscus.app/client.js"
-        data-repo="cleanwrite/minimal-mistakes"
-        data-repo-id="R_kgDOS-jfew"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOS-jfew"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
+<section id="giscus-comments">
+  {% if page.invite_code_hash %}
+    <!-- VIP gate for protected articles -->
+    <div id="vip-gate" class="vip-gate">
+      <h3><i class="fas fa-key"></i> 内部内容：请输入专属验证码/密钥</h3>
+      <p class="vip-gate__text">本帖的追加讨论与隐藏核心资源已被锁定，请输入有效的邀请码或密钥进行解锁。</p>
+      <div class="vip-gate__form">
+        <input type="password" id="invite-code-input" placeholder="请输入密钥..." autocomplete="off">
+        <button id="verify-btn">验证解锁</button>
+      </div>
+      <p id="verify-error-msg" class="vip-gate__error"><i class="fas fa-exclamation-triangle"></i> 密钥无效或已过期，请重新输入！</p>
+    </div>
+
+    <div id="vip-protected-content" class="vip-content" style="display:none">
+      {% if page.hidden_resource %}
+        <div class="vip-content__resource">
+          {{ page.hidden_resource | markdownify }}
+        </div>
+      {% endif %}
+      <div id="giscus-thread"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+    (function() {
+      var correctHash = {{ page.invite_code_hash | jsonify }};
+      var input = document.getElementById('invite-code-input');
+      var btn = document.getElementById('verify-btn');
+      var error = document.getElementById('verify-error-msg');
+
+      function unlock() {
+        document.getElementById('vip-gate').style.display = 'none';
+        document.getElementById('vip-protected-content').style.display = 'block';
+        loadGiscus();
+      }
+
+      function loadGiscus() {
+        var s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', 'cleanwrite/minimal-mistakes');
+        s.setAttribute('data-repo-id', 'R_kgDOS-jfew');
+        s.setAttribute('data-category', 'Announcements');
+        s.setAttribute('data-category-id', 'DIC_kwDOS-jfew');
+        s.setAttribute('data-mapping', 'pathname');
+        s.setAttribute('data-strict', '0');
+        s.setAttribute('data-reactions-enabled', '1');
+        s.setAttribute('data-emit-metadata', '0');
+        s.setAttribute('data-input-position', 'bottom');
+        s.setAttribute('data-theme', 'preferred_color_scheme');
+        s.setAttribute('data-lang', 'zh-CN');
+        s.setAttribute('data-loading', 'lazy');
+        s.crossOrigin = 'anonymous';
+        s.async = true;
+        document.getElementById('giscus-thread').appendChild(s);
+      }
+
+      function verify() {
+        var code = input.value.trim();
+        if (!code) return;
+        if (CryptoJS.MD5(code).toString() === correctHash) {
+          error.style.display = 'none';
+          unlock();
+        } else {
+          error.style.display = 'block';
+          input.value = '';
+          input.focus();
+        }
+      }
+
+      btn.addEventListener('click', verify);
+      input.addEventListener('keydown', function(e) { if (e.key === 'Enter') verify(); });
+    })();
+    </script>
+  {% else %}
+    <!-- Direct giscus for unprotected articles -->
+    <script src="https://giscus.app/client.js"
+            data-repo="cleanwrite/minimal-mistakes"
+            data-repo-id="R_kgDOS-jfew"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOS-jfew"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="zh-CN"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+    </script>
+  {% endif %}
+</section>
