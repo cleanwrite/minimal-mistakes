@@ -175,13 +175,7 @@ body {
    Main content wrapper
    ═══════════════════════════════════════════════════════════ */
 
-.main-content {
-  animation: fadeIn 0.5s ease both;
-}
-
-.initial-content {
-  animation: fadeIn 0.4s 0.1s ease both;
-}
+/* initial-content: no animation (conflicts with MM theme JS) */
 
 /* ═══════════════════════════════════════════════════════════
    Cards
@@ -302,19 +296,23 @@ a:hover {
   color: var(--text);
 }
 
-.site-birthday {
-  display: inline-block;
-  font-size: 0.72rem;
+.site-badge-visible {
+  display: inline-block !important;
+  font-size: 0.72rem !important;
   color: #fff !important;
-  background: var(--accent) !important;
-  padding: 4px 12px;
-  border-radius: 8px;
-  margin-left: 10px;
-  font-weight: 600;
-  white-space: nowrap;
-  box-shadow: 0 2px 8px var(--accent-glow);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  line-height: 1.4;
+  background: #e07b39 !important;
+  padding: 4px 12px !important;
+  border-radius: 8px !important;
+  margin-left: 10px !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+  line-height: 1.4 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-badge-visible { background: #e07b39 !important; }
 }
 
 .visible-links {

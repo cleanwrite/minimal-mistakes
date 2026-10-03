@@ -42,10 +42,6 @@
       @keyframes loaderFade{to{opacity:0;visibility:hidden;pointer-events:none}}
     </style>
     {% include head/custom.html %}
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/vercel/insights/script.js" crossorigin="anonymous"></script>
   </head>
   <body>
 
@@ -61,6 +57,41 @@
 
     {% include_cached skip-links.html locale=locale %}
     {% include_cached masthead.html locale=locale %}
+
+    <!-- Holiday greeting: runs BEFORE main.min.js to avoid being blocked -->
+    <script>
+    (function(){
+      var el=document.getElementById('holidayGreeting');
+      if(!el)return;
+      var d=new Date(),m=d.getMonth()+1,day=d.getDate(),w=d.getDay();
+      var year=d.getFullYear();
+      var today=m+'-'+day;
+      var todayFull=year+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+      var legal={'1-1':'元旦','3-8':'妇女节','5-1':'劳动节','6-1':'儿童节','7-1':'建党节','8-1':'建军节','9-10':'教师节','12-25':'圣诞节'};
+      var trad={
+        '2025-1-29':'春节','2025-2-12':'元宵','2025-4-4':'清明','2025-5-1':'端午','2025-10-6':'中秋',
+        '2026-2-17':'春节','2026-2-28':'元宵','2026-4-5':'清明','2026-5-31':'端午','2026-9-25':'中秋',
+        '2027-2-6':'春节','2027-2-20':'元宵','2027-4-5':'清明','2027-5-21':'端午','2027-9-15':'中秋',
+        '2028-1-27':'春节','2028-2-15':'元宵','2028-4-4':'清明','2028-5-10':'端午','2028-10-3':'中秋',
+        '2029-2-13':'春节','2029-3-3':'元宵','2029-4-4':'清明','2029-5-30':'端午','2029-9-22':'中秋',
+        '2030-2-3':'春节','2030-2-21':'元宵','2030-4-5':'清明','2030-6-12':'端午','2030-9-12':'中秋'
+      };
+      var west={'2-14':'情人节','4-1':'愚人节','5-4':'青年节','10-31':'万圣节','12-24':'平安夜'};
+      var msg='';
+      if(m===10&&day>=1&&day<=7)msg='🎉 国庆节黄金周（10月'+day+'日），祝您国庆快乐！';
+      else if((m===1&&day>=27)||(m===2&&day<=5))msg='🧧 春节假期，祝您新春快乐！';
+      else if(m===4&&day>=3&&day<=5)msg='🌿 清明假期，祝您平安顺遂！';
+      else if(m===5&&day>=1&&day<=5)msg='🎉 五一假期，祝您劳动节快乐！';
+      else if((m===5&&day>=30)||(m===6&&day<=2))msg='🐉 端午假期，祝您端午安康！';
+      else if(trad[todayFull])msg='🎉 今天是'+trad[todayFull]+'，祝您节日快乐！';
+      else if(legal[today])msg='🎉 今天是'+legal[today]+'，祝您节日快乐！';
+      else if(west[today])msg='✨ 今天是'+west[today]+'，祝您节日快乐！';
+      else if(w===0||w===6)msg='🌞 祝您周末愉快！';
+      else{var wd=['周一','周二','周三','周四','周五'];msg='☀️ 今天是'+wd[w-1]+'，祝您工作顺利！'}
+      el.textContent=msg;
+      el.className='site-badge-visible';
+    })();
+    </script>
 
     <main class="main-content">
       <div class="initial-content">
@@ -93,92 +124,6 @@
       window.addEventListener('scroll',function(){
         bt.classList.toggle('visible',window.scrollY>400);
       },{passive:true});
-    })();
-    </script>
-
-    <!-- Holiday greeting -->
-    <script>
-    (function(){
-      var el=document.getElementById('holidayGreeting');
-      if(!el)return;
-      var d=new Date();
-      var m=d.getMonth()+1,day=d.getDate(),w=d.getDay();
-      var year=d.getFullYear();
-      var today=m+'-'+day;
-      var todayFull=year+'-'+String(m).padStart(2,'0')+'-'+String(day).padStart(2,'0');
-
-      // ── 法定假日（单日）──
-      var legalHolidays={
-        '1-1':'元旦','3-8':'妇女节','5-1':'劳动节','6-1':'儿童节',
-        '7-1':'建党节','8-1':'建军节','9-10':'教师节','12-25':'圣诞节'
-      };
-
-      // ── 节假日范围 ──
-      var msg='';
-      // 春节黄金周（除夕到初六，约1月28日-2月4日，每年不同）
-      if((m===1&&day>=27)||(m===2&&day<=5)){
-        msg='🧧 今天是春节假期，祝您新春快乐、龙年大吉！';
-      }
-      // 清明假期（4月3日-5日）
-      else if(m===4&&day>=3&&day<=5){
-        msg='🌿 今天是清明假期，祝您平安顺遂！';
-      }
-      // 五一假期（5月1日-5日）
-      else if(m===5&&day>=1&&day<=5){
-        msg='🎉 今天是五一假期，祝您劳动节快乐！';
-      }
-      // 端午假期（约5月31日-6月2日，随农历变化）
-      else if((m===5&&day>=30)||(m===6&&day<=2)){
-        msg='🐉 今天是端午假期，祝您端午安康！';
-      }
-      // 国庆黄金周（10月1日-7日）
-      else if(m===10&&day>=1&&day<=7){
-        msg='🎉 今天是国庆节黄金周（10月'+day+'日），祝您国庆快乐！';
-      }
-
-      // ── 传统节日（农历，按公历近似日期 2025-2030）──
-      if(!msg){
-      var traditional={
-        '2025-1-29':'🧧 春节','2025-2-12':'🏮 元宵节','2025-4-4':'🌿 清明节','2025-5-1':'🐉 端午节','2025-10-6':'🥮 中秋节',
-        '2026-2-17':'🧧 春节','2026-2-28':'🏮 元宵节','2026-4-5':'🌿 清明节','2026-5-31':'🐉 端午节','2026-9-25':'🥮 中秋节',
-        '2027-2-6':'🧧 春节','2027-2-20':'🏮 元宵节','2027-4-5':'🌿 清明节','2027-5-21':'🐉 端午节','2027-9-15':'🥮 中秋节',
-        '2028-1-27':'🧧 春节','2028-2-15':'🏮 元宵节','2028-4-4':'🌿 清明节','2028-5-10':'🐉 端午节','2028-10-3':'🥮 中秋节',
-        '2029-2-13':'🧧 春节','2029-3-3':'🏮 元宵节','2029-4-4':'🌿 清明节','2029-5-30':'🐉 端午节','2029-9-22':'🥮 中秋节',
-        '2030-2-3':'🧧 春节','2030-2-21':'🏮 元宵节','2030-4-5':'🌿 清明节','2030-6-12':'🐉 端午节','2030-9-12':'🥮 中秋节'
-      };
-
-      // ── 西方/现代节日 ──
-      var western={
-        '2-14':'💝 情人节','4-1':'🎭 愚人节','5-4':'🌿 青年节','10-31':'🎃 万圣节前夜','12-24':'🎄 平安夜'
-      };
-
-      if(!msg){
-        // 优先级：传统节日 > 法定假日 > 西方节日 > 周末 > 工作日
-        if(traditional[todayFull]){
-          msg='🎉 今天是'+traditional[todayFull]+'，祝您节日快乐！';
-        }else if(legalHolidays[today]){
-          msg='🎉 今天是'+legalHolidays[today]+'，祝您节日快乐！';
-        }else if(western[today]){
-          msg='✨ 今天是'+western[today]+'，祝您节日快乐！';
-        }else if(w===0||w===6){
-          msg='🌞 祝您周末愉快！';
-        }else{
-          var wd=['周一','周二','周三','周四','周五'];
-          msg='☀️ 今天是'+wd[w-1]+'，祝您工作顺利！';
-        }
-      }
-      el.textContent=msg;
-      el.style.display='inline-block';
-      el.style.color='#fff';
-      el.style.background='#e07b39';
-      el.style.padding='4px 12px';
-      el.style.borderRadius='8px';
-      el.style.marginLeft='10px';
-      el.style.fontWeight='600';
-      el.style.fontSize='0.72rem';
-      el.style.whiteSpace='nowrap';
-      el.style.opacity='1';
-      el.style.visibility='visible';
     })();
     </script>
   </body>
