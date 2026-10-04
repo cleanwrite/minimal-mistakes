@@ -24,5 +24,9 @@
   "devDependencies": {
     "uglify-js": "^3.17.4",
     "@vercel/speed-insights": "^1.0.12"
+  },
+  "scripts": {
+    "build": "bundle exec jekyll build",
+    "deploy": "bundle exec jekyll build && npx wrangler deploy"
   }
 }
