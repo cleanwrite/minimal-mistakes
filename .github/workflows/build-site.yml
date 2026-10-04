@@ -1,0 +1,39 @@
+name: Build _site for Cloudflare
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '_site/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      JEKYLL_ENV: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+
+      - name: Commit _site to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f _site
+          if git diff --staged --quiet; then
+            echo "No changes in _site"
+          else
+            git commit -m "chore: auto-build _site"
+            git push
+          fi
