@@ -66,11 +66,11 @@ Vercel 连 GitHub 仓库，自动识别静态站点，git push 后自动上线�
 
 项目地址：[https://github.com/cleanwrite/fwjita-share](https://github.com/cleanwrite/fwjita-share)
 
-线上地址：[https://fwjita.cc.cd](https://fwjita.cc.cd)
+线上地址：[https://fwjita.de5.net](https://fwjita.de5.net)
 
 <div style="background:linear-gradient(135deg,rgba(224,123,57,.15),rgba(224,123,57,.05));border:2px solid rgba(224,123,57,.3);border-radius:16px;padding:28px 32px;margin:32px 0;text-align:center;">
   <p style="font-size:1.3rem;font-weight:700;margin:0 0 8px;">🎸 吉他谱个人分享站</p>
   <p style="opacity:.7;font-size:.9rem;margin:0 0 18px;">GPX · PDF · 图片 · 全局搜索 · 纯前端零后端</p>
-  <a href="https://fwjita.cc.cd/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:14px 36px;background:#e07b39;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:1.05rem;transition:all .2s;box-shadow:0 4px 16px rgba(224,123,57,.3);">打开吉他谱站 →</a>
-  <p style="margin:14px 0 0;font-size:.75rem;opacity:.5;"><a href="https://github.com/cleanwrite/fwjita-share" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://fwjita.cc.cd/" target="_blank" rel="noopener noreferrer">在线访问</a></p>
+  <a href="https://fwjita.de5.net/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:14px 36px;background:#e07b39;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:1.05rem;transition:all .2s;box-shadow:0 4px 16px rgba(224,123,57,.3);">打开吉他谱站 →</a>
+  <p style="margin:14px 0 0;font-size:.75rem;opacity:.5;"><a href="https://github.com/cleanwrite/fwjita-share" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://fwjita.de5.net/" target="_blank" rel="noopener noreferrer">在线访问</a></p>
 </div>
