@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://myfk.cc.cd/feed.xml" rel="self" type="application/atom+xml" /><link href="https://myfk.cc.cd/" rel="alternate" type="text/html" /><updated>2026-10-04T11:57:17+08:00</updated><id>https://myfk.cc.cd/feed.xml</id><title type="html">fw’s Blog</title><subtitle>欢迎来到我的个人博客！分享技术、工具与日常</subtitle><author><name>fw</name><email>439109032@qq.com</email></author><entry><title type="html">吉他谱个人分享站：Vercel + alphaTab</title><link href="https://myfk.cc.cd/guitar-tab-share-site/" rel="alternate" type="text/html" title="吉他谱个人分享站：Vercel + alphaTab" /><published>2026-10-03T00:00:00+08:00</published><updated>2026-10-03T00:00:00+08:00</updated><id>https://myfk.cc.cd/guitar-tab-share-site</id><content type="html" xml:base="https://myfk.cc.cd/guitar-tab-share-site/"><![CDATA[<p>做了个吉他谱分享站。GPX 文件能在浏览器里直接渲染成五线谱 + 六线谱，PDF 和图片也能在线看。纯前端，挂在 Cloudflare Pages 上。</p>
+
+<p>之前的痛点是 Guitar Pro 文件只能在电脑上看，手机上一堆 .gp5 文件没法预览。alphaTab 正好能解这个 —— 它把 GPX 二进制解析成 SVG，浏览器直接显示。</p>
+
+<h2 id="功能">功能</h2>
+
+<ul>
+  <li>GPX 乐谱渲染 + 播放（alphaTab 解析 Guitar Pro 3-8）</li>
+  <li>PDF 在线预览（iframe 嵌入）</li>
+  <li>图片画廊（带下载按钮）</li>
+  <li>全局搜索（歌名 + 分类名）</li>
+  <li>两层导航：分类卡片 → 谱子列表</li>
+  <li>多格式切换（同一首有 GPX + PDF + 图片时）</li>
+  <li>蓝奏云 / 夸克网盘备份链接</li>
+</ul>
+
+<h2 id="几个坑">几个坑</h2>
+
+<h3 id="alphatab-18-load-变了">alphaTab 1.8 load() 变了</h3>
+
+<p>旧版是回调模式 <code class="language-plaintext highlighter-rouge">api.load(data, success, error)</code>，1.8 改成同步返回 boolean。之前一直报错，翻源码才发现签名变了：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">uint8</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Uint8Array</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">success</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="nx">uint8</span><span class="p">);</span></code></pre></figure>
+
+<h3 id="中文路径">中文路径</h3>
+
+<p><code class="language-plaintext highlighter-rouge">fetch</code> 直接拿中文文件名会 404。需要对路径逐段编码：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nf">encodeAssetPath</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">path</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="nx">s</span> <span class="o">=&gt;</span> <span class="nf">encodeURIComponent</span><span class="p">(</span><span class="nx">s</span><span class="p">)).</span><span class="nf">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="stylesheet-某些-map-是-undefined">stylesheet 某些 Map 是 undefined</h3>
+
+<p>某些 GP5 文件解析后 <code class="language-plaintext highlighter-rouge">score.stylesheet.perTrackMultiBarRest</code> 不初始化，渲染时调用 <code class="language-plaintext highlighter-rouge">.has()</code> 报 <code class="language-plaintext highlighter-rouge">Cannot read properties of undefined</code>。在 <code class="language-plaintext highlighter-rouge">scoreLoaded</code> 事件里补上：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">api</span><span class="p">.</span><span class="nx">scoreLoaded</span><span class="p">.</span><span class="nf">on</span><span class="p">((</span><span class="nx">score</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">ss</span> <span class="o">=</span> <span class="nx">score</span><span class="p">.</span><span class="nx">stylesheet</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">ss</span><span class="p">.</span><span class="nx">perTrackMultiBarRest</span><span class="p">)</span> <span class="nx">ss</span><span class="p">.</span><span class="nx">perTrackMultiBarRest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">ss</span><span class="p">.</span><span class="nx">perTrackDisplayTuning</span><span class="p">)</span> <span class="nx">ss</span><span class="p">.</span><span class="nx">perTrackDisplayTuning</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">ss</span><span class="p">.</span><span class="nx">perTrackChordDiagramsOnTop</span><span class="p">)</span> <span class="nx">ss</span><span class="p">.</span><span class="nx">perTrackChordDiagramsOnTop</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+<span class="p">});</span></code></pre></figure>
+
+<p>alphaTab 的 CDN 版用 Blob Worker 跑 Web Worker，Cloudflare Pages 静态托管没遇到问题，但保险起见还是关掉了 <code class="language-plaintext highlighter-rouge">useWorkers: false</code>。</p>
+
+<h2 id="两层导航">两层导航</h2>
+
+<p>一级是分类卡片（按艺术家或风格），二级是标签筛选。数据全部前台 JSON 渲染，没有后端接口。分类卡片用 CSS Grid 自适应，手机端自动变成单列。</p>
+
+<h2 id="部署">部署</h2>
+
+<p>Vercel 连 GitHub 仓库，自动识别静态站点，git push 后自动上线。</p>
+
+<p>项目地址：<a href="https://github.com/cleanwrite/fwjita-share">https://github.com/cleanwrite/fwjita-share</a></p>
+
+<p>线上地址：<a href="https://fwjita.cc.cd">https://fwjita.cc.cd</a></p>
+
+<div style="background:linear-gradient(135deg,rgba(224,123,57,.15),rgba(224,123,57,.05));border:2px solid rgba(224,123,57,.3);border-radius:16px;padding:28px 32px;margin:32px 0;text-align:center;">
+  <p style="font-size:1.3rem;font-weight:700;margin:0 0 8px;">🎸 吉他谱个人分享站</p>
+  <p style="opacity:.7;font-size:.9rem;margin:0 0 18px;">GPX · PDF · 图片 · 全局搜索 · 纯前端零后端</p>
+  <a href="https://fwjita.cc.cd/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:14px 36px;background:#e07b39;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:1.05rem;transition:all .2s;box-shadow:0 4px 16px rgba(224,123,57,.3);">打开吉他谱站 →</a>
+  <p style="margin:14px 0 0;font-size:.75rem;opacity:.5;"><a href="https://github.com/cleanwrite/fwjita-share" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://fwjita-share.pages.dev" target="_blank" rel="noopener noreferrer">Pages.dev 镜像</a></p>
+</div>]]></content><author><name>fw</name><email>439109032@qq.com</email></author><category term="Vercel" /><category term="alphaTab" /><category term="前端" /><category term="项目" /><summary type="html"><![CDATA[做了个吉他谱分享站。GPX 文件能在浏览器里直接渲染成五线谱 + 六线谱，PDF 和图片也能在线看。纯前端，挂在 Cloudflare Pages 上。]]></summary></entry><entry><title type="html">技术文件讨论指导</title><link href="https://myfk.cc.cd/hpn/" rel="alternate" type="text/html" title="技术文件讨论指导" /><published>2026-08-15T00:00:00+08:00</published><updated>2026-08-15T00:00:00+08:00</updated><id>https://myfk.cc.cd/hpn</id><content type="html" xml:base="https://myfk.cc.cd/hpn/"><![CDATA[<h3 id="正文部分">正文部分</h3>
+<p>你好，欢迎来到 fw 的 blog，所有节点已更新至最新版本，更新日期为2026.8.15，如果你有任何问题请联系留下的联系方式，感谢您的使用和反馈，谨记网址https://myfk.cc.cd</p>]]></content><author><name>fw</name><email>439109032@qq.com</email></author><summary type="html"><![CDATA[正文部分 你好，欢迎来到 fw 的 blog，所有节点已更新至最新版本，更新日期为2026.8.15，如果你有任何问题请联系留下的联系方式，感谢您的使用和反馈，谨记网址https://myfk.cc.cd]]></summary></entry><entry><title type="html">静默无声</title><link href="https://myfk.cc.cd/jingmo/" rel="alternate" type="text/html" title="静默无声" /><published>2026-06-20T00:00:00+08:00</published><updated>2026-06-20T00:00:00+08:00</updated><id>https://myfk.cc.cd/jingmo</id><content type="html" xml:base="https://myfk.cc.cd/jingmo/"><![CDATA[<h3 id="正文部分">正文部分</h3>
+<p>一个静默音频播放程序。</p>
+
+<p>这是通过博客提供的分享内容，如需获取更多资源，请使用验证码解锁下方区域。</p>]]></content><author><name>fw</name><email>439109032@qq.com</email></author><summary type="html"><![CDATA[正文部分 一个静默音频播放程序。]]></summary></entry><entry><title type="html">测试密码锁文章</title><link href="https://myfk.cc.cd/1/" rel="alternate" type="text/html" title="测试密码锁文章" /><published>2026-06-19T00:00:00+08:00</published><updated>2026-06-19T00:00:00+08:00</updated><id>https://myfk.cc.cd/1</id><content type="html" xml:base="https://myfk.cc.cd/1/"><![CDATA[]]></content><author><name>fw</name><email>439109032@qq.com</email></author><summary type="html"><![CDATA[]]></summary></entry></feed>
